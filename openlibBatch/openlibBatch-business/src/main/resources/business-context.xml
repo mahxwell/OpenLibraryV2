@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="org.mahxwell.openlib.consumer"/>
+    <context:component-scan base-package="org.mahxwell.openlib.business"/>
+    <import resource="classpath:consumer-context.xml"/>
+
+    <bean id="abstractManager" abstract="true">
+        <property name="daoFactory" ref="daoFactory"/>
+    </bean>
+    <!-- ===== Manager Factory ===== -->
+    <bean id="userManager" class="org.mahxwell.openlib.business.impl.manager.UserManagerImpl" parent="abstractManager"/>
+    <bean id="libraryManager" class="org.mahxwell.openlib.business.impl.manager.LibraryManagerImpl"
+          parent="abstractManager"/>
+    <bean id="authorManager" class="org.mahxwell.openlib.business.impl.manager.AuthorManagerImpl"
+          parent="abstractManager"/>
+    <bean id="bookloaningManager" class="org.mahxwell.openlib.business.impl.manager.BookloaningManagerImpl"
+          parent="abstractManager"/>
+    <bean id="bookManager" class="org.mahxwell.openlib.business.impl.manager.BookManagerImpl"
+          parent="abstractManager"/>
+    <bean id="copyManager" class="org.mahxwell.openlib.business.impl.manager.CopyManagerImpl"
+          parent="abstractManager"/>
+    <bean id="editorManager" class="org.mahxwell.openlib.business.impl.manager.EditorManagerImpl"
+          parent="abstractManager"/>
+    <bean id="genreManager" class="org.mahxwell.openlib.business.impl.manager.GenreManagerImpl"
+          parent="abstractManager"/>
+
+
+    <!-- ===== Manager Factory ===== -->
+    <bean id="managerFactory" class="org.mahxwell.openlib.business.impl.ManagerFactoryImpl">
+        <property name="userManager" ref="userManager"/>
+        <property name="libraryManager" ref="libraryManager"/>
+        <property name="authorManager" ref="authorManager"/>
+        <property name="bookloaningManager" ref="bookloaningManager"/>
+        <property name="bookManager" ref="bookManager"/>
+        <property name="copyManager" ref="copyManager"/>
+        <property name="editorManager" ref="editorManager"/>
+        <property name="genreManager" ref="genreManager"/>
+    </bean>
+</beans>

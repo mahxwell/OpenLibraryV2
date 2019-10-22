@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>openlibclient</artifactId>
+        <groupId>org.openlibclient</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>openlibclient-client</artifactId>
+    <groupId>org.openlibclient</groupId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <!-- =============================================================== -->
+    <!-- Properties -->
+    <!-- =============================================================== -->
+
+    <!-- =============================================================== -->
+    <!-- Please Change Each URL With your OWN to make it work correctly -->
+    <!-- =============================================================== -->
+
+    <properties>
+        <service.wsdl.url.user>
+            <!-- change Url-->
+             http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/user?wsdl
+        </service.wsdl.url.user>
+
+        <service.wsdl.url.library>
+            <!-- change Url-->
+             http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/library?wsdl
+        </service.wsdl.url.library>
+
+        <service.wsdl.url.author>
+            <!-- change Url-->
+            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/author?wsdl
+        </service.wsdl.url.author>
+
+        <service.wsdl.url.editor>
+            <!-- change Url-->
+            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/editor?wsdl
+        </service.wsdl.url.editor>
+
+        <service.wsdl.url.copy>
+            <!-- change Url-->
+             http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/copy?wsdl
+        </service.wsdl.url.copy>
+
+        <service.wsdl.url.genre>
+            <!-- change Url-->
+             http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/genre?wsdl
+        </service.wsdl.url.genre>
+
+        <service.wsdl.url.book>
+            <!-- change Url-->
+             http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/book?wsdl
+        </service.wsdl.url.book>
+
+        <service.wsdl.url.bookloaning>
+            <!-- change Url-->
+            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/bookloaning?wsdl
+        </service.wsdl.url.bookloaning>
+    </properties>
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
+                    <wsdlUrls>
+                        <wsdlUrl>${service.wsdl.url.user}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.library}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.author}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.editor}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.copy}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.genre}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.book}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.bookloaning}</wsdlUrl>
+                    </wsdlUrls>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
