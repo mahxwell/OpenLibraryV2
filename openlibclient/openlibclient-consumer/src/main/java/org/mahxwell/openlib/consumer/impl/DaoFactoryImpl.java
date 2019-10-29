@@ -19,6 +19,7 @@ public class DaoFactoryImpl implements DaoFactory {
     private CopyDao copyDao;
     private EditorDao editorDao;
     private GenreDao genreDao;
+    private ReservationDao reservationDao;
 
     @Override
     public UserDao getUserDao() {
@@ -98,5 +99,15 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public void setGenreDao(GenreDao genreDao) {
         this.genreDao = genreDao;
+    }
+
+    @Override
+    public ReservationDao getReservationDao() {
+        return reservationDao;
+    }
+
+    @Override
+    public void setReservationDao(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
     }
 }

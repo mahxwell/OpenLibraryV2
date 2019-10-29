@@ -19,6 +19,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
     private CopyManager copyManager;
     private EditorManager editorManager;
     private GenreManager genreManager;
+    private ReservationManager reservationManager;
 
     @Override
     public UserManager getUserManager() {
@@ -98,5 +99,15 @@ public class ManagerFactoryImpl implements ManagerFactory {
     @Override
     public void setGenreManager(GenreManager genreManager) {
         this.genreManager = genreManager;
+    }
+
+    @Override
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
+    @Override
+    public void setReservationManager(ReservationManager reservationaManager) {
+        this.reservationManager = reservationaManager;
     }
 }

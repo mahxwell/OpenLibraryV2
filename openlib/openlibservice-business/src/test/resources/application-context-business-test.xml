@@ -27,7 +27,8 @@
     <bean id="libraryManager" class="org.mahxwell.openlib.business.impl.manager.LibraryManagerImpl"
           parent="abstractManager"/>
     <bean id="userManager" class="org.mahxwell.openlib.business.impl.manager.UserManagerImpl" parent="abstractManager"/>
-
+    <bean id="reservationManager" class="org.mahxwell.openlib.business.impl.manager.ReservationManagerImpl"
+          parent="abstractManager"/>
 
     <!-- ===== Manager Factory ===== -->
     <bean id="managerFactory" class="org.mahxwell.openlib.business.impl.ManagerFactoryImpl">
@@ -39,7 +40,7 @@
         <property name="genreManager" ref="genreManager"/>
         <property name="libraryManager" ref="libraryManager"/>
         <property name="userManager" ref="userManager"/>
-
+        <property name="reservationManager" ref="reservationManager"/>
     </bean>
 
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

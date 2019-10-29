@@ -58,4 +58,10 @@ public interface ManagerFactory {
 
     void setUserManager(UserManager userManager);
 
+    //Reservation
+
+    ReservationManager getReservationManager();
+
+    void setReservationManager(ReservationManager reservationManager);
+
 }

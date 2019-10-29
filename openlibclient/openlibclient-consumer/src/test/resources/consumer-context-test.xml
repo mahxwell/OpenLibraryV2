@@ -17,6 +17,7 @@
     <bean id="copyDao" class="org.mahxwell.openlib.consumer.impl.dao.CopyDaoImpl"/>
     <bean id="editorDao" class="org.mahxwell.openlib.consumer.impl.dao.EditorDaoImpl"/>
     <bean id="genreDao" class="org.mahxwell.openlib.consumer.impl.dao.GenreDaoImpl"/>
+    <bean id="reservationDao" class="org.mahxwell.openlib.consumer.impl.dao.ReservationDaoImpl"/>
 
 
     <!-- ===== DaoFactory ===== -->
@@ -29,6 +30,7 @@
         <property name="copyDao" ref="copyDao"/>
         <property name="editorDao" ref="editorDao"/>
         <property name="genreDao" ref="genreDao"/>
+        <property name="reservationDao" ref="reservationDao"/>
     </bean>
 
 </beans>

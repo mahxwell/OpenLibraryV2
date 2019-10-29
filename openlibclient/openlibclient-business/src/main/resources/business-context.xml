@@ -29,6 +29,8 @@
           parent="abstractManager"/>
     <bean id="genreManager" class="org.mahxwell.openlib.business.impl.manager.GenreManagerImpl"
           parent="abstractManager"/>
+    <bean id="reservationManager" class="org.mahxwell.openlib.business.impl.manager.ReservationManagerImpl"
+          parent="abstractManager"/>
 
 
     <!-- ===== Manager Factory ===== -->
@@ -41,5 +43,6 @@
         <property name="copyManager" ref="copyManager"/>
         <property name="editorManager" ref="editorManager"/>
         <property name="genreManager" ref="genreManager"/>
+        <property name="reservationManager" ref="reservationManager"/>
     </bean>
 </beans>

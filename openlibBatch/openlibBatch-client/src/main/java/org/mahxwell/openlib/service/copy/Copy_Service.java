@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "copy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", wsdlLocation = "http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/copy?wsdl")
+@WebServiceClient(name = "copy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", wsdlLocation = "http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/copy?wsdl")
 public class Copy_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class Copy_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/copy?wsdl");
+            url = new URL("http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/copy?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
