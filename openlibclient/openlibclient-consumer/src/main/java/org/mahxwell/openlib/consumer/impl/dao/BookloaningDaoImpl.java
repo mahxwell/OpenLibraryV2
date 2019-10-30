@@ -129,4 +129,15 @@ public class BookloaningDaoImpl implements BookloaningDao {
         return bookloaningService.listbookloaningByBookAndUser(book_id, user_id);
     }
 
+    /**
+     * DAO
+     * Get a Bookloaning List by Book Object Order by ending_date
+     *
+     * @param book_id Book Unique Identification Number
+     * @return Bookloanings -> List of Bookloaning Object
+     */
+    @Override
+    public List<Bookloaning> bookloaningsByBookOrderByDateAsc(final Integer book_id) {
+        return bookloaningService.listbookloaningByBookOrderByDateAsc(book_id);
+    }
 }

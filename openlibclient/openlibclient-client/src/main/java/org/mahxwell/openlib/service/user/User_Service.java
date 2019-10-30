@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "user", targetNamespace = "http://user.service.openlib.mahxwell.org/", wsdlLocation = "http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice1408593539488495134/user?wsdl")
+@WebServiceClient(name = "user", targetNamespace = "http://user.service.openlib.mahxwell.org/", wsdlLocation = "http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice4884919888204003743/user?wsdl")
 public class User_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class User_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice1408593539488495134/user?wsdl");
+            url = new URL("http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice4884919888204003743/user?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

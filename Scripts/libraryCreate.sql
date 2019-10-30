@@ -141,10 +141,4 @@ ALTER TABLE librarydb.reservation ADD CONSTRAINT user_fk FOREIGN KEY (user_id_us
 REFERENCES librarydb.user (user_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 
-ALTER TABLE librarydb.reservation ADD CONSTRAINT copy_fk FOREIGN KEY (copy_id_copy)
-REFERENCES librarydb.copy (copy_id) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
-
-ALTER TABLE librarydb.reservation ADD CONSTRAINT reservation_uq UNIQUE (copy_id_copy);
-
 

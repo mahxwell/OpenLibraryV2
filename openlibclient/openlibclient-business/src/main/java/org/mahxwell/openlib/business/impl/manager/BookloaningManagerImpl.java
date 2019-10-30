@@ -123,4 +123,16 @@ public class BookloaningManagerImpl extends AbstractManagerImpl implements Bookl
     public List<Bookloaning> bookloaningsByBookAndByUser(final Integer book_id, final Integer user_id) {
         return getDaoFactory().getBookloaningDao().bookloaningsByBookAndByUser(book_id, user_id);
     }
+
+    /**
+     * Manager
+     * Get a Bookloaning List by Book Object Order by Date
+     *
+     * @param book_id Book Unique Identification Number
+     * @return Bookloanins -> List of Bookloaning Object
+     */
+    @Override
+    public List<Bookloaning> bookloaningsByBookOrderByDateAsc(final Integer book_id) {
+        return getDaoFactory().getBookloaningDao().bookloaningsByBookOrderByDateAsc(book_id);
+    }
 }

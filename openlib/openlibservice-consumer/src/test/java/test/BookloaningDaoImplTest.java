@@ -121,4 +121,26 @@ public class BookloaningDaoImplTest {
         else
             logger.error("No Bookloaning available !");
     }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningListByBook() {
+        List<Bookloaning> bookloanings = bookloaningDao.bookloaningsByBook(3);
+       // System.out.println(bookloanings.toString());
+
+     /*   for (int i = 0; i < bookloanings.size(); i++)
+            System.out.println(bookloanings.get(i));*/
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningListByBookOrderByDate() {
+        List<Bookloaning> bookloanings = bookloaningDao.bookloaningsByBookOrderByDateAsc(3);
+/*
+        for (int i = 0; i < bookloanings.size(); i++)
+            System.out.println(bookloanings.get(i));*/
+    }
 }

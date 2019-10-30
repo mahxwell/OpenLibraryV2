@@ -97,4 +97,26 @@ public class BookloaningManagerImplTest {
         else
             logger.error("No Bookloaning available !");
     }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningListByBook() {
+        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBook(3);
+        // System.out.println(bookloanings.toString());
+
+   /*     for (int i = 0; i < bookloanings.size(); i++)
+            System.out.println(bookloanings.get(i));*/
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningListByBookOrderByDate() {
+        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookOrderByDateAsc(3);
+
+/*        for (int i = 0; i < bookloanings.size(); i++)
+            System.out.println(bookloanings.get(i));*/
+    }
 }

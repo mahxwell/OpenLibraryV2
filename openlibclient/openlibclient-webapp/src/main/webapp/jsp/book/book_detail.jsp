@@ -35,6 +35,10 @@
             <s:if test="%{#userId!=null}">
                 <s:if test="%{#copyAvailable==0}">
                     <p style="color: red">Plus d'exemplaires Disponibles</p>
+
+                    <s:a action="reservation_create">Réserver le livre</s:a>
+
+
                 </s:if>
                 <s:elseif test="%{#AlreadyLoaned==true}">
                     <p style="color: red">Ouvrage Emprunté jusqu'au <span style="color: blue;"><s:property

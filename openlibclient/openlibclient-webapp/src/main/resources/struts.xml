@@ -147,6 +147,15 @@
             <result name="success">/jsp/search/quick_search.jsp</result>
             <result name="error">/jsp/search/quick_search.jsp</result>
         </action>
+
+        <!-- Reservation -->
+        <action name="reservation_create"
+                class="org.mahxwell.openlib.action.ReservationAction"
+                method="doCreateReservation">
+            <result name="success" type="redirectAction">welcome</result>
+            <result name="error">/jsp/error.jsp</result>
+        </action>
+
     </package>
     <package name="public" extends="base">
 
