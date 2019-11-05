@@ -56,6 +56,7 @@ public class BookAction extends ActionSupport implements SessionAware {
     private Boolean alreadyLoaned;
     private Date date;
     private boolean bookloaningExtend;
+    private boolean cannotExtend;
 
     /**
      * doListBook
@@ -141,6 +142,16 @@ public class BookAction extends ActionSupport implements SessionAware {
                     XMLGregorianCalendar datexml = bookloaningsByBookAndUser.get(0).getEndDate();
                     date = datexml.toGregorianCalendar().getTime();
                     bookloaningExtend = bookloaningsByBookAndUser.get(0).isExtended();
+
+                    /**
+                     * For P10
+                     */
+                    Date dateNow = new Date();
+                    if (dateNow.compareTo(date) > 0) {
+                        cannotExtend = true;
+                    } else {
+                        cannotExtend = false;
+                    }
                 } else {
                     alreadyLoaned = false;
                 }
@@ -277,5 +288,13 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     public void setBookloaningExtend(boolean bookloaningExtend) {
         this.bookloaningExtend = bookloaningExtend;
+    }
+
+    public boolean isCannotExtend() {
+        return cannotExtend;
+    }
+
+    public void setCannotExtend(boolean cannotExtend) {
+        this.cannotExtend = cannotExtend;
     }
 }

@@ -1,0 +1,8 @@
+test/AuthorDaoImplTest.class
+test/CopyDaoImplTest.class
+test/GenreDaoImplTest.class
+test/BookDaoImplTest.class
+test/EditorDaoImplTest.class
+test/LibraryDaoImplTest.class
+test/UserDaoImplTest.class
+test/BookloaningDaoImplTest.class

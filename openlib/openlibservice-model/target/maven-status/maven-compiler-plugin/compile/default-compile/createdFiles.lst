@@ -1,0 +1,11 @@
+org/mahxwell/openlib/model/bean/openlib/User.class
+org/mahxwell/openlib/model/exception/NotFoundException.class
+org/mahxwell/openlib/model/bean/openlib/Editor.class
+org/mahxwell/openlib/model/bean/openlib/Genre.class
+org/mahxwell/openlib/model/bean/openlib/Author.class
+org/mahxwell/openlib/model/bean/openlib/Library.class
+org/mahxwell/openlib/model/bean/openlib/Bookloaning.class
+org/mahxwell/openlib/model/exception/TechnicalException.class
+org/mahxwell/openlib/model/exception/FunctionalException.class
+org/mahxwell/openlib/model/bean/openlib/Book.class
+org/mahxwell/openlib/model/bean/openlib/Copy.class
