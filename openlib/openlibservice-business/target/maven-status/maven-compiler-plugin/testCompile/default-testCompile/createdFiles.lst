@@ -1,8 +1,0 @@
-test/BookloaningManagerImplTest.class
-test/AuthorManagerImplTest.class
-test/BookManagerImplTest.class
-test/LibraryManagerImplTest.class
-test/CopyManagerImplTest.class
-test/UserManagerImplTest.class
-test/EditorManagerImplTest.class
-test/GenreManagerImplTest.class
