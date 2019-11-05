@@ -28,6 +28,57 @@ public interface ReservationService {
     /**
      * 
      * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.AddReservation")
+    @ResponseWrapper(localName = "addReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.AddReservationResponse")
+    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/addReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/addReservationResponse")
+    public void addReservation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Reservation arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.UpdateReservation")
+    @ResponseWrapper(localName = "updateReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.UpdateReservationResponse")
+    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/updateReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/updateReservationResponse")
+    public void updateReservation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Reservation arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Reservation arg1);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.DeleteReservation")
+    @ResponseWrapper(localName = "deleteReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.DeleteReservationResponse")
+    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/deleteReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/deleteReservationResponse")
+    public void deleteReservation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Reservation arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.reservation.Reservation>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listreservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.Listreservation")
+    @ResponseWrapper(localName = "listreservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.ListreservationResponse")
+    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/listreservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/listreservationResponse")
+    public List<Reservation> listreservation();
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns org.mahxwell.openlib.service.reservation.Reservation
      */
@@ -105,56 +156,5 @@ public interface ReservationService {
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Integer arg1);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.AddReservation")
-    @ResponseWrapper(localName = "addReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.AddReservationResponse")
-    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/addReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/addReservationResponse")
-    public void addReservation(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Reservation arg0);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.UpdateReservation")
-    @ResponseWrapper(localName = "updateReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.UpdateReservationResponse")
-    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/updateReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/updateReservationResponse")
-    public void updateReservation(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Reservation arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Reservation arg1);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteReservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.DeleteReservation")
-    @ResponseWrapper(localName = "deleteReservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.DeleteReservationResponse")
-    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/deleteReservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/deleteReservationResponse")
-    public void deleteReservation(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Reservation arg0);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.reservation.Reservation>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listreservation", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.Listreservation")
-    @ResponseWrapper(localName = "listreservationResponse", targetNamespace = "http://reservation.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.reservation.ListreservationResponse")
-    @Action(input = "http://reservation.service.openlib.mahxwell.org/ReservationService/listreservationRequest", output = "http://reservation.service.openlib.mahxwell.org/ReservationService/listreservationResponse")
-    public List<Reservation> listreservation();
 
 }

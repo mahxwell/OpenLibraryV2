@@ -30,15 +30,28 @@
             <s:set var="copyAvailable" value="copyNbr"/>
             <s:set var="AlreadyLoaned" value="alreadyLoaned"/>
             <s:set var="Extended" value="bookloaningExtend"/>
-            <div style="background-color: rgba(208, 207, 207, 1.00)"><h4>Option</h4></div>
+            <s:set var="Reserved" value="alreadyReserved"/>
+            <s:set var="ResDate" value="returnDate"/>
 
+            <div style="background-color: rgba(208, 207, 207, 1.00)"><h4>Option</h4></div>
             <s:if test="%{#userId!=null}">
                 <s:if test="%{#copyAvailable==0}">
-                    <p style="color: red">Plus d'exemplaires Disponibles</p>
+                    <s:if test="%{#AlreadyLoaned==false && #Reserved==false}">
+                        <p style="color: red">Plus d'exemplaires Disponibles, vous pouvez reserver cet ouvrage</p>
+                        <p style="color: red">Disponible à partir du : <s:property value="ResDate"/></p>
+                        <s:a action="reservation_create">Réserver le livre</s:a>
 
-                    <s:a action="reservation_create">Réserver le livre</s:a>
-
-
+                    </s:if>
+                    <s:elseif test="%{#AlreadyLoaned==false && #Reserved==true}">
+                        <p style="color: red">Disponible à partir du : <s:property value="ResDate"/></p>
+                        <s:a action="reservation_delete">Annuler la réservation</s:a>
+                    </s:elseif>
+                    <s:else>
+                        <p style="color: red">Disponible à partir du : <s:property value="ResDate"/></p>
+                        <p style="color: red">Error</p>
+                        déjà emprunté = <s:property value="AlreadyLoaned"/>
+                        déjà reservé = <s:property value="Reserved"/>
+                    </s:else>
                 </s:if>
                 <s:elseif test="%{#AlreadyLoaned==true}">
                     <p style="color: red">Ouvrage Emprunté jusqu'au <span style="color: blue;"><s:property

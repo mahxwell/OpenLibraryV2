@@ -15,18 +15,25 @@
             <input type="text" placeholder="Search">
         </div>
         <section id="mainContent">
-            <h1>Menu des Ouvrages</h1>
-            <s:a action="listBook">Tous les Livres</s:a>
-            <s:set var="userId" value="user.userId"/>
-            <s:if test="%{#userId!=null}">
-                <p style="color:rgba(146, 146, 146, 1.00);font-family:  montserrat, sans-serif;
-    font-style: normal">Consulter Vos empruns</p>
-                <s:a action="loanedListBook">Livres Empruntés</s:a>
-                <p style="color:rgba(146, 146, 146, 1.00);font-family:  montserrat, sans-serif;
-    font-style: normal">Consulter Vos Réservations</p>
-                <s:a action="reservedListBook">Livres Réservés</s:a>
+            <s:set var="books" value="books"/>
+            <%-- <s:if test="%{#books.size() == 0 }">--%>
+            <s:if test="%{#books==null }">
+                <p> Vous n'avez pas encore reservé de Livres</p>
             </s:if>
             <s:else>
+                <h2>Vos livres reservés</h2>
+                <ul>
+                    <s:iterator value="books">
+                        <s:a action="bookDetail">
+                            <s:param name="bookId" value="bookId"/>
+                            <s:property value="bookTitle"/><br>
+                        </s:a>
+                    </s:iterator>
+                </ul>
+            </s:else>
+            <s:set var="userId" value="user.userId"/>
+            <s:else>
+                <p></p>
             </s:else>
         </section>
         <%@include file="../_include/sidebar.jsp" %>
@@ -35,5 +42,4 @@
     </div>
 </div>
 </body>
-
 </html>

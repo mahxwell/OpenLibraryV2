@@ -27,7 +27,6 @@
                             <s:param name="bookId" value="bookId"/>
                             <s:property value="bookTitle"/><br>
                         </s:a>
-                        <%-- <s:property value="bookTitle"/><br>--%>
                     </s:iterator>
                 </ul>
             </s:else>

@@ -82,6 +82,23 @@ public class ReservationAction extends ActionSupport implements SessionAware {
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    public String deDeleteReservation() {
+        user = (User) this.session.get("user");
+        book = (Book) this.session.get("book");
+
+        if (user != null && book != null) {
+            try {
+                Reservation reservation = reservationManager.reservationsByUserAndByBooks(user.getUserId(), book.getBookId());
+                reservationManager.deleteReservation(reservation);
+            } catch (Exception e) {
+                logger.error("Error deleting reservation : " + e);
+            }
+
+        }
+
+        return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+    }
+
 
     public Map<String, Object> getSession() {
         return session;

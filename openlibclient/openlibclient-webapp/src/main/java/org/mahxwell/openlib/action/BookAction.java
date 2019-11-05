@@ -13,6 +13,7 @@ import org.mahxwell.openlib.service.copy.Copy;
 import org.mahxwell.openlib.service.editor.Editor;
 import org.mahxwell.openlib.service.genre.Genre;
 import org.mahxwell.openlib.service.library.Library;
+import org.mahxwell.openlib.service.reservation.Reservation;
 import org.mahxwell.openlib.service.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +41,7 @@ public class BookAction extends ActionSupport implements SessionAware {
     EditorManager editorManager = ContextLoader.INSTANCE.getEditorManager();
     GenreManager genreManager = ContextLoader.INSTANCE.getGenreManager();
     LibraryManager libraryManager = ContextLoader.INSTANCE.getLibraryManager();
+    ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
 
     private Book book;
     private Integer bookId;
@@ -56,6 +58,11 @@ public class BookAction extends ActionSupport implements SessionAware {
     private Boolean alreadyLoaned;
     private Date date;
     private boolean bookloaningExtend;
+    private Reservation reservation;
+    private boolean alreadyReserved;
+    private XMLGregorianCalendar expectedReturnDate;
+    private Date returnDate;
+    private List<Book> reservedBooksByUser;
 
     /**
      * doListBook
@@ -108,7 +115,43 @@ public class BookAction extends ActionSupport implements SessionAware {
             }
         }
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+    }
 
+    /**
+     * doListReservationBook
+     * Show Reserved Book List by User
+     *
+     * @return SUCCESS in each cases
+     */
+    public String doListReservationBook() {
+
+        user = (User) this.session.get("user");
+        try {
+            List<Reservation> reservationsByUser = reservationManager.reservationsByUser(user.getUserId());
+            if (reservationsByUser.size() > 0) {
+                List<Book> allBooks = bookManager.books();
+                List<Book> booksByUser = new ArrayList<>();
+                int i = 0;
+                int j;
+                while (i < allBooks.size()) {
+                    j = 0;
+                    while (j < reservationsByUser.size()) {
+                        if (allBooks.get(i).getBookId() == reservationsByUser.get(j).getGetBookId()
+                                && !booksByUser.contains(allBooks.get(i)))
+                            booksByUser.add(allBooks.get(i));
+                        j++;
+                    }
+                    i++;
+                }
+
+                // TO CHANGE BOOKS IS NOT NULL
+                books = new ArrayList<>(booksByUser);
+            }
+        } catch (Exception e) {
+        }
+
+
+        return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
     /**
@@ -134,6 +177,16 @@ public class BookAction extends ActionSupport implements SessionAware {
                 copyListByBooks = copyManager.copiesByBook(bookId);
                 bookloanings = bookloaningManager.bookloaningsByBook(bookId);
                 copyNbr = copyListByBooks.size() - bookloanings.size();
+                reservation = reservationManager.reservationsByUserAndByBooks(user.getUserId(), bookId);
+
+                List<Bookloaning> bookloanedDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(bookId);
+                expectedReturnDate = bookloanedDate.get(0).getEndDate();
+                returnDate = expectedReturnDate.toGregorianCalendar().getTime();
+                if (reservation != null) {
+                    alreadyReserved = true;
+                } else {
+                    alreadyReserved = false;
+                }
                 List<Bookloaning> bookloaningsByBookAndUser =
                         bookloaningManager.bookloaningsByBookAndByUser(bookId, user.getUserId());
                 if (bookloaningsByBookAndUser.size() > 0) {
@@ -165,6 +218,38 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     public void setServletRequest(HttpServletRequest servletRequest) {
         this.servletRequest = servletRequest;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public boolean isAlreadyReserved() {
+        return alreadyReserved;
+    }
+
+    public void setAlreadyReserved(boolean alreadyReserved) {
+        this.alreadyReserved = alreadyReserved;
+    }
+
+    public XMLGregorianCalendar getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setExpectedReturnDate(XMLGregorianCalendar expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
     }
 
     public Integer getBookId() {
