@@ -39,18 +39,6 @@ public interface LibraryService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addLibrary", targetNamespace = "http://library.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.library.AddLibrary")
-    @ResponseWrapper(localName = "addLibraryResponse", targetNamespace = "http://library.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.library.AddLibraryResponse")
-    @Action(input = "http://library.service.openlib.mahxwell.org/LibraryService/addLibraryRequest", output = "http://library.service.openlib.mahxwell.org/LibraryService/addLibraryResponse")
-    public void addLibrary(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Library arg0);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      */
@@ -90,5 +78,17 @@ public interface LibraryService {
     public Library getLibrary(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addLibrary", targetNamespace = "http://library.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.library.AddLibrary")
+    @ResponseWrapper(localName = "addLibraryResponse", targetNamespace = "http://library.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.library.AddLibraryResponse")
+    @Action(input = "http://library.service.openlib.mahxwell.org/LibraryService/addLibraryRequest", output = "http://library.service.openlib.mahxwell.org/LibraryService/addLibraryResponse")
+    public void addLibrary(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Library arg0);
 
 }

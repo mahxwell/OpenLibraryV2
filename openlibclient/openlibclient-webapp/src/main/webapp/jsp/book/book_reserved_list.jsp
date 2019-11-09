@@ -16,8 +16,7 @@
         </div>
         <section id="mainContent">
             <s:set var="books" value="books"/>
-            <%-- <s:if test="%{#books.size() == 0 }">--%>
-            <s:if test="%{#books==null }">
+            <s:if test="%{#books.size() == 0 }">
                 <p> Vous n'avez pas encore reservé de Livres</p>
             </s:if>
             <s:else>

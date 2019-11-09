@@ -20,8 +20,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence>
  *         &lt;element name="copyIdCopy" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="getBookId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="reservationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="reservationDate" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="reservationId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="reservationMail" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="userIdUser" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,15 +38,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "getBookId",
     "reservationDate",
     "reservationId",
+    "reservationMail",
     "userIdUser"
 })
 public class Reservation {
 
     protected Integer copyIdCopy;
     protected Integer getBookId;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar reservationDate;
+    protected String reservationDate;
     protected Integer reservationId;
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar reservationMail;
     protected Integer userIdUser;
 
     /**
@@ -101,10 +104,10 @@ public class Reservation {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getReservationDate() {
+    public String getReservationDate() {
         return reservationDate;
     }
 
@@ -113,10 +116,10 @@ public class Reservation {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setReservationDate(XMLGregorianCalendar value) {
+    public void setReservationDate(String value) {
         this.reservationDate = value;
     }
 
@@ -142,6 +145,30 @@ public class Reservation {
      */
     public void setReservationId(Integer value) {
         this.reservationId = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété reservationMail.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getReservationMail() {
+        return reservationMail;
+    }
+
+    /**
+     * Définit la valeur de la propriété reservationMail.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setReservationMail(XMLGregorianCalendar value) {
+        this.reservationMail = value;
     }
 
     /**

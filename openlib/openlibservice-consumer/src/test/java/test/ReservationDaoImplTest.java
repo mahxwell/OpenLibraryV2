@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,9 @@ public class ReservationDaoImplTest {
     private Reservation InitializeReservationObject(final Integer book_id, final Integer user_id, final Integer copy_id) {
         Reservation reservation = new Reservation();
         try {
-            Date date = new Date();
-            reservation.setReservationDate(date);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            reservation.setReservationDate(timestamp.toString());
+            reservation.setReservationMail(new Date());
             reservation.setGetBookId(book_id);
             reservation.setUserIdUser(user_id);
             reservation.setCopyIdCopy(copy_id);

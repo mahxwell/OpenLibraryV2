@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +41,9 @@ public class ReservationDaoImplTest {
         try {
             XMLGregorianCalendar gDateFormatted =
                     DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-            reservation.setReservationDate(gDateFormatted);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            reservation.setReservationDate(timestamp.toString());
+            reservation.setReservationMail(gDateFormatted);
             reservation.setGetBookId(book_id);
             reservation.setUserIdUser(user_id);
             reservation.setCopyIdCopy(copy_id);

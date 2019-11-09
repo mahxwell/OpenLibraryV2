@@ -119,4 +119,13 @@ public class BookloaningDaoImplTest {
         else
             logger.error("No Bookloaning available !");
     }
+
+    @Test
+    public void bookloaningsByBookAndUserByDare() {
+        List<Bookloaning> bookloanings = bookloaningDao.bookloaningsByBookOrderByDateAsc(1);
+        if (bookloanings != null)
+            logger.info(bookloanings.toString());
+        else
+            logger.error("No Bookloaning available !");
+    }
 }

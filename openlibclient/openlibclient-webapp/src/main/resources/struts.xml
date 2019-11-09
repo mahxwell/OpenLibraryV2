@@ -103,7 +103,7 @@
 
         <action name="reservedListBook"
                 class="org.mahxwell.openlib.action.BookAction"
-                method="doListReservationBook">
+                method="doListReservedBook">
             <result name="success">/jsp/book/book_reserved_list.jsp</result>
             <result name="error">/jsp/error.jsp</result>
         </action>

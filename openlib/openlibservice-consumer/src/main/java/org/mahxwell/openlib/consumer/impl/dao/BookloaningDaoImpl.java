@@ -235,7 +235,7 @@ public class BookloaningDaoImpl extends AbstractDaoImpl implements BookloaningDa
         BookloaningRowMapper bookloaningRowMapper = new BookloaningRowMapper();
         JdbcTemplate template = new JdbcTemplate(getDataSource());
         String query = "SELECT * FROM librarydb.bookloaning" +
-                " RIGHT JOIN librarydb.reservation ON librarydb.reservation.copy_id_copy != librarydb.bookloaning.copy_id_copy "
+                " LEFT JOIN librarydb.reservation ON librarydb.reservation.copy_id_copy = librarydb.bookloaning.copy_id_copy "
                 + " WHERE librarydb.bookloaning.get_book_id = " + book_id + " ORDER BY librarydb.bookloaning.endind_date ASC";
 
         List<Bookloaning> bookloanings = template.query(query, bookloaningRowMapper.getBookloaningRowMapper());

@@ -18,7 +18,8 @@ public class ReservationRowMapper {
         public Reservation mapRow(ResultSet resultSet, int i) throws SQLException {
             Reservation reservation = new Reservation();
             reservation.setReservationId(resultSet.getInt("reservation_id"));
-            reservation.setReservationDate(resultSet.getDate("reservation_date"));
+            reservation.setReservationDate(resultSet.getString("reservation_date"));
+            reservation.setReservationMail(resultSet.getDate("reservation_mail"));
             reservation.setGetBookId(resultSet.getInt("get_book_id"));
             reservation.setUserIdUser(resultSet.getInt("user_id_user"));
             reservation.setCopyIdCopy(resultSet.getInt("copy_id_copy"));

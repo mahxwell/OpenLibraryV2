@@ -28,4 +28,5 @@ public interface BookDao {
                                   final String genre_name, final String author_name);
 
     List<Book> booksToSendMail();
+
 }

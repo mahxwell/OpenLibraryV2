@@ -138,9 +138,8 @@ public class BookloaningDaoImplTest {
     @Transactional
     @Rollback(true)
     public void bookloaningListByBookOrderByDate() {
-        List<Bookloaning> bookloanings = bookloaningDao.bookloaningsByBookOrderByDateAsc(3);
-/*
-        for (int i = 0; i < bookloanings.size(); i++)
+        List<Bookloaning> bookloanings = bookloaningDao.bookloaningsByBookOrderByDateAsc(1);
+/*        for (int i = 0; i < bookloanings.size(); i++)
             System.out.println(bookloanings.get(i));*/
     }
 }

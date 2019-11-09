@@ -27,21 +27,6 @@ public interface BookloaningService {
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns org.mahxwell.openlib.service.bookloaning.Bookloaning
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.GetBookloaning")
-    @ResponseWrapper(localName = "getBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.GetBookloaningResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/getBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/getBookloaningResponse")
-    public Bookloaning getBookloaning(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.bookloaning.Bookloaning>
      */
@@ -63,6 +48,21 @@ public interface BookloaningService {
     public void addBookloaning(
         @WebParam(name = "arg0", targetNamespace = "")
         Bookloaning arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns org.mahxwell.openlib.service.bookloaning.Bookloaning
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.GetBookloaning")
+    @ResponseWrapper(localName = "getBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.GetBookloaningResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/getBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/getBookloaningResponse")
+    public Bookloaning getBookloaning(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
 
     /**
      * 

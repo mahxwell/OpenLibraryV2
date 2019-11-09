@@ -123,4 +123,13 @@ public class BookloaningManagerImplTest {
         else
             logger.error("No Bookloaning available !");
     }
+
+    @Test
+    public void bookloaningsByBookAndUserByDare() {
+        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookOrderByDateAsc(1);
+        if (bookloanings != null)
+            logger.info(bookloanings.toString());
+        else
+            logger.error("No Bookloaning available !");
+    }
 }

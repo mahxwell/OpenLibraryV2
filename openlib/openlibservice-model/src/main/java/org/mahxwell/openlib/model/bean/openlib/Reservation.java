@@ -5,7 +5,8 @@ import java.util.Date;
 public class Reservation {
 
     private Integer reservationId, userIdUser, copyIdCopy, getBookId;
-    private Date reservationDate;
+    private String reservationDate;
+    private Date reservationMail;
 
     public Integer getReservationId() {
         return reservationId;
@@ -31,12 +32,20 @@ public class Reservation {
         this.copyIdCopy = copyIdCopy;
     }
 
-    public Date getReservationDate() {
+    public String getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(Date reservationDate) {
+    public void setReservationDate(String reservationDate) {
         this.reservationDate = reservationDate;
+    }
+
+    public Date getReservationMail() {
+        return reservationMail;
+    }
+
+    public void setReservationMail(Date reservationMail) {
+        this.reservationMail = reservationMail;
     }
 
     public Integer getGetBookId() {
@@ -54,7 +63,8 @@ public class Reservation {
                 ", userIdUser=" + userIdUser +
                 ", copyIdCopy=" + copyIdCopy +
                 ", getBookId=" + getBookId +
-                ", reservationDate=" + reservationDate +
+                ", reservationDate='" + reservationDate + '\'' +
+                ", reservationMail=" + reservationMail +
                 '}';
     }
 }

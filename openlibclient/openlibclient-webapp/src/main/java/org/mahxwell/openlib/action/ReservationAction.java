@@ -16,6 +16,7 @@ import org.mahxwell.openlib.service.user.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,10 +35,9 @@ public class ReservationAction extends ActionSupport implements SessionAware {
     private User user;
     private List<Copy> copyList;
 
-
-    BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
-    ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
-    CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
+    private BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
+    private ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
+    private CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
 
     public String doCreateReservation() {
 
@@ -50,30 +50,23 @@ public class ReservationAction extends ActionSupport implements SessionAware {
                 copyList = copyManager.copiesByBook(book.getBookId());
                 reservationList = reservationManager.reservationsByBooks(book.getBookId());
 
-                boolean maxLengthQueud;
-
-                if (reservationList.size() <= (copyList.size() + copyList.size())) {
-                    maxLengthQueud = true;
-                } else {
-                    maxLengthQueud = false;
-                }
-
-                if (bookloaningListOrderByDate.size() > 0 && maxLengthQueud == true) {
-                    try {
-                        String formater = "yyyy-MM-dd'T'HH:mm:ss";
-                        DateFormat format = new SimpleDateFormat(formater);
-                        Date date = new Date();
-                        XMLGregorianCalendar gDateFormatted =
-                                DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-                        Reservation reservation = new Reservation();
-                        reservation.setReservationDate(gDateFormatted);
-                        reservation.setGetBookId(book.getBookId());
-                        reservation.setUserIdUser(user.getUserId());
-                        reservation.setCopyIdCopy(bookloaningListOrderByDate.get(0).getCopyIdCopy());
-                        reservationManager.addReservation(reservation);
-                    } catch (Exception e) {
-                        logger.error("Failed adding reservation : " + e);
-                    }
+                try {
+                    String formater = "yyyy-MM-dd'T'HH:mm:ss";
+                    DateFormat format = new SimpleDateFormat(formater);
+                    Date date = new Date();
+                    XMLGregorianCalendar gDateFormatted =
+                            DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
+                    Reservation reservation = new Reservation();
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String timestampToString = timestamp.toString();
+                    reservation.setReservationDate(timestampToString);
+                    reservation.setReservationMail(gDateFormatted);
+                    reservation.setGetBookId(book.getBookId());
+                    reservation.setUserIdUser(user.getUserId());
+                    reservation.setCopyIdCopy(bookloaningListOrderByDate.get(0).getCopyIdCopy());
+                    reservationManager.addReservation(reservation);
+                } catch (Exception e) {
+                    logger.error("Failed adding reservation : " + e);
                 }
             } catch (Exception e) {
                 logger.error("bookloaningListOrderByDate error : " + e);

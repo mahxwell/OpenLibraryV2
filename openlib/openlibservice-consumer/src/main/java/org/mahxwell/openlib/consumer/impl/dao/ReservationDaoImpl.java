@@ -32,10 +32,11 @@ public class ReservationDaoImpl extends AbstractDaoImpl implements ReservationDa
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-        String query = "INSERT INTO librarydb.reservation(reservation_date, get_book_id,  user_id_user, copy_id_copy) VALUES"
-                + " (:reservation_date, :get_book_id, :user_id_user, :copy_id_copy)";
+        String query = "INSERT INTO librarydb.reservation(reservation_date, reservation_mail, get_book_id,  user_id_user, copy_id_copy) VALUES"
+                + " (:reservation_date, :reservation_mail, :get_book_id, :user_id_user, :copy_id_copy)";
 
         parameters.addValue("reservation_date", newReservation.getReservationDate());
+        parameters.addValue("reservation_mail", newReservation.getReservationMail());
         parameters.addValue("get_book_id", newReservation.getGetBookId());
         parameters.addValue("user_id_user", newReservation.getUserIdUser());
         parameters.addValue("copy_id_copy", newReservation.getCopyIdCopy());
@@ -58,11 +59,12 @@ public class ReservationDaoImpl extends AbstractDaoImpl implements ReservationDa
         MapSqlParameterSource parameters = new MapSqlParameterSource();
 
         String query = "UPDATE librarydb.reservation SET"
-                + " reservation_date = :reservation_date, get_book_id = :get_book_id,  user_id_user = :user_id_user, copy_id_copy = :copy_id_copy"
+                + " reservation_date = :reservation_date, reservation_mail = :reservation_mail, get_book_id = :get_book_id,  user_id_user = :user_id_user, copy_id_copy = :copy_id_copy"
                 + " WHERE reservation_id = :reservation_id";
 
         parameters.addValue("reservation_id", reservationToFind.getReservationId());
         parameters.addValue("reservation_date", reservationToUpdate.getReservationDate());
+        parameters.addValue("reservation_mail", reservationToUpdate.getReservationMail());
         parameters.addValue("get_book_id", reservationToUpdate.getGetBookId());
         parameters.addValue("user_id_user", reservationToUpdate.getUserIdUser());
         parameters.addValue("copy_id_copy", reservationToUpdate.getCopyIdCopy());
