@@ -27,27 +27,21 @@ public interface BookloaningService {
 
     /**
      * 
+     * @param arg1
+     * @param arg0
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.bookloaning.Bookloaning>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listbookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.Listbookloaning")
-    @ResponseWrapper(localName = "listbookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningResponse")
-    public List<Bookloaning> listbookloaning();
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.AddBookloaning")
-    @ResponseWrapper(localName = "addBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.AddBookloaningResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/addBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/addBookloaningResponse")
-    public void addBookloaning(
+    @RequestWrapper(localName = "listbookloaningByBookAndUser", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningByBookAndUser")
+    @ResponseWrapper(localName = "listbookloaningByBookAndUserResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningByBookAndUserResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningByBookAndUserRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningByBookAndUserResponse")
+    public List<Bookloaning> listbookloaningByBookAndUser(
         @WebParam(name = "arg0", targetNamespace = "")
-        Bookloaning arg0);
+        Integer arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Integer arg1);
 
     /**
      * 
@@ -66,33 +60,6 @@ public interface BookloaningService {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.UpdateBookloaning")
-    @ResponseWrapper(localName = "updateBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.UpdateBookloaningResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/updateBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/updateBookloaningResponse")
-    public void updateBookloaning(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Bookloaning arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Bookloaning arg1);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.DeleteBookloaning")
-    @ResponseWrapper(localName = "deleteBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.DeleteBookloaningResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/deleteBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/deleteBookloaningResponse")
-    public void deleteBookloaning(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Bookloaning arg0);
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.bookloaning.Bookloaning>
@@ -105,6 +72,21 @@ public interface BookloaningService {
     public List<Bookloaning> listbookloaningByUser(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.UpdateBookloaning")
+    @ResponseWrapper(localName = "updateBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.UpdateBookloaningResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/updateBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/updateBookloaningResponse")
+    public void updateBookloaning(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Bookloaning arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Bookloaning arg1);
 
     /**
      * 
@@ -138,21 +120,39 @@ public interface BookloaningService {
 
     /**
      * 
-     * @param arg1
      * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.DeleteBookloaning")
+    @ResponseWrapper(localName = "deleteBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.DeleteBookloaningResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/deleteBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/deleteBookloaningResponse")
+    public void deleteBookloaning(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Bookloaning arg0);
+
+    /**
+     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.bookloaning.Bookloaning>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listbookloaningByBookAndUser", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningByBookAndUser")
-    @ResponseWrapper(localName = "listbookloaningByBookAndUserResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningByBookAndUserResponse")
-    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningByBookAndUserRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningByBookAndUserResponse")
-    public List<Bookloaning> listbookloaningByBookAndUser(
+    @RequestWrapper(localName = "listbookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.Listbookloaning")
+    @ResponseWrapper(localName = "listbookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.ListbookloaningResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/listbookloaningResponse")
+    public List<Bookloaning> listbookloaning();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addBookloaning", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.AddBookloaning")
+    @ResponseWrapper(localName = "addBookloaningResponse", targetNamespace = "http://bookloaning.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.bookloaning.AddBookloaningResponse")
+    @Action(input = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/addBookloaningRequest", output = "http://bookloaning.service.openlib.mahxwell.org/BookloaningService/addBookloaningResponse")
+    public void addBookloaning(
         @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Integer arg1);
+        Bookloaning arg0);
 
     /**
      * 

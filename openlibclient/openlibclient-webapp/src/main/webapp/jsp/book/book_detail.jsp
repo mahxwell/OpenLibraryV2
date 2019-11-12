@@ -30,9 +30,6 @@
             <s:set var="copyAvailable" value="copyNbr"/>
             <s:set var="AlreadyLoaned" value="alreadyLoaned"/>
             <s:set var="Extended" value="bookloaningExtend"/>
-            <s:set var="limitPassed" value="cannotExtend"/>
-
-
             <div style="background-color: rgba(208, 207, 207, 1.00)"><h4>Option</h4></div>
 
             <s:if test="%{#userId!=null}">
@@ -46,12 +43,9 @@
                     <s:a action="book_loaning_delete">Rendre Le Livre</s:a>
                     </br>
                     <p>Besoin de temps pour finir votre lecture ?</p>
-                    <s:if test="%{#Extended==false && #limitPassed==false}">
+                    <s:if test="%{#Extended==false}">
                         <s:a action="book_loaning_update">Prolonger Emprun</s:a>
                     </s:if>
-                    <s:elseif test="%{#limitPassed==true}">
-                        <p style="color: red">Attention : Vous ne pouvez prolonger un emprun en retard</p>
-                    </s:elseif>
                     <s:else>
                         <p style="color: red">Vous ne pouvez prolongez qu'une seule fois</p>
                     </s:else>
