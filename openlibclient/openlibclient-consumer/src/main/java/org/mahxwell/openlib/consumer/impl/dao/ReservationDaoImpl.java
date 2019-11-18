@@ -121,4 +121,16 @@ public class ReservationDaoImpl implements ReservationDao {
     public Reservation reservationsByUserAndByBooks(final Integer user_id, final Integer book_id) {
         return reservationService.reservationByUserAndByBooks(user_id, book_id);
     }
+
+    /**
+     * DAO
+     * Get a Reservation Object List by Copy_id
+     *
+     * @param copy_id Copy unique Identification number
+     * @return
+     */
+    @Override
+    public List<Reservation> reservationsByCopyId(final Integer copy_id) {
+        return reservationService.reservationsByCopyId(copy_id);
+    }
 }

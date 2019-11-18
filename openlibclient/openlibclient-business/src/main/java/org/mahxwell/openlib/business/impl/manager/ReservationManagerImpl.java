@@ -127,4 +127,15 @@ public class ReservationManagerImpl extends AbstractManagerImpl implements Reser
         return getDaoFactory().getReservationDao().reservationsByUserAndByBooks(user_id, book_id);
     }
 
+    /**
+     * Manager
+     * Get a Reservation Object List by Copy_id
+     *
+     * @param copy_id Copy unique Identification number
+     * @return
+     */
+    @Override
+    public List<Reservation> reservationsByCopyId(final Integer copy_id) {
+        return getDaoFactory().getReservationDao().reservationsByCopyId(copy_id);
+    }
 }

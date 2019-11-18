@@ -1,6 +1,7 @@
 package org.mahxwell.openlib.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 import org.mahxwell.openlib.ContextLoader;
@@ -19,6 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -57,13 +59,20 @@ public class ReservationAction extends ActionSupport implements SessionAware {
 
         if (user != null && book != null) {
             try {
-
-
-                // IMPLEMENT CHANGE COPY ID FOR RESERVATION
                 bookloaningListOrderByDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(book.getBookId());
-                copyList = copyManager.copiesByBook(book.getBookId());
                 reservationList = reservationManager.reservationsByBooks(book.getBookId());
+                Integer freeCopyId = getFreeCopyId(reservationList, book.getBookId());
 
+                /**
+                 * Check if Error occured in Queue
+                 */
+                if (freeCopyId == -1) {
+                    return ActionSupport.ERROR;
+                }
+
+                /**
+                 * Set then Insert New Reservation Object
+                 */
                 try {
                     String formater = "yyyy-MM-dd'T'HH:mm:ss";
                     DateFormat format = new SimpleDateFormat(formater);
@@ -77,7 +86,7 @@ public class ReservationAction extends ActionSupport implements SessionAware {
                     reservation.setReservationMail(gDateFormatted);
                     reservation.setGetBookId(book.getBookId());
                     reservation.setUserIdUser(user.getUserId());
-                    reservation.setCopyIdCopy(bookloaningListOrderByDate.get(0).getCopyIdCopy());
+                    reservation.setCopyIdCopy(freeCopyId);
                     reservationManager.addReservation(reservation);
                 } catch (Exception e) {
                     logger.error("Failed adding reservation : " + e);
@@ -87,6 +96,79 @@ public class ReservationAction extends ActionSupport implements SessionAware {
             }
         }
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
+    }
+
+    /**
+     * Add V2
+     * Check free copy for queue
+     *
+     * @param reservations reservation list by book identification number
+     * @param book_id      Book Unique Identification Number
+     * @return
+     */
+    private Integer getFreeCopyId(final List<Reservation> reservations, final Integer book_id) {
+        try {
+
+            /**
+             * Get All Copy list and then Compare them
+             * If substract of two lists is positive, the first copy_id of the list can be reserved
+             * If substract of two lists is null (= 0 here), calling a new method to determine second reservation queue
+             */
+            List<Copy> copies = copyManager.copiesByBook(book_id);
+
+            List<Integer> copies1 = new ArrayList<>();
+            List<Integer> copies2 = new ArrayList<>();
+
+            for (int i = 0; i < copies.size(); i++)
+                copies1.add(copies.get(i).getCopyId());
+
+            for (int j = 0; j < reservations.size(); j++)
+                copies2.add(reservations.get(j).getCopyIdCopy());
+
+            List<Integer> finalCopyList = ListUtils.subtract(copies1, copies2);
+
+            if (finalCopyList.size() <= 0) {
+                return getSecondCopyReservation(book_id);
+            } else {
+                return finalCopyList.get(0);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return -1;
+    }
+
+
+    /**
+     * Add V2
+     * Check Existing Queue to allow second flow of Reservation
+     *
+     * @param book_id Book Unique Identification Number
+     * @return
+     */
+    private Integer getSecondCopyReservation(final Integer book_id) {
+
+        List<Copy> copies = copyManager.copiesByBook(book_id);
+
+        /**
+         * Second reservation queue
+         * If all copies of are reserved a first time, a second reservation can be triggered
+         * (each copies can have two reservations)
+         */
+        int i = 0;
+
+        while (i < copies.size()) {
+            try {
+                List<Reservation> reservationList = reservationManager.reservationsByCopyId(copies.get(i).getCopyId());
+                if (reservationList.size() >= 2)
+                    i++;
+                else
+                    return copies.get(i).getCopyId();
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        }
+        return -1;
     }
 
     /**

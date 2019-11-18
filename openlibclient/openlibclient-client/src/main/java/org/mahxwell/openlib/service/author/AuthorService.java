@@ -27,25 +27,13 @@ public interface AuthorService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.author.Author>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listauthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.Listauthor")
-    @ResponseWrapper(localName = "listauthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.ListauthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorResponse")
-    public List<Author> listauthor();
-
-    /**
-     * 
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "addAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthor")
-    @ResponseWrapper(localName = "addAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorResponse")
-    public void addAuthor(
+    @RequestWrapper(localName = "deleteAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthor")
+    @ResponseWrapper(localName = "deleteAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorResponse")
+    public void deleteAuthor(
         @WebParam(name = "arg0", targetNamespace = "")
         Author arg0);
 
@@ -66,15 +54,15 @@ public interface AuthorService {
 
     /**
      * 
-     * @param arg0
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.author.Author>
      */
     @WebMethod
-    @RequestWrapper(localName = "deleteAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthor")
-    @ResponseWrapper(localName = "deleteAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorResponse")
-    public void deleteAuthor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Author arg0);
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listauthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.Listauthor")
+    @ResponseWrapper(localName = "listauthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.ListauthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorResponse")
+    public List<Author> listauthor();
 
     /**
      * 
@@ -90,5 +78,17 @@ public interface AuthorService {
     public Author getAuthor(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthor")
+    @ResponseWrapper(localName = "addAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorResponse")
+    public void addAuthor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Author arg0);
 
 }

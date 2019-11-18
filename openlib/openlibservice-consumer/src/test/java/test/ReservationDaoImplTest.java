@@ -171,4 +171,15 @@ public class ReservationDaoImplTest {
 
         reservationDao.reservationsByUserAndByBooks(reservation.getUserIdUser(), reservation1.getGetBookId());
     }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void reservationsByCopyId() {
+
+        List<Reservation> reservationList = reservationDao.reservationsByCopyId(1);
+
+        for (int i = 0; i < reservationList.size(); i++)
+            System.out.println(reservationList.get(i));
+    }
 }

@@ -36,12 +36,14 @@ public class ObjectFactory {
     private final static QName _ListreservationByBooks_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationByBooks");
     private final static QName _ListreservationByBooksResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationByBooksResponse");
     private final static QName _DeleteReservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "deleteReservation");
+    private final static QName _ReservationsByCopyIdResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsByCopyIdResponse");
     private final static QName _UpdateReservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "updateReservation");
     private final static QName _ListreservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationResponse");
     private final static QName _ReservationByUserAndByBooksResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationByUserAndByBooksResponse");
     private final static QName _UpdateReservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "updateReservationResponse");
     private final static QName _GetReservationByUserIdAndCopyId_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "getReservationByUserIdAndCopyId");
     private final static QName _DeleteReservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "deleteReservationResponse");
+    private final static QName _ReservationsByCopyId_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsByCopyId");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.mahxwell.openlib.service.reservation
@@ -56,6 +58,14 @@ public class ObjectFactory {
      */
     public DeleteReservationResponse createDeleteReservationResponse() {
         return new DeleteReservationResponse();
+    }
+
+    /**
+     * Create an instance of {@link ReservationsByCopyId }
+     * 
+     */
+    public ReservationsByCopyId createReservationsByCopyId() {
+        return new ReservationsByCopyId();
     }
 
     /**
@@ -104,6 +114,14 @@ public class ObjectFactory {
      */
     public DeleteReservation createDeleteReservation() {
         return new DeleteReservation();
+    }
+
+    /**
+     * Create an instance of {@link ReservationsByCopyIdResponse }
+     * 
+     */
+    public ReservationsByCopyIdResponse createReservationsByCopyIdResponse() {
+        return new ReservationsByCopyIdResponse();
     }
 
     /**
@@ -311,6 +329,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationsByCopyIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "reservationsByCopyIdResponse")
+    public JAXBElement<ReservationsByCopyIdResponse> createReservationsByCopyIdResponse(ReservationsByCopyIdResponse value) {
+        return new JAXBElement<ReservationsByCopyIdResponse>(_ReservationsByCopyIdResponse_QNAME, ReservationsByCopyIdResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UpdateReservation }{@code >}}
      * 
      */
@@ -362,6 +389,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "deleteReservationResponse")
     public JAXBElement<DeleteReservationResponse> createDeleteReservationResponse(DeleteReservationResponse value) {
         return new JAXBElement<DeleteReservationResponse>(_DeleteReservationResponse_QNAME, DeleteReservationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationsByCopyId }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "reservationsByCopyId")
+    public JAXBElement<ReservationsByCopyId> createReservationsByCopyId(ReservationsByCopyId value) {
+        return new JAXBElement<ReservationsByCopyId>(_ReservationsByCopyId_QNAME, ReservationsByCopyId.class, null, value);
     }
 
 }

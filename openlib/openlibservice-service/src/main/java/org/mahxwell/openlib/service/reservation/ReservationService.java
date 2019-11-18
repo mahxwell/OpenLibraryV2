@@ -177,7 +177,7 @@ public class ReservationService extends AbstractManagerService {
     }
 
     /**
-     * WebService¬
+     * WebService
      * Get ONE Precise Reservation Object by User ID AND Book ID
      *
      * @param user_id User unique Identification number
@@ -193,6 +193,28 @@ public class ReservationService extends AbstractManagerService {
             logger.error("Error reservationsByUserAndByBooks method = " + e);
             return null;
         }
+    }
+
+    /**
+     * WebService
+     * Get a Reservation Object List by Copy_id
+     *
+     * @param copy_id Copy unique Identification number
+     * @return
+     */
+    @WebMethod(operationName = "reservationsByCopyId")
+    public List<Reservation> reservationsByCopyId(final Integer copy_id) {
+        try {
+            List<Reservation> reservations = reservationManager.reservationsByCopyId(copy_id);
+            if (reservations != null) {
+                return reservations;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error reservationsByCopyId method = " + e);
+        }
+        return null;
     }
 
 }

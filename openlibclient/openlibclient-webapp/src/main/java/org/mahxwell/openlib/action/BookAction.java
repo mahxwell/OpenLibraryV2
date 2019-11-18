@@ -265,7 +265,7 @@ public class BookAction extends ActionSupport implements SessionAware {
             Integer actualReservation = reservations.size();
             Integer maxReservationByBook = copiesByBooks.size() + copiesByBooks.size();
 
-            if (actualReservation <= maxReservationByBook) {
+            if (actualReservation < maxReservationByBook) {
                 reserveQueueLimit = false;
             } else {
                 reserveQueueLimit = true;

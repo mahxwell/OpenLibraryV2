@@ -221,4 +221,23 @@ public class ReservationDaoImpl extends AbstractDaoImpl implements ReservationDa
 
         return reservations.get(0);
     }
+
+    /**
+     * DAO
+     * Get a Reservation Object List by Copy_id
+     *
+     * @param copy_id Copy unique Identification number
+     * @return
+     */
+    @Override
+    public List<Reservation> reservationsByCopyId(final Integer copy_id) {
+        ReservationRowMapper reservationRowMapper = new ReservationRowMapper();
+        JdbcTemplate template = new JdbcTemplate(getDataSource());
+
+        String query = "SELECT * FROM librarydb.reservation"
+                + " WHERE copy_id_copy = " + "'" + copy_id + "'";
+        List<Reservation> reservations = template.query(query, reservationRowMapper.getReservationRowMapper());
+
+        return reservations;
+    }
 }

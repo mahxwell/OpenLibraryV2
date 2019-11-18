@@ -22,4 +22,6 @@ public interface ReservationDao {
     List<Reservation> reservationsByUser(final Integer user_id);
 
     Reservation reservationsByUserAndByBooks(final Integer user_id, final Integer book_id);
+
+    List<Reservation> reservationsByCopyId(final Integer copy_id);
 }
