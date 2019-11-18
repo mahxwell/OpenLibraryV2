@@ -82,6 +82,10 @@ public class BookAction extends ActionSupport implements SessionAware {
         }
     }
 
+    /**
+     * List of Reserved Book by User
+     * @return
+     */
     public String doListReservedBook() {
 
         user = (User) this.session.get("user");
@@ -168,6 +172,9 @@ public class BookAction extends ActionSupport implements SessionAware {
             logger.error("bookId is null");
         } else {
             try {
+                /**
+                 * Get All Book Informations for JSP
+                 */
                 book = bookManager.getBook(bookId);
                 editor = editorManager.getEditor(book.getEditorIdEditor());
                 author = authorManager.getAuthor(book.getAuthorIdAuthor());
@@ -177,10 +184,19 @@ public class BookAction extends ActionSupport implements SessionAware {
                 bookloanings = bookloaningManager.bookloaningsByBook(bookId);
                 copyNbr = copyListByBooks.size() - bookloanings.size();
 
+                /**
+                 * Add for V2 -> Expected return date for JSP
+                 */
                 this.expectedReturnDate = expectedReturnDateForReservation(bookId);
 
+                /**
+                 * Add for V2 -> Check if reservation list for a book is not too long
+                 */
                 checkMaxQueueReservation(bookId);
 
+                /**
+                 * Add for V2 -> Check if a book is already reserved for JSP
+                 */
                 try {
                     Reservation reservationKeep = reservationManager.reservationsByUserAndByBooks(user.getUserId(), bookId);
                     if (reservationKeep == null) {
@@ -192,7 +208,9 @@ public class BookAction extends ActionSupport implements SessionAware {
                     logger.info("reservationKeep is null");
                 }
 
-
+                /**
+                 * Bookloaning Operation
+                 */
                 List<Bookloaning> bookloaningsByBookAndUser =
                         bookloaningManager.bookloaningsByBookAndByUser(bookId, user.getUserId());
                 if (bookloaningsByBookAndUser.size() > 0) {
@@ -202,7 +220,8 @@ public class BookAction extends ActionSupport implements SessionAware {
                     bookloaningExtend = bookloaningsByBookAndUser.get(0).isExtended();
 
                     /**
-                     * For P10
+                     * Add For V2 -> Fix add 1.0.1
+                     * User cannot extend a loan when return date is passed
                      */
                     Date dateNow = new Date();
                     if (dateNow.compareTo(date) > 0) {
@@ -221,6 +240,11 @@ public class BookAction extends ActionSupport implements SessionAware {
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    /**
+     * Add For V2 -> Get a expected return Date for reservation
+     * @param bookId
+     * @return
+     */
     private Date expectedReturnDateForReservation(final Integer bookId) {
 
         List<Bookloaning> bookloanedDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(bookId);
@@ -229,6 +253,10 @@ public class BookAction extends ActionSupport implements SessionAware {
         return returnDate;
     }
 
+    /**
+     * Add for V2 -> Check if reservation list for a book is not too long
+     * @param bookId
+     */
     private void checkMaxQueueReservation(final Integer bookId) {
         List<Reservation> reservations = reservationManager.reservationsByBooks(bookId);
         List<Copy> copiesByBooks = copyManager.copiesByBook(bookId);

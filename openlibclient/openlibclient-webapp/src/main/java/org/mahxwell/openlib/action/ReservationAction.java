@@ -23,6 +23,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Mahxwell
+ * <h1>Reservation Action Class</h1>
+ * <p>Contain All Struts2 Framework Book Actions</p>
+ */
 public class ReservationAction extends ActionSupport implements SessionAware {
 
     private static final Logger logger = Logger.getLogger(ReservationAction.class);
@@ -39,6 +44,12 @@ public class ReservationAction extends ActionSupport implements SessionAware {
     private ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
     private CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
 
+    /**
+     * Add V2
+     * Create a new Reservation Object
+     *
+     * @return
+     */
     public String doCreateReservation() {
 
         user = (User) this.session.get("user");
@@ -46,6 +57,9 @@ public class ReservationAction extends ActionSupport implements SessionAware {
 
         if (user != null && book != null) {
             try {
+
+
+                // IMPLEMENT CHANGE COPY ID FOR RESERVATION
                 bookloaningListOrderByDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(book.getBookId());
                 copyList = copyManager.copiesByBook(book.getBookId());
                 reservationList = reservationManager.reservationsByBooks(book.getBookId());
@@ -75,6 +89,12 @@ public class ReservationAction extends ActionSupport implements SessionAware {
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    /**
+     * Add V2
+     * Delete a Reservation Object
+     *
+     * @return
+     */
     public String deDeleteReservation() {
         user = (User) this.session.get("user");
         book = (Book) this.session.get("book");
@@ -86,12 +106,11 @@ public class ReservationAction extends ActionSupport implements SessionAware {
             } catch (Exception e) {
                 logger.error("Error deleting reservation : " + e);
             }
-
         }
-
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    /* GETTERS AND SETTERS */
 
     public Map<String, Object> getSession() {
         return session;
