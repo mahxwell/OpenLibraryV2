@@ -7,9 +7,11 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.mahxwell.openlib.ContextLoader;
 import org.mahxwell.openlib.business.contract.manager.BookloaningManager;
 import org.mahxwell.openlib.business.contract.manager.CopyManager;
+import org.mahxwell.openlib.business.contract.manager.ReservationManager;
 import org.mahxwell.openlib.service.book.Book;
 import org.mahxwell.openlib.service.bookloaning.Bookloaning;
 import org.mahxwell.openlib.service.copy.Copy;
+import org.mahxwell.openlib.service.reservation.Reservation;
 import org.mahxwell.openlib.service.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +27,9 @@ public class BookLoaningAction extends ActionSupport implements SessionAware {
     private Map<String, Object> session;
     private HttpServletRequest servletRequest;
 
-    BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
-    CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
+    private BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
+    private CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
+    private ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
 
     /*    private ManagerFactory managerFactory;*/
 
@@ -44,6 +47,14 @@ public class BookLoaningAction extends ActionSupport implements SessionAware {
         book = (Book) this.session.get("book");
         if (user != null && book != null) {
             try {
+
+
+                /**
+                 * Add V2 -> clean reservation when a user loan a book
+                 */
+                this.cleanReservation(user.getUserId(), book.getBookId());
+
+
                 copies = copyManager.copiesByBook(book.getBookId());
                 bookloaningList = bookloaningManager.bookloanings();
 
@@ -163,6 +174,17 @@ public class BookLoaningAction extends ActionSupport implements SessionAware {
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    public void cleanReservation(final Integer user_id, final Integer book_id) {
+
+        try {
+            Reservation reservation = reservationManager.reservationsByUserAndByBooks(user_id, book_id);
+            if (reservation != null) {
+                reservationManager.deleteReservation(reservation);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
     /* GETTERS AND SETTERS */
 

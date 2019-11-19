@@ -84,18 +84,6 @@ public interface UserService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Deleteuser")
-    @ResponseWrapper(localName = "deleteuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.DeleteuserResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/deleteuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/deleteuserResponse")
-    public void deleteuser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        User arg0);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.user.User>
      */
@@ -105,5 +93,17 @@ public interface UserService {
     @ResponseWrapper(localName = "userstosendmailResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.UserstosendmailResponse")
     @Action(input = "http://user.service.openlib.mahxwell.org/UserService/userstosendmailRequest", output = "http://user.service.openlib.mahxwell.org/UserService/userstosendmailResponse")
     public List<User> userstosendmail();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Deleteuser")
+    @ResponseWrapper(localName = "deleteuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.DeleteuserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/deleteuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/deleteuserResponse")
+    public void deleteuser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        User arg0);
 
 }

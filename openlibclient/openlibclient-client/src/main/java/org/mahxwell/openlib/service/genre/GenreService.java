@@ -27,45 +27,6 @@ public interface GenreService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.genre.Genre>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listgenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.Listgenre")
-    @ResponseWrapper(localName = "listgenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.ListgenreResponse")
-    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/listgenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/listgenreResponse")
-    public List<Genre> listgenre();
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteGenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.DeleteGenre")
-    @ResponseWrapper(localName = "deleteGenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.DeleteGenreResponse")
-    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/deleteGenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/deleteGenreResponse")
-    public void deleteGenre(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Genre arg0);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateGenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.UpdateGenre")
-    @ResponseWrapper(localName = "updateGenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.UpdateGenreResponse")
-    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/updateGenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/updateGenreResponse")
-    public void updateGenre(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Genre arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Genre arg1);
-
-    /**
-     * 
      * @param arg0
      */
     @WebMethod
@@ -90,5 +51,44 @@ public interface GenreService {
     public Genre getGenre(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateGenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.UpdateGenre")
+    @ResponseWrapper(localName = "updateGenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.UpdateGenreResponse")
+    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/updateGenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/updateGenreResponse")
+    public void updateGenre(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Genre arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Genre arg1);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.genre.Genre>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listgenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.Listgenre")
+    @ResponseWrapper(localName = "listgenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.ListgenreResponse")
+    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/listgenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/listgenreResponse")
+    public List<Genre> listgenre();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteGenre", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.DeleteGenre")
+    @ResponseWrapper(localName = "deleteGenreResponse", targetNamespace = "http://genre.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.genre.DeleteGenreResponse")
+    @Action(input = "http://genre.service.openlib.mahxwell.org/GenreService/deleteGenreRequest", output = "http://genre.service.openlib.mahxwell.org/GenreService/deleteGenreResponse")
+    public void deleteGenre(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Genre arg0);
 
 }

@@ -66,6 +66,8 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     private boolean reserveQueueLimit;
 
+    private boolean reservationPrioritybol;
+
     /**
      * doListBook
      * Show All Book List
@@ -84,6 +86,7 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     /**
      * List of Reserved Book by User
+     *
      * @return
      */
     public String doListReservedBook() {
@@ -187,12 +190,13 @@ public class BookAction extends ActionSupport implements SessionAware {
                 /**
                  * Add for V2 -> Expected return date for JSP
                  */
-                this.expectedReturnDate = expectedReturnDateForReservation(bookId);
+                this.expectedReturnDate = expectedReturnDateForReservation(book.getBookId());
 
                 /**
                  * Add for V2 -> Check if reservation list for a book is not too long
                  */
-                checkMaxQueueReservation(bookId);
+                this.checkMaxQueueReservation(book.getBookId());
+
 
                 /**
                  * Add for V2 -> Check if a book is already reserved for JSP
@@ -207,6 +211,19 @@ public class BookAction extends ActionSupport implements SessionAware {
                 } catch (Exception e) {
                     logger.info("reservationKeep is null");
                 }
+                /**
+                 * Add V2 -> Check If a user has reserved a book or not
+                 * to allow priority to users who have reserved to loan
+                 */
+                // CHECK IF LOANING BUG OCCUR AGAIN
+                List<Reservation>  reservationPriority = reservationManager.reservationsByBooks(bookId);
+
+                if (reservationPriority.size() <= 0) {
+                    reservationPrioritybol = false;
+                } else {
+                    reservationPrioritybol = true;
+                }
+
 
                 /**
                  * Bookloaning Operation
@@ -242,34 +259,45 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     /**
      * Add For V2 -> Get a expected return Date for reservation
+     *
      * @param bookId
      * @return
      */
     private Date expectedReturnDateForReservation(final Integer bookId) {
 
-        List<Bookloaning> bookloanedDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(bookId);
-        XMLGregorianCalendar expectedReturnDate = bookloanedDate.get(0).getEndDate();
-        Date returnDate = expectedReturnDate.toGregorianCalendar().getTime();
-        return returnDate;
+        try {
+            List<Bookloaning> bookloanedDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(bookId);
+            XMLGregorianCalendar expectedReturnDate = bookloanedDate.get(0).getEndDate();
+            Date returnDate = expectedReturnDate.toGregorianCalendar().getTime();
+            return returnDate;
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
     }
 
     /**
      * Add for V2 -> Check if reservation list for a book is not too long
+     *
      * @param bookId
      */
     private void checkMaxQueueReservation(final Integer bookId) {
-        List<Reservation> reservations = reservationManager.reservationsByBooks(bookId);
-        List<Copy> copiesByBooks = copyManager.copiesByBook(bookId);
+        try {
+            List<Reservation> reservations = reservationManager.reservationsByBooks(bookId);
+            List<Copy> copiesByBooks = copyManager.copiesByBook(bookId);
 
-        if (reservations.size() > 0 && copiesByBooks.size() > 0) {
-            Integer actualReservation = reservations.size();
-            Integer maxReservationByBook = copiesByBooks.size() + copiesByBooks.size();
+            if (reservations.size() > 0 && copiesByBooks.size() > 0) {
+                Integer actualReservation = reservations.size();
+                Integer maxReservationByBook = copiesByBooks.size() + copiesByBooks.size();
 
-            if (actualReservation < maxReservationByBook) {
-                reserveQueueLimit = false;
-            } else {
-                reserveQueueLimit = true;
+                if (actualReservation < maxReservationByBook) {
+                    reserveQueueLimit = false;
+                } else {
+                    reserveQueueLimit = true;
+                }
             }
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -443,5 +471,13 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     public void setCannotExtend(boolean cannotExtend) {
         this.cannotExtend = cannotExtend;
+    }
+
+    public boolean isReservationPrioritybol() {
+        return reservationPrioritybol;
+    }
+
+    public void setReservationPrioritybol(boolean reservationPrioritybol) {
+        this.reservationPrioritybol = reservationPrioritybol;
     }
 }
