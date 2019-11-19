@@ -3,51 +3,44 @@ package org.mahxwell.openlib.batch;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.mahxwell.openlib.business.contract.manager.BookManager;
-import org.mahxwell.openlib.business.contract.manager.UserManager;
-import org.mahxwell.openlib.mail.JavaMailSenderUser;
-import org.mahxwell.openlib.service.book.Book;
-import org.mahxwell.openlib.service.user.User;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+/**
+ * Main Class of OpenLibBatch
+ *
+ * Create several threads to send different informations to OpenLibrary users
+ */
 public class BatchLauncher {
 
     private static final Logger logger = LogManager.getLogger(BatchLauncher.class);
 
+    /**
+     * Launch This Method with your IDE to begin threads
+     * @param args
+     */
     public static void main(String[] args) {
+
+        /**
+         * Use 2 as parameters -> 2 threads
+         */
         ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
 
-        Runnable task = () -> {
-            try {
-                UserManager userManager = ContextLoader.INSTANCE.getUserManager();
-                BookManager bookManager = ContextLoader.INSTANCE.getBookManager();
+        TaskLateMailSender taskLateMailSender = new TaskLateMailSender();
 
-                List<User> users = userManager.usersToSendMail();
-                List<Book> books = bookManager.booksToSendMail();
-                List<String> userEmails = new ArrayList<>();
-                List<String> booksLate = new ArrayList<>();
+       // TaskFreeBookReservationMail taskFreeBookReservationMail = new TaskFreeBookReservationMail();
 
-                for (int j = 0; j < users.size(); j++) {
-                    userEmails.add(users.get(j).getUserEmail());
-                    booksLate.add(books.get(j).getBookTitle());
-                }
+        /**
+         * Execute Java Thread as Batch -> V1 : Send mails to users who are late for giving back previously loaned books
+         */
+        ses.scheduleAtFixedRate(taskLateMailSender.taskLateMail, 0, 30, SECONDS);
 
-                for (int j = 0; j < userEmails.size(); j++) {
-                    JavaMailSenderUser.sendMessageToUser(userEmails.get(j), booksLate.get(j));
+        /**
+         * Execute Java Thread as Batch -> V2 : Send a mail when a book they previously loaned is available to loan
+         */
+       // ses.scheduleAtFixedRate(taskFreeBookReservationMail., 0, 30, SECONDS);
 
-                }
-            } catch (RuntimeException e) {
-                logger.error(e);
-            } catch (Exception e) {
-                logger.error(e);
-            }
-        };
-        ses.scheduleAtFixedRate(task, 0, 30, SECONDS);
         //Uncommment for exemple
         //    ses.shutdown();
     }

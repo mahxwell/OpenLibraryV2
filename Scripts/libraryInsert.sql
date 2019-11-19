@@ -122,6 +122,10 @@ INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_boo
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 3, 2, 14);
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 4, 2, 24);
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 5, 2, 34);
+
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-07-09', 4, 3, 30);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-06-04', 5, 3, 40);
+
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 2, 4, 5);
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 3, 4, 15);
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-19', '2019-12-19', 4, 4, 25);

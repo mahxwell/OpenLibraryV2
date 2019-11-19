@@ -57,18 +57,6 @@ public interface UserService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "adduser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Adduser")
-    @ResponseWrapper(localName = "adduserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.AdduserResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/adduserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/adduserResponse")
-    public void adduser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        User arg0);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      */
@@ -105,5 +93,17 @@ public interface UserService {
     @ResponseWrapper(localName = "userstosendmailResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.UserstosendmailResponse")
     @Action(input = "http://user.service.openlib.mahxwell.org/UserService/userstosendmailRequest", output = "http://user.service.openlib.mahxwell.org/UserService/userstosendmailResponse")
     public List<User> userstosendmail();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "adduser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Adduser")
+    @ResponseWrapper(localName = "adduserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.AdduserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/adduserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/adduserResponse")
+    public void adduser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        User arg0);
 
 }

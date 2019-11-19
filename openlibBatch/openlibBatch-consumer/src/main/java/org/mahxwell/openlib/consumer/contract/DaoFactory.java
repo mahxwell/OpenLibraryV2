@@ -50,5 +50,10 @@ public interface DaoFactory {
 
     void setGenreDao(GenreDao genreDao);
 
+    //Reservation
+    ReservationDao getReservationDao();
+
+    void setReservationDao(ReservationDao reservationDao);
+
 
 }

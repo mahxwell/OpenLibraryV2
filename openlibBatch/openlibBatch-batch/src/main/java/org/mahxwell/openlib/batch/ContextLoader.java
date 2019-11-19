@@ -1,6 +1,7 @@
 package org.mahxwell.openlib.batch;
 
 import org.mahxwell.openlib.business.contract.manager.*;
+import org.mahxwell.openlib.service.reservation.Reservation;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public enum ContextLoader {
@@ -15,6 +16,7 @@ public enum ContextLoader {
     private CopyManager copyManager;
     private EditorManager editorManager;
     private GenreManager genreManager;
+    private ReservationManager reservationManager;
 
     ContextLoader() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bootstrapContext.xml");
@@ -26,6 +28,7 @@ public enum ContextLoader {
         copyManager = context.getBean("copyManager", CopyManager.class);
         editorManager = context.getBean("editorManager", EditorManager.class);
         genreManager = context.getBean("genreManager", GenreManager.class);
+        reservationManager = context.getBean("reservationManager", ReservationManager.class);
     }
 
     public ContextLoader getInstance() {
@@ -62,5 +65,13 @@ public enum ContextLoader {
 
     public GenreManager getGenreManager() {
         return genreManager;
+    }
+
+    public ReservationManager getReservationManager() {
+        return reservationManager;
+    }
+
+    public void setReservationManager(ReservationManager reservationManager) {
+        this.reservationManager = reservationManager;
     }
 }

@@ -56,5 +56,11 @@ public interface ManagerFactory {
 
     void setGenreManager(GenreManager genreManager);
 
+    //Reservation
+
+    ReservationManager getReservationManager();
+
+    void setReservationManager(ReservationManager reservationaManager);
+
 
 }

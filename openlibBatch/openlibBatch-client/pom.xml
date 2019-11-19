@@ -24,43 +24,48 @@
     <properties>
         <service.wsdl.url.user>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/user?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/user?wsdl
         </service.wsdl.url.user>
 
         <service.wsdl.url.library>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/library?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/library?wsdl
         </service.wsdl.url.library>
 
         <service.wsdl.url.author>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/author?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/author?wsdl
         </service.wsdl.url.author>
 
         <service.wsdl.url.editor>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/editor?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/editor?wsdl
         </service.wsdl.url.editor>
 
         <service.wsdl.url.copy>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/copy?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/copy?wsdl
         </service.wsdl.url.copy>
 
         <service.wsdl.url.genre>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/genre?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/genre?wsdl
         </service.wsdl.url.genre>
 
         <service.wsdl.url.book>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/book?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/book?wsdl
         </service.wsdl.url.book>
 
         <service.wsdl.url.bookloaning>
             <!-- change Url-->
-            http://Mahxwells-MacBook.local:8080/Openlibrary-Webservice5112920012513696107/bookloaning?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/bookloaning?wsdl
         </service.wsdl.url.bookloaning>
+
+        <service.wsdl.url.reservation>
+            <!-- change Url-->
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/reservation?wsdl
+        </service.wsdl.url.reservation>
     </properties>
 
 
@@ -91,6 +96,7 @@
                         <wsdlUrl>${service.wsdl.url.genre}</wsdlUrl>
                         <wsdlUrl>${service.wsdl.url.book}</wsdlUrl>
                         <wsdlUrl>${service.wsdl.url.bookloaning}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.reservation}</wsdlUrl>
                     </wsdlUrls>
                 </configuration>
             </plugin>
