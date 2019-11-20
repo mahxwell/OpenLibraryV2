@@ -27,6 +27,33 @@ public interface BookService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns org.mahxwell.openlib.service.book.Book
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.GetBook")
+    @ResponseWrapper(localName = "getBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.GetBookResponse")
+    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/getBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/getBookResponse")
+    public Book getBook(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.AddBook")
+    @ResponseWrapper(localName = "addBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.AddBookResponse")
+    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/addBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/addBookResponse")
+    public void addBook(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Book arg0);
+
+    /**
+     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.book.Book>
      */
@@ -36,21 +63,6 @@ public interface BookService {
     @ResponseWrapper(localName = "listbookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.ListbookResponse")
     @Action(input = "http://book.service.openlib.mahxwell.org/BookService/listbookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/listbookResponse")
     public List<Book> listbook();
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.UpdateBook")
-    @ResponseWrapper(localName = "updateBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.UpdateBookResponse")
-    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/updateBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/updateBookResponse")
-    public void updateBook(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Book arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Book arg1);
 
     /**
      * 
@@ -81,18 +93,6 @@ public interface BookService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.book.Book>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "booksMail", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.BooksMail")
-    @ResponseWrapper(localName = "booksMailResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.BooksMailResponse")
-    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/booksMailRequest", output = "http://book.service.openlib.mahxwell.org/BookService/booksMailResponse")
-    public List<Book> booksMail();
-
-    /**
-     * 
      * @param arg3
      * @param arg2
      * @param arg4
@@ -120,29 +120,29 @@ public interface BookService {
 
     /**
      * 
-     * @param arg0
      * @return
-     *     returns org.mahxwell.openlib.service.book.Book
+     *     returns java.util.List<org.mahxwell.openlib.service.book.Book>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.GetBook")
-    @ResponseWrapper(localName = "getBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.GetBookResponse")
-    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/getBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/getBookResponse")
-    public Book getBook(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
+    @RequestWrapper(localName = "booksMail", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.BooksMail")
+    @ResponseWrapper(localName = "booksMailResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.BooksMailResponse")
+    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/booksMailRequest", output = "http://book.service.openlib.mahxwell.org/BookService/booksMailResponse")
+    public List<Book> booksMail();
 
     /**
      * 
+     * @param arg1
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "addBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.AddBook")
-    @ResponseWrapper(localName = "addBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.AddBookResponse")
-    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/addBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/addBookResponse")
-    public void addBook(
+    @RequestWrapper(localName = "updateBook", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.UpdateBook")
+    @ResponseWrapper(localName = "updateBookResponse", targetNamespace = "http://book.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.book.UpdateBookResponse")
+    @Action(input = "http://book.service.openlib.mahxwell.org/BookService/updateBookRequest", output = "http://book.service.openlib.mahxwell.org/BookService/updateBookResponse")
+    public void updateBook(
         @WebParam(name = "arg0", targetNamespace = "")
-        Book arg0);
+        Book arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Book arg1);
 
 }

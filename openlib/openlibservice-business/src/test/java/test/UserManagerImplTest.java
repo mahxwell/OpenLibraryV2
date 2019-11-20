@@ -117,6 +117,15 @@ public class UserManagerImplTest {
             logger.error("login failed...");
             return;
         }
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getUser() {
+
+        User user = userManager.getUser(1);
+        System.out.println(user.toString());
 
     }
 }

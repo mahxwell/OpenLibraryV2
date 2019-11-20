@@ -101,4 +101,12 @@ public class UserDaoImplTest {
         else
             logger.error("Could not find User List");
     }
+
+    @Test
+    public void getUser() {
+
+        User user = userDao.getUser(1);
+        System.out.println(user.getUserName().toString());
+
+    }
 }

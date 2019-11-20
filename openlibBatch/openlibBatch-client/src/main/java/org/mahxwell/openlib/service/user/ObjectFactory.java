@@ -24,17 +24,19 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ListusersResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "listusersResponse");
+    private final static QName _GetUserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "getUserResponse");
     private final static QName _Loginuser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "loginuser");
-    private final static QName _LoginuserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "loginuserResponse");
     private final static QName _UserstosendmailResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "userstosendmailResponse");
-    private final static QName _Adduser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "adduser");
-    private final static QName _Listusers_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "listusers");
+    private final static QName _GetUser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "getUser");
     private final static QName _Userstosendmail_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "userstosendmail");
     private final static QName _AdduserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "adduserResponse");
     private final static QName _UpdateuserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "updateuserResponse");
     private final static QName _Deleteuser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "deleteuser");
     private final static QName _DeleteuserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "deleteuserResponse");
+    private final static QName _ListusersResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "listusersResponse");
+    private final static QName _LoginuserResponse_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "loginuserResponse");
+    private final static QName _Adduser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "adduser");
+    private final static QName _Listusers_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "listusers");
     private final static QName _Updateuser_QNAME = new QName("http://user.service.openlib.mahxwell.org/", "updateuser");
 
     /**
@@ -42,14 +44,6 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link ListusersResponse }
-     * 
-     */
-    public ListusersResponse createListusersResponse() {
-        return new ListusersResponse();
     }
 
     /**
@@ -61,6 +55,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetUserResponse }
+     * 
+     */
+    public GetUserResponse createGetUserResponse() {
+        return new GetUserResponse();
+    }
+
+    /**
      * Create an instance of {@link UserstosendmailResponse }
      * 
      */
@@ -69,27 +71,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginuserResponse }
+     * Create an instance of {@link GetUser }
      * 
      */
-    public LoginuserResponse createLoginuserResponse() {
-        return new LoginuserResponse();
-    }
-
-    /**
-     * Create an instance of {@link Adduser }
-     * 
-     */
-    public Adduser createAdduser() {
-        return new Adduser();
-    }
-
-    /**
-     * Create an instance of {@link Listusers }
-     * 
-     */
-    public Listusers createListusers() {
-        return new Listusers();
+    public GetUser createGetUser() {
+        return new GetUser();
     }
 
     /**
@@ -133,6 +119,38 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ListusersResponse }
+     * 
+     */
+    public ListusersResponse createListusersResponse() {
+        return new ListusersResponse();
+    }
+
+    /**
+     * Create an instance of {@link LoginuserResponse }
+     * 
+     */
+    public LoginuserResponse createLoginuserResponse() {
+        return new LoginuserResponse();
+    }
+
+    /**
+     * Create an instance of {@link Adduser }
+     * 
+     */
+    public Adduser createAdduser() {
+        return new Adduser();
+    }
+
+    /**
+     * Create an instance of {@link Listusers }
+     * 
+     */
+    public Listusers createListusers() {
+        return new Listusers();
+    }
+
+    /**
      * Create an instance of {@link Updateuser }
      * 
      */
@@ -149,12 +167,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ListusersResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "listusersResponse")
-    public JAXBElement<ListusersResponse> createListusersResponse(ListusersResponse value) {
-        return new JAXBElement<ListusersResponse>(_ListusersResponse_QNAME, ListusersResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "getUserResponse")
+    public JAXBElement<GetUserResponse> createGetUserResponse(GetUserResponse value) {
+        return new JAXBElement<GetUserResponse>(_GetUserResponse_QNAME, GetUserResponse.class, null, value);
     }
 
     /**
@@ -167,15 +185,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LoginuserResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "loginuserResponse")
-    public JAXBElement<LoginuserResponse> createLoginuserResponse(LoginuserResponse value) {
-        return new JAXBElement<LoginuserResponse>(_LoginuserResponse_QNAME, LoginuserResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UserstosendmailResponse }{@code >}}
      * 
      */
@@ -185,21 +194,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Adduser }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUser }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "adduser")
-    public JAXBElement<Adduser> createAdduser(Adduser value) {
-        return new JAXBElement<Adduser>(_Adduser_QNAME, Adduser.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Listusers }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "listusers")
-    public JAXBElement<Listusers> createListusers(Listusers value) {
-        return new JAXBElement<Listusers>(_Listusers_QNAME, Listusers.class, null, value);
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "getUser")
+    public JAXBElement<GetUser> createGetUser(GetUser value) {
+        return new JAXBElement<GetUser>(_GetUser_QNAME, GetUser.class, null, value);
     }
 
     /**
@@ -245,6 +245,42 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "deleteuserResponse")
     public JAXBElement<DeleteuserResponse> createDeleteuserResponse(DeleteuserResponse value) {
         return new JAXBElement<DeleteuserResponse>(_DeleteuserResponse_QNAME, DeleteuserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListusersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "listusersResponse")
+    public JAXBElement<ListusersResponse> createListusersResponse(ListusersResponse value) {
+        return new JAXBElement<ListusersResponse>(_ListusersResponse_QNAME, ListusersResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LoginuserResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "loginuserResponse")
+    public JAXBElement<LoginuserResponse> createLoginuserResponse(LoginuserResponse value) {
+        return new JAXBElement<LoginuserResponse>(_LoginuserResponse_QNAME, LoginuserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Adduser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "adduser")
+    public JAXBElement<Adduser> createAdduser(Adduser value) {
+        return new JAXBElement<Adduser>(_Adduser_QNAME, Adduser.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Listusers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://user.service.openlib.mahxwell.org/", name = "listusers")
+    public JAXBElement<Listusers> createListusers(Listusers value) {
+        return new JAXBElement<Listusers>(_Listusers_QNAME, Listusers.class, null, value);
     }
 
     /**

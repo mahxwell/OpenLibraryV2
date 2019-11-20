@@ -24,4 +24,6 @@ public interface UserDao {
 
     List<User> usersToSendMail();
 
+    User getUser(final Integer user_id);
+
 }

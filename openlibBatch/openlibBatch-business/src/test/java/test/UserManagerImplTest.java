@@ -96,4 +96,11 @@ public class UserManagerImplTest {
             logger.error("Could not find User List");
     }
 
+
+    @Test
+    public void getUser() {
+        User user = userManager.getUser(1);
+        System.out.println(user.getUserName().toString());
+
+    }
 }

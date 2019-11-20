@@ -160,4 +160,24 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
         return users;
     }
+
+    /**
+     * DAO
+     * Get a User Object with Unique Identification Number
+     *
+     * @param user_id User Unique Identification Number
+     * @return A User Object
+     */
+    @Override
+    public User getUser(final Integer user_id) {
+
+        UserRowMapper userRowMapper = new UserRowMapper();
+        JdbcTemplate template = new JdbcTemplate(getDataSource());
+
+        String query = "SELECT * FROM librarydb.user WHERE user_id = " + user_id;
+
+        List<User> users = template.query(query, userRowMapper.getUserRowMapper());
+
+        return users.get(0);
+    }
 }
