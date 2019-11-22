@@ -31,18 +31,22 @@ public class ObjectFactory {
     private final static QName _ListreservationByUserResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationByUserResponse");
     private final static QName _Listreservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservation");
     private final static QName _GetReservationByUserIdAndCopyIdResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "getReservationByUserIdAndCopyIdResponse");
+    private final static QName _ReservationsOrderById_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsOrderById");
     private final static QName _ReservationByUserAndByBooks_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationByUserAndByBooks");
     private final static QName _AddReservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "addReservation");
     private final static QName _ListreservationByBooks_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationByBooks");
     private final static QName _ListreservationByBooksResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationByBooksResponse");
+    private final static QName _ReservationsOrderByIdResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsOrderByIdResponse");
     private final static QName _DeleteReservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "deleteReservation");
     private final static QName _ReservationsByCopyIdResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsByCopyIdResponse");
+    private final static QName _GetReservationByMailDateNotNull_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "getReservationByMailDateNotNull");
     private final static QName _UpdateReservation_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "updateReservation");
     private final static QName _ListreservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "listreservationResponse");
     private final static QName _ReservationByUserAndByBooksResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationByUserAndByBooksResponse");
     private final static QName _UpdateReservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "updateReservationResponse");
     private final static QName _GetReservationByUserIdAndCopyId_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "getReservationByUserIdAndCopyId");
     private final static QName _DeleteReservationResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "deleteReservationResponse");
+    private final static QName _GetReservationByMailDateNotNullResponse_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "getReservationByMailDateNotNullResponse");
     private final static QName _ReservationsByCopyId_QNAME = new QName("http://reservation.service.openlib.mahxwell.org/", "reservationsByCopyId");
 
     /**
@@ -58,6 +62,14 @@ public class ObjectFactory {
      */
     public DeleteReservationResponse createDeleteReservationResponse() {
         return new DeleteReservationResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetReservationByMailDateNotNullResponse }
+     * 
+     */
+    public GetReservationByMailDateNotNullResponse createGetReservationByMailDateNotNullResponse() {
+        return new GetReservationByMailDateNotNullResponse();
     }
 
     /**
@@ -98,6 +110,14 @@ public class ObjectFactory {
      */
     public GetReservationByUserIdAndCopyId createGetReservationByUserIdAndCopyId() {
         return new GetReservationByUserIdAndCopyId();
+    }
+
+    /**
+     * Create an instance of {@link GetReservationByMailDateNotNull }
+     * 
+     */
+    public GetReservationByMailDateNotNull createGetReservationByMailDateNotNull() {
+        return new GetReservationByMailDateNotNull();
     }
 
     /**
@@ -149,6 +169,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReservationsOrderByIdResponse }
+     * 
+     */
+    public ReservationsOrderByIdResponse createReservationsOrderByIdResponse() {
+        return new ReservationsOrderByIdResponse();
+    }
+
+    /**
      * Create an instance of {@link ReservationByUserAndByBooks }
      * 
      */
@@ -162,6 +190,14 @@ public class ObjectFactory {
      */
     public GetReservationByUserIdAndCopyIdResponse createGetReservationByUserIdAndCopyIdResponse() {
         return new GetReservationByUserIdAndCopyIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link ReservationsOrderById }
+     * 
+     */
+    public ReservationsOrderById createReservationsOrderById() {
+        return new ReservationsOrderById();
     }
 
     /**
@@ -284,6 +320,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationsOrderById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "reservationsOrderById")
+    public JAXBElement<ReservationsOrderById> createReservationsOrderById(ReservationsOrderById value) {
+        return new JAXBElement<ReservationsOrderById>(_ReservationsOrderById_QNAME, ReservationsOrderById.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ReservationByUserAndByBooks }{@code >}}
      * 
      */
@@ -320,6 +365,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReservationsOrderByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "reservationsOrderByIdResponse")
+    public JAXBElement<ReservationsOrderByIdResponse> createReservationsOrderByIdResponse(ReservationsOrderByIdResponse value) {
+        return new JAXBElement<ReservationsOrderByIdResponse>(_ReservationsOrderByIdResponse_QNAME, ReservationsOrderByIdResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DeleteReservation }{@code >}}
      * 
      */
@@ -335,6 +389,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "reservationsByCopyIdResponse")
     public JAXBElement<ReservationsByCopyIdResponse> createReservationsByCopyIdResponse(ReservationsByCopyIdResponse value) {
         return new JAXBElement<ReservationsByCopyIdResponse>(_ReservationsByCopyIdResponse_QNAME, ReservationsByCopyIdResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetReservationByMailDateNotNull }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "getReservationByMailDateNotNull")
+    public JAXBElement<GetReservationByMailDateNotNull> createGetReservationByMailDateNotNull(GetReservationByMailDateNotNull value) {
+        return new JAXBElement<GetReservationByMailDateNotNull>(_GetReservationByMailDateNotNull_QNAME, GetReservationByMailDateNotNull.class, null, value);
     }
 
     /**
@@ -389,6 +452,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "deleteReservationResponse")
     public JAXBElement<DeleteReservationResponse> createDeleteReservationResponse(DeleteReservationResponse value) {
         return new JAXBElement<DeleteReservationResponse>(_DeleteReservationResponse_QNAME, DeleteReservationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetReservationByMailDateNotNullResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://reservation.service.openlib.mahxwell.org/", name = "getReservationByMailDateNotNullResponse")
+    public JAXBElement<GetReservationByMailDateNotNullResponse> createGetReservationByMailDateNotNullResponse(GetReservationByMailDateNotNullResponse value) {
+        return new JAXBElement<GetReservationByMailDateNotNullResponse>(_GetReservationByMailDateNotNullResponse_QNAME, GetReservationByMailDateNotNullResponse.class, null, value);
     }
 
     /**

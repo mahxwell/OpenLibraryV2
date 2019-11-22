@@ -183,4 +183,9 @@ public class ReservationDaoImplTest {
         reservationDao.reservationsByUserAndByBooks(reservation.getUserIdUser(), reservation1.getGetBookId());
         cleanAllReservation();
     }
+
+    @Test
+    public void getReservationByMailDateNotNull() {
+        List<Reservation> reservations = reservationDao.getReservationByMailDateNotNull();
+    }
 }

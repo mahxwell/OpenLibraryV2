@@ -216,5 +216,45 @@ public class ReservationService extends AbstractManagerService {
         }
         return null;
     }
+    /**
+     * WebService
+     * Get a Reservation list when reservation_mail row is not null
+     *
+     * @return Reservation List
+     */
+    @WebMethod(operationName = "getReservationByMailDateNotNull")
+    public List<Reservation> getReservationByMailDateNotNull() {
+        try {
+            List<Reservation> reservations = reservationManager.getReservationByMailDateNotNull();
+            if (reservations != null) {
+                return reservations;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error reservationsByCopyId method = " + e);
+        }
+        return null;
+    }
 
+    /**
+     * WebService
+     * Get a Reservation list Order by Identification Number
+     *
+     * @return Reservation List
+     */
+    @WebMethod(operationName = "reservationsOrderById")
+    public List<Reservation> reservationsOrderById() {
+        try {
+            List<Reservation> reservations = reservationManager.reservationsOrderById();
+            if (reservations != null) {
+                return reservations;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error reservationsOrderById method = " + e);
+        }
+        return null;
+    }
 }

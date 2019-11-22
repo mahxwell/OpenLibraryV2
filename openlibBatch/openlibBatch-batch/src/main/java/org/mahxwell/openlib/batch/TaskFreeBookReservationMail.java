@@ -3,6 +3,7 @@ package org.mahxwell.openlib.batch;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.mahxwell.openlib.business.contract.manager.*;
+import org.mahxwell.openlib.mail.JavaMailSenderUser;
 import org.mahxwell.openlib.service.book.Book;
 import org.mahxwell.openlib.service.bookloaning.Bookloaning;
 import org.mahxwell.openlib.service.copy.Copy;
@@ -27,34 +28,31 @@ public class TaskFreeBookReservationMail {
     private CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
     private UserManager userManager = ContextLoader.INSTANCE.getUserManager();
     private ReservationManager reservationManagerForMail = ContextLoader.INSTANCE.getReservationManager();
+    private BookManager bookManager = ContextLoader.INSTANCE.getBookManager();
 
     /**
      * Here Java Thread by Using Runnable task calling all methods to send mails
      */
     Runnable taskFreeReservation = () -> {
         try {
-            UserManager userManager = ContextLoader.INSTANCE.getUserManager();
-            BookManager bookManager = ContextLoader.INSTANCE.getBookManager();
             BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
             ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
 
-            List<Reservation> reservations = reservationManager.Reservations();
+            /**
+             * Test to check if a user that receive a mail has loaned the reserved book (more than 48h)
+             */
+            checkIf48hoursPassedAlgorithm();
+            List<Reservation> reservations = reservationManager.reservationsOrderById();
+
             List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
 
             List<Integer> freeCopyList = checkReservationsAndBookloanings(reservations, bookloanings);
 
-            //TEST
-            List<User> usersToSendMail = usersReservation(freeCopyList, reservations);
+            //TODO UNCOMMENT FOR FINAL
 
-    /*        for (int i = 0; i < usersToSendMail.size(); i++)
-                System.out.println(usersToSendMail.get(i).getUserName());*/
+            usersReservation(freeCopyList, reservations);
 
 
-/////////////PRINT TO DELETE
-            System.out.println("test4");
-            for (int i = 0; i < freeCopyList.size(); i++)
-                System.out.println(freeCopyList.get(i));
-///////////////////
         } catch (RuntimeException e) {
             logger.error(e);
         } catch (Exception e) {
@@ -112,24 +110,36 @@ public class TaskFreeBookReservationMail {
 
         List<User> usersToSendMail = new ArrayList<>();
 
+        /**
+         * Count to send mail to only first user of the list and only one time by book
+         */
         List<Integer> securityMailCount = new ArrayList<>();
 
         try {
-            List<Integer> userListId = new ArrayList<>();
 
             int i = 0;
             int j;
             while (i < reservations.size()) {
                 j = 0;
+                User user = new User();
                 while (j < freeCopyList.size()) {
                     if (reservations.get(i).getCopyIdCopy() == freeCopyList.get(j)
                             && !securityMailCount.contains(reservations.get(i).getCopyIdCopy())) {
                         securityMailCount.add(reservations.get(i).getCopyIdCopy());
-                        User user = userManager.getUser(reservations.get(i).getUserIdUser());
+                        user = userManager.getUser(reservations.get(i).getUserIdUser());
+                        Book book = bookManager.getBook(reservations.get(i).getGetBookId());
 
-                        ///MAIL SENDER
+                        /**
+                         * Send a mail to previous user
+                         */
+                        JavaMailSenderUser.sendMessageToUserReservation(user.getUserEmail(),
+                                book.getBookTitle(), user.getUserName());
 
-                        Reservation reservationSetDate  = reservationManagerForMail
+                        /**
+                         * Set reservation_mail date  row in table Reservation with current date
+                         * (Used to check if a user is late to loan a reserved book)
+                         */
+                        Reservation reservationSetDate = reservationManagerForMail
                                 .getReservationByUserIdAndCopyId(user.getUserId(), reservations.get(i).getCopyIdCopy());
 
                         String formater = "yyyy-MM-dd'T'HH:mm:ss";
@@ -140,48 +150,79 @@ public class TaskFreeBookReservationMail {
 
                         reservationSetDate.setReservationMail(gDateFormatted);
                         reservationManagerForMail.updateReservation(reservationSetDate, reservationSetDate);
-
-                        // SEND EMAIL HERE
-
-
-                        System.out.println("test " + user.getUserName().toString());
                     }
+
                     j++;
                 }
                 i++;
             }
-
-           // usersToSendMail = userToSendMailFinding(userListId);
-
         } catch (Exception e) {
             logger.error(e);
         }
         return usersToSendMail;
     }
 
-    private List<User> userToSendMailFinding(final List<Integer> userListId) {
-
-        List<User> usersToSendMail = new ArrayList<>();
+    /**
+     * Test to check if a user has loaned a reserved book in time (2 days)
+     * -> if he has nothing happen
+     * -> if he has not, this method will erase user from reservation list (to later send a mail to second)
+     */
+    public void checkIf48hoursPassedAlgorithm() {
 
         try {
-            List<User> users = userManager.Users();
+            List<Reservation> reservations = reservationManagerForMail.getReservationByMailDateNotNull();
 
-            int i = 0;
-            int k;
-            while (i < userListId.size()) {
-                k = 0;
-                while (k < users.size()) {
-                    if (userListId.get(i) == users.get(k).getUserId()
-                            && !usersToSendMail.contains(userListId.get(i))) {
-                        usersToSendMail.add(users.get(k));
+            for (int i = 0; i < reservations.size(); i++) {
+                Date date = reservations.get(i).getReservationMail().toGregorianCalendar().getTime();
+
+                //TODO DELETE RESERVATION WHEN IS TRUE
+                /**
+                 * Delete Reservation if a user is late to loan a reserved book =
+                 */
+                boolean checkDate = checkLimitDate(date);
+                if (checkDate == true) {
+                    try {
+                        User user = userManager.getUser(reservations.get(i).getUserIdUser());
+                        Book book = bookManager.getBook(reservations.get(i).getGetBookId());
+                        JavaMailSenderUser.sendMessageToUserReservationWhenTooLate(user.getUserEmail(),
+                                book.getBookTitle(), user.getUserName());
+                        reservationManagerForMail.deleteReservation(reservations.get(i));
+                    } catch (Exception e) {
+                        logger.error(e);
                     }
-                    k++;
                 }
-                i++;
             }
-            return usersToSendMail;
         } catch (Exception e) {
+            logger.error(e);
         }
-        return usersToSendMail;
+    }
+
+    /**
+     * @param datePlus48 Had 2 days to date got in reservation table => row reversation_mail
+     * @return true -> if date is over limit (auto erase from reservation table)
+     * false -> if date is ok and not over limit
+     */
+    private boolean checkLimitDate(Date datePlus48) {
+
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(datePlus48);
+            c.add(Calendar.DATE, 2);
+            datePlus48 = c.getTime();
+
+            Date dateNow = new Date();
+
+            /**
+             * Compare current Date (dateNow) with reservation date (datePlus48)
+             */
+            if (dateNow.compareTo(datePlus48) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return false;
     }
 }

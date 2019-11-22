@@ -240,4 +240,40 @@ public class ReservationDaoImpl extends AbstractDaoImpl implements ReservationDa
 
         return reservations;
     }
+
+    /**
+     * DAO
+     * Get a Reservation list when reservation_mail row is not null
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> getReservationByMailDateNotNull() {
+        ReservationRowMapper reservationRowMapper = new ReservationRowMapper();
+        JdbcTemplate template = new JdbcTemplate(getDataSource());
+
+        String query = "SELECT * FROM librarydb.reservation"
+                + " WHERE librarydb.reservation.reservation_mail IS NOT NULL";
+        List<Reservation> reservations = template.query(query, reservationRowMapper.getReservationRowMapper());
+
+        return reservations;
+    }
+
+    /**
+     * DAO
+     * Get a Reservation list Order by Identification Number
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> reservationsOrderById() {
+        ReservationRowMapper reservationRowMapper = new ReservationRowMapper();
+        JdbcTemplate template = new JdbcTemplate(getDataSource());
+
+        String query = "SELECT * FROM librarydb.reservation ORDER BY reservation.reservation_id ASC";
+
+        List<Reservation> reservations = template.query(query, reservationRowMapper.getReservationRowMapper());
+
+        return reservations;
+    }
 }

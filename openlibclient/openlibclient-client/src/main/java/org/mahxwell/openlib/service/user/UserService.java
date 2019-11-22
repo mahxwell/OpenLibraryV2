@@ -27,15 +27,30 @@ public interface UserService {
 
     /**
      * 
+     * @param arg1
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "adduser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Adduser")
-    @ResponseWrapper(localName = "adduserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.AdduserResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/adduserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/adduserResponse")
-    public void adduser(
+    @RequestWrapper(localName = "updateuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Updateuser")
+    @ResponseWrapper(localName = "updateuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.UpdateuserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/updateuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/updateuserResponse")
+    public void updateuser(
         @WebParam(name = "arg0", targetNamespace = "")
-        User arg0);
+        User arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        User arg1);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.user.User>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listusers", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Listusers")
+    @ResponseWrapper(localName = "listusersResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.ListusersResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/listusersRequest", output = "http://user.service.openlib.mahxwell.org/UserService/listusersResponse")
+    public List<User> listusers();
 
     /**
      * 
@@ -57,30 +72,15 @@ public interface UserService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.user.User>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listusers", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Listusers")
-    @ResponseWrapper(localName = "listusersResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.ListusersResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/listusersRequest", output = "http://user.service.openlib.mahxwell.org/UserService/listusersResponse")
-    public List<User> listusers();
-
-    /**
-     * 
-     * @param arg1
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "updateuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Updateuser")
-    @ResponseWrapper(localName = "updateuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.UpdateuserResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/updateuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/updateuserResponse")
-    public void updateuser(
+    @RequestWrapper(localName = "deleteuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Deleteuser")
+    @ResponseWrapper(localName = "deleteuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.DeleteuserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/deleteuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/deleteuserResponse")
+    public void deleteuser(
         @WebParam(name = "arg0", targetNamespace = "")
-        User arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        User arg1);
+        User arg0);
 
     /**
      * 
@@ -99,11 +99,26 @@ public interface UserService {
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "deleteuser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Deleteuser")
-    @ResponseWrapper(localName = "deleteuserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.DeleteuserResponse")
-    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/deleteuserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/deleteuserResponse")
-    public void deleteuser(
+    @RequestWrapper(localName = "adduser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.Adduser")
+    @ResponseWrapper(localName = "adduserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.AdduserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/adduserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/adduserResponse")
+    public void adduser(
         @WebParam(name = "arg0", targetNamespace = "")
         User arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns org.mahxwell.openlib.service.user.User
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUser", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.GetUser")
+    @ResponseWrapper(localName = "getUserResponse", targetNamespace = "http://user.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.user.GetUserResponse")
+    @Action(input = "http://user.service.openlib.mahxwell.org/UserService/getUserRequest", output = "http://user.service.openlib.mahxwell.org/UserService/getUserResponse")
+    public User getUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
 
 }

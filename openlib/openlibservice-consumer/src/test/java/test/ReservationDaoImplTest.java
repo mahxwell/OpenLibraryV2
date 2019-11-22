@@ -176,10 +176,20 @@ public class ReservationDaoImplTest {
     @Transactional
     @Rollback(true)
     public void reservationsByCopyId() {
-
         List<Reservation> reservationList = reservationDao.reservationsByCopyId(1);
+    }
 
-        for (int i = 0; i < reservationList.size(); i++)
-            System.out.println(reservationList.get(i));
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getReservationByMailDateNotNull() {
+        List<Reservation> reservations = reservationDao.getReservationByMailDateNotNull();
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void reservationsOrderById(){
+        List<Reservation> reservations = reservationDao.reservationsOrderById();
     }
 }

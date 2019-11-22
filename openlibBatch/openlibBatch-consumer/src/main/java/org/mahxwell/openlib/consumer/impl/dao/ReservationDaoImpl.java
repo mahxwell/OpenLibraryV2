@@ -133,4 +133,26 @@ public class ReservationDaoImpl implements ReservationDao {
     public List<Reservation> reservationsByCopyId(final Integer copy_id) {
         return reservationService.reservationsByCopyId(copy_id);
     }
+
+    /**
+     * DAO
+     * Get a Reservation list when reservation_mail row is not null
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> getReservationByMailDateNotNull() {
+        return reservationService.getReservationByMailDateNotNull();
+    }
+
+    /**
+     * DAO
+     * Get a Reservation list Order by Identification Number
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> reservationsOrderById() {
+        return reservationService.reservationsOrderById();
+    }
 }

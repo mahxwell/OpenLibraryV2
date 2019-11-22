@@ -26,4 +26,8 @@ public interface ReservationDao {
 
     List<Reservation> reservationsByCopyId(final Integer copy_id);
 
+    List<Reservation> getReservationByMailDateNotNull();
+
+    List<Reservation> reservationsOrderById();
+
 }

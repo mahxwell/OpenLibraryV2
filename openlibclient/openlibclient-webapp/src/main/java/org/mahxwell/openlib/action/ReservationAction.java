@@ -74,16 +74,16 @@ public class ReservationAction extends ActionSupport implements SessionAware {
                  * Set then Insert New Reservation Object
                  */
                 try {
-                    String formater = "yyyy-MM-dd'T'HH:mm:ss";
+      /*              String formater = "yyyy-MM-dd'T'HH:mm:ss";
                     DateFormat format = new SimpleDateFormat(formater);
                     Date date = new Date();
                     XMLGregorianCalendar gDateFormatted =
-                            DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
+                            DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));*/
                     Reservation reservation = new Reservation();
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String timestampToString = timestamp.toString();
                     reservation.setReservationDate(timestampToString);
-                    reservation.setReservationMail(gDateFormatted);
+                    //reservation.setReservationMail(gDateFormatted);
                     reservation.setGetBookId(book.getBookId());
                     reservation.setUserIdUser(user.getUserId());
                     reservation.setCopyIdCopy(freeCopyId);

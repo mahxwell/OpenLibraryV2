@@ -28,18 +28,6 @@ public interface AuthorService {
     /**
      * 
      * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthor")
-    @ResponseWrapper(localName = "addAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorResponse")
-    public void addAuthor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Author arg0);
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns org.mahxwell.openlib.service.author.Author
      */
@@ -54,18 +42,27 @@ public interface AuthorService {
 
     /**
      * 
-     * @param arg1
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "updateAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.UpdateAuthor")
-    @ResponseWrapper(localName = "updateAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.UpdateAuthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/updateAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/updateAuthorResponse")
-    public void updateAuthor(
+    @RequestWrapper(localName = "addAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthor")
+    @ResponseWrapper(localName = "addAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.AddAuthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/addAuthorResponse")
+    public void addAuthor(
         @WebParam(name = "arg0", targetNamespace = "")
-        Author arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Author arg1);
+        Author arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.author.Author>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listauthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.Listauthor")
+    @ResponseWrapper(localName = "listauthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.ListauthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorResponse")
+    public List<Author> listauthor();
 
     /**
      * 
@@ -81,14 +78,17 @@ public interface AuthorService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.author.Author>
+     * @param arg1
+     * @param arg0
      */
     @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listauthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.Listauthor")
-    @ResponseWrapper(localName = "listauthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.ListauthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorResponse")
-    public List<Author> listauthor();
+    @RequestWrapper(localName = "updateAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.UpdateAuthor")
+    @ResponseWrapper(localName = "updateAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.UpdateAuthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/updateAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/updateAuthorResponse")
+    public void updateAuthor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Author arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Author arg1);
 
 }

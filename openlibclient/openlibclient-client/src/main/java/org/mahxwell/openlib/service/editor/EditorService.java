@@ -54,6 +54,18 @@ public interface EditorService {
 
     /**
      * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
+    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
+    public void deleteEditor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Editor arg0);
+
+    /**
+     * 
      * @param arg1
      * @param arg0
      */
@@ -78,17 +90,5 @@ public interface EditorService {
     @ResponseWrapper(localName = "listeditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.ListeditorResponse")
     @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorResponse")
     public List<Editor> listeditor();
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
-    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
-    public void deleteEditor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Editor arg0);
 
 }

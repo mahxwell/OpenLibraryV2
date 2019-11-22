@@ -181,8 +181,10 @@ public class ReservationManagerImplTest {
     @Test
     public void reservationsByCopyId(){
         List<Reservation> reservations = reservationManager.reservationsByCopyId(1);
- /*       for (int i = 0; i < reservations.size(); i++){
-            System.out.println(reservations.get(i));
-        }*/
+    }
+
+    @Test
+    public void getReservationByMailDateNotNull() {
+        List<Reservation> reservations = reservationManager.getReservationByMailDateNotNull();
     }
 }

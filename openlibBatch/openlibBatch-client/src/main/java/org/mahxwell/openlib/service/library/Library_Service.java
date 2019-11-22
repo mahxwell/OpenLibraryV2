@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "library", targetNamespace = "http://library.service.openlib.mahxwell.org/", wsdlLocation = "http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8784515580378901408/library?wsdl")
+@WebServiceClient(name = "library", targetNamespace = "http://library.service.openlib.mahxwell.org/", wsdlLocation = "http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/library?wsdl")
 public class Library_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class Library_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8784515580378901408/library?wsdl");
+            url = new URL("http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/library?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

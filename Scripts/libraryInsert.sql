@@ -114,13 +114,11 @@ INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_boo
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 5, 5, 25);
 INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 4, 7, 17);
 
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:50.696', '2019-11-20', 1, 3, 1);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:56.151', '2019-11-20', 2, 3, 3);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:30.648', '2019-11-20', 1, 4, 2);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:36.161', '2019-11-20', 2, 4, 4);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:08.116', '2019-11-20', 1, 5, 1);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:12.031', '2019-11-20', 2, 5, 3);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:54.061', '2019-11-20', 1, 6, 2);
-INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:58.761', '2019-11-20', 2, 6, 4);
-
-
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:50.696', 1, 3, 1);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:56.151', 2, 3, 3);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:30.648', 1, 4, 2);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:36.161', 2, 4, 4);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:08.116', 1, 5, 1);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:12.031', 2, 5, 3);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:54.061', 1, 6, 2);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:58.761', 2, 6, 4);

@@ -25,4 +25,8 @@ public interface ReservationManager {
     Reservation reservationsByUserAndByBooks(final Integer user_id, final Integer book_id);
 
     List<Reservation> reservationsByCopyId(final Integer copy_id);
+
+    List<Reservation> getReservationByMailDateNotNull();
+
+    List<Reservation> reservationsOrderById();
 }

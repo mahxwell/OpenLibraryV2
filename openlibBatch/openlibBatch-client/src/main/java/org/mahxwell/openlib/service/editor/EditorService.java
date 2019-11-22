@@ -69,18 +69,6 @@ public interface EditorService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.editor.Editor>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listeditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.Listeditor")
-    @ResponseWrapper(localName = "listeditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.ListeditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorResponse")
-    public List<Editor> listeditor();
-
-    /**
-     * 
      * @param arg0
      */
     @WebMethod
@@ -90,5 +78,17 @@ public interface EditorService {
     public void deleteEditor(
         @WebParam(name = "arg0", targetNamespace = "")
         Editor arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.editor.Editor>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listeditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.Listeditor")
+    @ResponseWrapper(localName = "listeditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.ListeditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/listeditorResponse")
+    public List<Editor> listeditor();
 
 }

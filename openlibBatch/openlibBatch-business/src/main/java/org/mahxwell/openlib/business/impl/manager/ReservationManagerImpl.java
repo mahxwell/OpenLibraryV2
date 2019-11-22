@@ -138,4 +138,26 @@ public class ReservationManagerImpl extends AbstractManagerImpl implements Reser
     public List<Reservation> reservationsByCopyId(final Integer copy_id) {
         return getDaoFactory().getReservationDao().reservationsByCopyId(copy_id);
     }
+
+    /**
+     * Manager
+     * Get a Reservation list when reservation_mail row is not null
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> getReservationByMailDateNotNull() {
+        return getDaoFactory().getReservationDao().getReservationByMailDateNotNull();
+    }
+
+    /**
+     * Manager
+     * Get a Reservation list Order by Identification Number
+     *
+     * @return Reservation List
+     */
+    @Override
+    public List<Reservation> reservationsOrderById() {
+        return getDaoFactory().getReservationDao().reservationsOrderById();
+    }
 }

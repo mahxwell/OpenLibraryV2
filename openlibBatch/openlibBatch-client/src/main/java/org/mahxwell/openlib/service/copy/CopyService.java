@@ -67,6 +67,21 @@ public interface CopyService {
     /**
      * 
      * @param arg0
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.copy.Copy>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listcopybybook", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.Listcopybybook")
+    @ResponseWrapper(localName = "listcopybybookResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.ListcopybybookResponse")
+    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/listcopybybookRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/listcopybybookResponse")
+    public List<Copy> listcopybybook(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
+    /**
+     * 
+     * @param arg0
      */
     @WebMethod
     @RequestWrapper(localName = "deleteCopy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.DeleteCopy")
@@ -90,20 +105,5 @@ public interface CopyService {
         Copy arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Copy arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.copy.Copy>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listcopybybook", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.Listcopybybook")
-    @ResponseWrapper(localName = "listcopybybookResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.ListcopybybookResponse")
-    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/listcopybybookRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/listcopybybookResponse")
-    public List<Copy> listcopybybook(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
 
 }

@@ -24,47 +24,47 @@
     <properties>
         <service.wsdl.url.user>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/user?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/user?wsdl
         </service.wsdl.url.user>
 
         <service.wsdl.url.library>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/library?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/library?wsdl
         </service.wsdl.url.library>
 
         <service.wsdl.url.author>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/author?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/author?wsdl
         </service.wsdl.url.author>
 
         <service.wsdl.url.editor>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/editor?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/editor?wsdl
         </service.wsdl.url.editor>
 
         <service.wsdl.url.copy>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/copy?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/copy?wsdl
         </service.wsdl.url.copy>
 
         <service.wsdl.url.genre>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/genre?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/genre?wsdl
         </service.wsdl.url.genre>
 
         <service.wsdl.url.book>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/book?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/book?wsdl
         </service.wsdl.url.book>
 
         <service.wsdl.url.bookloaning>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/bookloaning?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/bookloaning?wsdl
         </service.wsdl.url.bookloaning>
 
         <service.wsdl.url.reservation>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice2562610770408138605/reservation?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/reservation?wsdl
         </service.wsdl.url.reservation>
     </properties>
 

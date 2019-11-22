@@ -99,7 +99,7 @@ ALTER TABLE librarydb.bookloaning OWNER TO postgres;
 CREATE TABLE librarydb.reservation (
 	reservation_id serial NOT NULL,
 	reservation_date varchar NOT NULL,
-	reservation_mail date NOT NULL,
+	reservation_mail date,
 	get_book_id integer NOT NULL,
 	user_id_user integer,
 	copy_id_copy integer,

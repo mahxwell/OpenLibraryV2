@@ -69,18 +69,6 @@ public interface AuthorService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthor")
-    @ResponseWrapper(localName = "deleteAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthorResponse")
-    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorResponse")
-    public void deleteAuthor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Author arg0);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.author.Author>
      */
@@ -90,5 +78,17 @@ public interface AuthorService {
     @ResponseWrapper(localName = "listauthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.ListauthorResponse")
     @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/listauthorResponse")
     public List<Author> listauthor();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteAuthor", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthor")
+    @ResponseWrapper(localName = "deleteAuthorResponse", targetNamespace = "http://author.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.author.DeleteAuthorResponse")
+    @Action(input = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorRequest", output = "http://author.service.openlib.mahxwell.org/AuthorService/deleteAuthorResponse")
+    public void deleteAuthor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Author arg0);
 
 }
