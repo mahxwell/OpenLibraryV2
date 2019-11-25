@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="org.mahxwell.openlib.consumer"/>
+
+    <!-- ===== DAO ===== -->
+    <bean id="userDao" class="org.mahxwell.openlib.consumer.impl.dao.UserDaoImpl"/>
+    <bean id="libraryDao" class="org.mahxwell.openlib.consumer.impl.dao.LibraryDaoImpl"/>
+    <bean id="authorDao" class="org.mahxwell.openlib.consumer.impl.dao.AuthorDaoImpl"/>
+    <bean id="bookDao" class="org.mahxwell.openlib.consumer.impl.dao.BookDaoImpl"/>
+    <bean id="bookloaningDao" class="org.mahxwell.openlib.consumer.impl.dao.BookloaningDaoImpl"/>
+    <bean id="copyDao" class="org.mahxwell.openlib.consumer.impl.dao.CopyDaoImpl"/>
+    <bean id="editorDao" class="org.mahxwell.openlib.consumer.impl.dao.EditorDaoImpl"/>
+    <bean id="genreDao" class="org.mahxwell.openlib.consumer.impl.dao.GenreDaoImpl"/>
+    <bean id="reservationDao" class="org.mahxwell.openlib.consumer.impl.dao.ReservationDaoImpl"/>
+
+    <!-- ===== DaoFactory ===== -->
+    <bean id="daoFactory" class="org.mahxwell.openlib.consumer.impl.DaoFactoryImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="libraryDao" ref="libraryDao"/>
+        <property name="bookDao" ref="bookDao"/>
+        <property name="authorDao" ref="authorDao"/>
+        <property name="bookloaningDao" ref="bookloaningDao"/>
+        <property name="copyDao" ref="copyDao"/>
+        <property name="editorDao" ref="editorDao"/>
+        <property name="genreDao" ref="genreDao"/>
+        <property name="reservationDao" ref="reservationDao"/>
+    </bean>
+
+</beans>
