@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "editor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", wsdlLocation = "http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/editor?wsdl")
+@WebServiceClient(name = "editor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", wsdlLocation = "http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/editor?wsdl")
 public class Editor_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class Editor_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/editor?wsdl");
+            url = new URL("http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/editor?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -54,18 +54,6 @@ public interface CopyService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<org.mahxwell.openlib.service.copy.Copy>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listcopy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.Listcopy")
-    @ResponseWrapper(localName = "listcopyResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.ListcopyResponse")
-    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/listcopyRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/listcopyResponse")
-    public List<Copy> listcopy();
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.copy.Copy>
@@ -81,18 +69,6 @@ public interface CopyService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteCopy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.DeleteCopy")
-    @ResponseWrapper(localName = "deleteCopyResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.DeleteCopyResponse")
-    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/deleteCopyRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/deleteCopyResponse")
-    public void deleteCopy(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Copy arg0);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      */
@@ -105,5 +81,29 @@ public interface CopyService {
         Copy arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Copy arg1);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<org.mahxwell.openlib.service.copy.Copy>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listcopy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.Listcopy")
+    @ResponseWrapper(localName = "listcopyResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.ListcopyResponse")
+    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/listcopyRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/listcopyResponse")
+    public List<Copy> listcopy();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteCopy", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.DeleteCopy")
+    @ResponseWrapper(localName = "deleteCopyResponse", targetNamespace = "http://copy.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.copy.DeleteCopyResponse")
+    @Action(input = "http://copy.service.openlib.mahxwell.org/CopyService/deleteCopyRequest", output = "http://copy.service.openlib.mahxwell.org/CopyService/deleteCopyResponse")
+    public void deleteCopy(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Copy arg0);
 
 }

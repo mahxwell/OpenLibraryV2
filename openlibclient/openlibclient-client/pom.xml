@@ -5,13 +5,13 @@
     <parent>
         <artifactId>openlibclient</artifactId>
         <groupId>org.openlibclient</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>openlibclient-client</artifactId>
     <groupId>org.openlibclient</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <!-- =============================================================== -->
     <!-- Properties -->
@@ -24,47 +24,47 @@
     <properties>
         <service.wsdl.url.user>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/user?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/user?wsdl
         </service.wsdl.url.user>
 
         <service.wsdl.url.library>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/library?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/library?wsdl
         </service.wsdl.url.library>
 
         <service.wsdl.url.author>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/author?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/author?wsdl
         </service.wsdl.url.author>
 
         <service.wsdl.url.editor>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/editor?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/editor?wsdl
         </service.wsdl.url.editor>
 
         <service.wsdl.url.copy>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/copy?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/copy?wsdl
         </service.wsdl.url.copy>
 
         <service.wsdl.url.genre>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/genre?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/genre?wsdl
         </service.wsdl.url.genre>
 
         <service.wsdl.url.book>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/book?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/book?wsdl
         </service.wsdl.url.book>
 
         <service.wsdl.url.bookloaning>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/bookloaning?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/bookloaning?wsdl
         </service.wsdl.url.bookloaning>
 
         <service.wsdl.url.reservation>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice1104666051681517037/reservation?wsdl
+            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice8240251089617905556/reservation?wsdl
         </service.wsdl.url.reservation>
     </properties>
 

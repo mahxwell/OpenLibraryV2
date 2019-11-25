@@ -7,7 +7,7 @@
     <groupId>org.openlibBatch</groupId>
     <artifactId>openlibBatch</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <modules>
         <module>openlibBatch-client</module>
         <module>openlibBatch-consumer</module>
@@ -35,17 +35,17 @@
             <dependency>
                 <groupId>org.openlibBatch</groupId>
                 <artifactId>openlibBatch-client</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.openlibBatch</groupId>
                 <artifactId>openlibBatch-consumer</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.openlibBatch</groupId>
                 <artifactId>openlibBatch-business</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- ===== Spring ===== -->
