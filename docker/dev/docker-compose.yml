@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  database:
+    image: postgres:10.3-alpine
+    container_name: librarydb
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - "./init/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    ports:
+      - 9032:5432
+    environment:
+      - POSTGRES_DB=librarydb
+      - POSTGRES_USER=openlib
+      - POSTGRES_PASSWORD=openlibco
+  web-service:
+    image: shinyay/docker-glassfish5
+    container_name: library_web-service
+    restart: always
+    hostname: 127.0.0.1
+    volumes:
+      - ./webservice/Openlibrary-Webservice.war:/glassfish5/glassfish/domains/domain1/autodeploy/Openlibrary-Webservice.war
+    ports:
+      - 8080:8080
+  web-application:
+    image: shinyay/docker-glassfish5
+    container_name: library_web-application
+    hostname: 127.0.0.1
+    volumes:
+      - ./webapp/Openlibrary-Client.war:/glassfish5/glassfish/domains/domain1/autodeploy/Openlibrary-Client.war
+    ports:
+      - 8085:8080

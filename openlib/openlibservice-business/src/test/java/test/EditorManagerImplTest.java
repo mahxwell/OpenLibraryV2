@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.EditorManager;
@@ -24,6 +25,26 @@ public class EditorManagerImplTest {
 
 
 
+    /**
+     * Test
+     * Initialize Editor Object for Unit Tests
+     *
+     * @param editorName Set Editor Name
+     * @param editorNationality Set Editor Nationality
+     * @return An Editor Object
+     */
+    private Editor InitializeEditorObject(final String editorName, final String editorNationality) {
+        Editor editor = new Editor();
+
+        try {
+            editor.setEditorName(editorName);
+            editor.setEditorNationality(editorNationality);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return editor;
+    }
+
     /* Add New Editor In DataBase */
 
     @Test
@@ -31,12 +52,11 @@ public class EditorManagerImplTest {
     @Rollback(true)
     public void addEditor() {
 
-        /* Add 20 new editor */
-        for (int i = 0; i < 20; i++) {
-            Editor editor = new Editor();
-            editor.setEditorName("editorName" + i);
-            editor.setEditorNationality("editorNationality" + i);
+        try {
+            Editor editor = InitializeEditorObject("Flam", "Allemand");
             editorManager.addEditor(editor);
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -46,14 +66,13 @@ public class EditorManagerImplTest {
     @Transactional
     @Rollback(true)
     public void updateEditor() {
-        List<Editor> editors = editorManager.Editors();
-        if (editors != null || editors.size() < 3) {
-            Editor editor = new Editor();
-            editor.setEditorName("updateEditor");
-            editor.setEditorNationality("updatedNationality");
-            editorManager.updateEditor(editor, editors.get(1));
-        } else {
-            logger.error("No Editor or update Editor out of range....");
+        try {
+            List<Editor> editors = editorManager.Editors();
+            Editor editor = InitializeEditorObject("Updated", "Updated");
+
+            editorManager.updateEditor(editor, editors.get(0));
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -63,11 +82,15 @@ public class EditorManagerImplTest {
     @Transactional
     @Rollback(true)
     public void deleteEditor() {
-        List<Editor> editors = editorManager.Editors();
-        if (editors != null || editors.size() < 3) {
-            editorManager.deleteEditor(editors.get(1));
-        } else {
-            logger.error("No Editor or update Editor out of range....");
+        try {
+            List<Editor> editors = editorManager.Editors();
+            if (editors != null) {
+                editorManager.deleteEditor(editors.get(1));
+            } else {
+                logger.error("No Editor or update Editor out of range....");
+            }
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -77,11 +100,34 @@ public class EditorManagerImplTest {
     @Transactional
     @Rollback(true)
     public void editors() {
+        try {
+            List<Editor> editors = editorManager.Editors();
+            if (editors != null)
+                logger.info(editors.toString());
+            else
+                logger.error("No editors available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
-        List<Editor> editors = editorManager.Editors();
-        if (editors != null)
-            logger.info(editors.toString());
-        else
-            logger.error("No editors available !");
+    /* Find One Editor By Identification Number */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getEditor() {
+        try {
+            List<Editor> editors = editorManager.Editors();
+            if (editors != null) {
+                logger.info(editors.toString());
+            } else {
+                logger.error("No Editors available !");
+            }
+            Editor editor = editorManager.getEditor(1);
+            Assert.assertEquals(editor.getEditorId(), editors.get(0).getEditorId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package test;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.ReservationManager;
@@ -22,22 +21,30 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ReservationManagerImplTest {
 
-    private static final Logger logger = Logger.getLogger(ReservationManagerImplTest.class);
-
     @Autowired
     ReservationManager reservationManager;
+    private static final Logger logger = Logger.getLogger(ReservationManagerImplTest.class);
 
-    private String formater = "yyyy-MM-dd'T'HH:mm:ss";
-
-    private DateFormat format = new SimpleDateFormat(formater);
-
-
+    /**
+     * Test
+     * Initialize Reservation Object for Unit Tests
+     *
+     * @param book_id Set Book Identification Number
+     * @param user_id Set User Identification Number
+     * @param copy_id Set Copy Identification Number
+     * @return A Reservation Object
+     */
     private Reservation InitializeReservationObject(final Integer book_id, final Integer user_id, final Integer copy_id) {
         Reservation reservation = new Reservation();
         try {
-            Date date = new Date();
+
+            String formater = "yyyy-MM-dd'T'HH:mm:ss";
+
+            DateFormat format = new SimpleDateFormat(formater);
+
             XMLGregorianCalendar gDateFormatted =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(new Date()));
+
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             reservation.setReservationDate(timestamp.toString());
             reservation.setReservationMail(gDateFormatted);
@@ -50,139 +57,152 @@ public class ReservationManagerImplTest {
         return reservation;
     }
 
-    private void cleanAllReservation() {
-        List<Reservation> reservations = reservationManager.Reservations();
-        if (reservations != null) {
-            for (int i = 0; i < reservations.size(); i++) {
-                reservationManager.deleteReservation(reservations.get(i));
-            }
-        } else {
-            logger.error("reservation list is null, unable to clean empty list");
+    /**
+     * Test
+     * Get Last Reservation Object in Data Base
+     *
+     * @return Last Object -> For Delete
+     */
+    private Reservation getLastReservation() {
+        try {
+            List<Reservation> reservations = reservationManager.Reservations();
+            return reservations.get(reservations.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
     }
+
+    /* Add New Reservation In DataBase */
 
     @Test
     public void addReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(1, 1, 1);
+            reservationManager.addReservation(reservation);
+            reservationManager.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /*  Update Reservation */
 
     @Test
     public void updateReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-
-        Reservation reservationUpdate = InitializeReservationObject(2, 2, 2);
-        List<Reservation> reservations = reservationManager.Reservations();
-        reservationManager.updateReservation(reservationUpdate, reservations.get(0));
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(2, 2, 4);
+            reservationManager.addReservation(reservation);
+            reservationManager.updateReservation(reservation, getLastReservation());
+            reservationManager.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Delete Reservation */
+
 
     @Test
     public void deleteReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(1, 1, 1);
+            reservationManager.addReservation(reservation);
+            reservationManager.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Show Reservation List */
 
     @Test
     public void reservations() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-
-        List<Reservation> reservations = reservationManager.Reservations();
-
-        Assert.assertNotNull(reservations);
-        cleanAllReservation();
+        try {
+            reservationManager.Reservations();
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Find One Reservation By Identification Number */
 
     @Test
     public void getReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-
-        List<Reservation> reservations = reservationManager.Reservations();
-
-        Integer reservation_id = reservations.get(0).getReservationId();
-
-        Reservation reservationGetting = reservationManager.getReservation(reservation_id);
-
-        Assert.assertNotNull(reservationGetting);
-        cleanAllReservation();
+        try {
+            reservationManager.getReservation(getLastReservation().getReservationId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Find One Reservation By UserId AND CopyId */
 
     @Test
     public void getReservationByUserIdAndCopyId() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
+        try {
+            reservationManager.getReservationByUserIdAndCopyId(1, 1);
 
-        Reservation reservation1 = reservationManager.getReservationByUserIdAndCopyId(1, 1);
-
-        Assert.assertNotNull(reservation1);
-        cleanAllReservation();
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Find Reservations By Books */
 
     @Test
     public void reservationsByBooks() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-
-        Reservation reservation1 = InitializeReservationObject(1, 2, 2);
-        reservationManager.addReservation(reservation1);
-
-        Integer book_id1 = reservation.getGetBookId();
-        Integer book_id2 = reservation1.getGetBookId();
-
-        Assert.assertEquals(book_id1, book_id2);
-
-        reservationManager.reservationsByBooks(book_id1);
-        cleanAllReservation();
+        try {
+            reservationManager.reservationsByBooks(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Find Reservations By Users */
 
     @Test
     public void reservationsByUser() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
+        try {
+            reservationManager.reservationsByUser(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
 
-        Reservation reservation1 = InitializeReservationObject(2, 1, 2);
-        reservationManager.addReservation(reservation1);
-
-        Integer user_id1 = reservation.getUserIdUser();
-        Integer user_id2 = reservation1.getUserIdUser();
-
-        Assert.assertEquals(user_id1, user_id2);
-
-        reservationManager.reservationsByUser(user_id1);
-        cleanAllReservation();
     }
+
+    /* Find Reservations By Books AND Users */
 
     @Test
     public void reservationsByUserAndByBooks() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationManager.addReservation(reservation);
-
-        Reservation reservation1 = InitializeReservationObject(2, 1, 2);
-        reservationManager.addReservation(reservation1);
-
-        reservationManager.reservationsByUserAndByBooks(reservation.getUserIdUser(), reservation1.getGetBookId());
-        cleanAllReservation();
+        try {
+            reservationManager.reservationsByUserAndByBooks(1, 1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
+    /* Find Reservations By Copies */
+
     @Test
-    public void reservationsByCopyId(){
-        List<Reservation> reservations = reservationManager.reservationsByCopyId(1);
- /*       for (int i = 0; i < reservations.size(); i++){
-            System.out.println(reservations.get(i));
-        }*/
+    public void reservationsByCopyId() {
+
+        try {
+            List<Reservation> reservationList = reservationManager.reservationsByCopyId(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

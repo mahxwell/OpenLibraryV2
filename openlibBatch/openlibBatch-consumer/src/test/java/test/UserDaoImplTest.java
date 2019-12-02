@@ -15,98 +15,136 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserDaoImplTest {
 
+    @Autowired
+    UserDao userDao;
 
     private static final Logger logger = Logger.getLogger(UserDaoImplTest.class);
 
-    @Autowired
-    UserDao userDao;
+    /**
+     * Test
+     * Initialize User Object for Unit Tests
+     *
+     * @param userName Set User Name
+     * @param userSurname Set User Surname
+     * @param userPseudo Set User Pseudo
+     * @param userEmail Set User Email
+     * @param userPassword Set User Password
+     * @param userPhone Set User Phone
+     * @return A User Object
+     */
+    private User InitializeUserObject(final String userName, final String userSurname, final String userPseudo,
+                                      final String userEmail, final String userPassword, final String userPhone) {
+        User user = new User();
+
+        try {
+            user.setUserName(userName);
+            user.setUserSurname(userSurname);
+            user.setUserPseudo(userPseudo);
+            user.setUserEmail(userEmail);
+            user.setUserPassword(userPassword);
+            user.setUserPhone(userPhone);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return user;
+    }
+
+    /**
+     * Test
+     * Get Last Author Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private User getLastUser() {
+        try {
+            List<User> users = userDao.Users();
+            return users.get(users.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    /* Add New User In DataBase */
+
+    @Test
+    public void addUser() {
+
+        try {
+            User user = InitializeUserObject("Jack", "White", "Jojo",
+                    "jojo@test", "toto", "875136523");
+            userDao.addUser(user);
+            userDao.deleteUser(getLastUser());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /*  Update User */
+
+    @Test
+    public void updateUser() {
+
+        try {
+            User user = InitializeUserObject("Jack", "White", "Jojo",
+                    "jojo@test", "toto", "875136523");
+            userDao.addUser(user);
+            userDao.updateUser(user, getLastUser());
+            userDao.deleteUser(getLastUser());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+
+        List<User> users = userDao.Users();
+    }
+
+    /* Delete User */
+
+    @Test
+    public void deleteUser() {
+
+        try {
+            User user = InitializeUserObject("Jack", "White", "Jojo",
+                    "jojo@test", "toto", "875136523");
+            userDao.addUser(user);
+            userDao.deleteUser(getLastUser());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show User List */
+
+    @Test
+    public void users() {
+        try {
+            List<User> users = userDao.Users();
+
+            if (users != null) {
+                logger.info(users.toString());
+            } else {
+                logger.error("No users available");
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
     /* Find User by email and password */
 
     @Test
     public void loginUser() {
-
-        User user = userDao.getLoginUser("UserName3@test", "titi");
-        if (user == null)
-            logger.error("User is null for login");
-        else {
-            logger.info(user.getUserName());
-        }
-    }
-
-
-    @Test
-    public void listTest() {
-        List<User> users = userDao.Users();
-
-        if (users == null)
-            logger.error("User List is null");
-        else {
-            for (int i = 0; i < users.size(); i++) {
-                logger.info(users.get(i).getUserName());
+        try {
+            List<User> users = userDao.Users();
+            if (users != null) {
+                String email = users.get(0).getUserEmail();
+                String password = users.get(0).getUserPassword();
+                User user = userDao.getLoginUser(email, password);
+                logger.info(user.toString());
+            } else {
+                logger.error("login failed...");
             }
-            logger.info("FINISHED");
+        } catch (Exception e) {
+            logger.error(e);
         }
-
-    }
-
-    @Test
-    public void addUserTest() {
-
-        User user = new User();
-
-        user.setUserName("UserNameClient");
-        user.setUserSurname("UserSurnameClient");
-        user.setUserPseudo("UserPseudo");
-        user.setUserPassword("titi");
-        user.setUserEmail("UserEmailClientt@test");
-        user.setUserPhone("Phone");
-        if (user != null)
-            userDao.addUser(user);
-        else
-            logger.error("Could not add user");
-    }
-
-    @Test
-    public void updateUserTest() {
-
-        List<User> users = userDao.Users();
-        if (users.size() > 0) {
-            User user = users.get(0);
-
-            User updateUser = new User();
-            updateUser.setUserName("UserNameClientUpdated");
-            updateUser.setUserSurname("UserSurnameClientUpdated");
-            updateUser.setUserPseudo("UserPseudoUpdated");
-            updateUser.setUserPassword("toto");
-            updateUser.setUserEmail("UserEmailClientUpdatedt@test");
-            updateUser.setUserPhone("UpdatedPhone");
-
-            if (user != null && updateUser != null)
-                userDao.updateUser(updateUser, user);
-            else
-                logger.error("Could not update user");
-        } else
-            logger.error("No User available");
-
-    }
-
-    @Test
-    public void deleteUserTest() {
-
-        List<User> users = userDao.Users();
-
-        if (users.size() > 0)
-            userDao.deleteUser(users.get(0));
-        else
-            logger.error("Could not find User List");
-    }
-
-    @Test
-    public void getUser() {
-
-        User user = userDao.getUser(1);
-        System.out.println(user.getUserName().toString());
-
     }
 }

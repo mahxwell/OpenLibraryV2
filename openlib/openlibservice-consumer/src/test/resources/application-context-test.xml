@@ -9,10 +9,11 @@
     <bean id="dataSourceOpenLib"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <property name="url" value="jdbc:postgresql://localhost:9032/librarydb"/>
+        <property name="username" value="openlib"/>
+        <property name="password" value="openlibco"/>
     </bean>
+
 
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSourceOpenLib"/>

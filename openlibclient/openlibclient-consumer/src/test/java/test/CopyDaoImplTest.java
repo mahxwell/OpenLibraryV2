@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.consumer.contract.dao.CopyDao;
@@ -19,15 +20,49 @@ public class CopyDaoImplTest {
     private static final Logger logger = Logger.getLogger(CopyDaoImplTest.class);
 
 
+    /**
+     * Test
+     * Initialize Copy Object for Unit Tests
+     *
+     * @param bookId Set Book Identification Number
+     * @return A Copy Object
+     */
+    private Copy InitializeCopyObject(final Integer bookId) {
+        Copy copy = new Copy();
+        try {
+            copy.setBookIdBook(bookId);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return copy;
+    }
+
+    /**
+     * Test
+     * Get Last Copy Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Copy getLastCopy() {
+        try {
+            List<Copy> copies = copyDao.copies();
+            return copies.get(copies.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
     /* Add New Copy In DataBase */
 
     @Test
     public void addCopy() {
-        /* Add 20 new library */
-        for (int i = 0; i < 20; i++) {
-            Copy copy = new Copy();
-            copy.setBookIdBook(4);
+
+        try {
+            Copy copy = InitializeCopyObject(1);
             copyDao.addCopy(copy);
+            copyDao.deleteCopy(getLastCopy());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -35,26 +70,27 @@ public class CopyDaoImplTest {
 
     @Test
     public void updateCopy() {
-
-        List<Copy> copies = copyDao.copies();
-        if (copies != null || copies.size() < 3) {
-            Copy copy = new Copy();
-            copy.setBookIdBook(5);
-            copyDao.updateCopy(copy, copies.get(1));
-        } else {
-            logger.error("No Copy or update Copy out of range....");
+        try {
+            Copy copy = InitializeCopyObject(2);
+            copyDao.addCopy(copy);
+            copyDao.updateCopy(copy, getLastCopy());
+            copyDao.deleteCopy(getLastCopy());
+        } catch (Exception e) {
+            logger.error(e);
         }
+
     }
 
     /* Delete Copy */
 
     @Test
     public void deleteCopy() {
-        List<Copy> copies = copyDao.copies();
-        if (copies != null || copies.size() < 3) {
-            copyDao.deleteCopy(copies.get(1));
-        } else {
-            logger.error("No Copy or update Copy out of range....");
+        try {
+            Copy copy = InitializeCopyObject(1);
+            copyDao.addCopy(copy);
+            copyDao.deleteCopy(getLastCopy());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -62,11 +98,47 @@ public class CopyDaoImplTest {
 
     @Test
     public void copies() {
+        try {
+            List<Copy> copies = copyDao.copies();
+            if (copies != null)
+                logger.info(copies.toString());
+            else
+                logger.error("No copy available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
-        List<Copy> copies = copyDao.copies();
-        if (copies != null)
-            logger.info(copies.toString());
-        else
-            logger.error("No copy available !");
+    /* Show Copy List By Book */
+
+    @Test
+    public void copiesByBook() {
+        try {
+            List<Copy> copies = copyDao.copiesByBook(1);
+            if (copies != null)
+                logger.info(copies.toString());
+            else
+                logger.error("No copy available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Copy By Identification Number */
+
+    @Test
+    public void getCopy() {
+        try {
+            List<Copy> copies = copyDao.copies();
+            if (copies != null) {
+                logger.info(copies.toString());
+            } else {
+                logger.error("No Copies available !");
+            }
+            Copy copy = copyDao.getCopy(1);
+            Assert.assertEquals(copy.getCopyId(), copies.get(0).getCopyId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

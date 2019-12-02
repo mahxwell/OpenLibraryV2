@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.BookloaningManager;
@@ -24,6 +25,35 @@ public class BookloaningManagerImplTest {
     private static final Logger logger = Logger.getLogger(BookloaningManagerImplTest.class);
 
 
+    /**
+     * Test
+     * Initialize BookLoaning Object For Unit Tests
+     *
+     * @param extended Set Extended Status
+     * @param beginDate Set Loan Begin Date
+     * @param endDate Set Loan Ending Date
+     * @param getBookId Set Book Identification Number
+     * @param copyId Set Copy Identification Number
+     * @param userId Set User Identification Number
+     * @return A Bookloaning Object
+     */
+    private Bookloaning InitializeBookLoaningObject(final Boolean extended, final Date beginDate, final Date endDate,
+                                                    final Integer getBookId, final Integer copyId, final Integer userId) {
+        Bookloaning bookloaning = new Bookloaning();
+        try {
+            bookloaning.setExtended(extended);
+            bookloaning.setBeginDate(beginDate);
+            bookloaning.setEndDate(endDate);
+            bookloaning.setGetBookId(getBookId);
+            bookloaning.setCopyIdCopy(copyId);
+            bookloaning.setUserIdUser(userId);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return bookloaning;
+    }
+
+
     /* Add New Bookloaning In DataBase */
 
     @Test
@@ -31,19 +61,12 @@ public class BookloaningManagerImplTest {
     @Rollback(true)
     public void addBookloaning() {
 
-        Date date = new Date();
-
-        int n = 1;
-        /* Add 20 new Bookloaning */
-        for (int i = 0; i < 10; i++) {
-            Bookloaning bookloaning = new Bookloaning();
-            bookloaning.setExtended(true);
-            bookloaning.setBeginDate(date);
-            bookloaning.setEndDate(date);
-            bookloaning.setGetBookId(1);
-            bookloaning.setUserIdUser(1);
-            bookloaning.setCopyIdCopy(n = n + 1);
+        try {
+            Bookloaning bookloaning = InitializeBookLoaningObject(false,
+                    new Date(), new Date(), 1, 1, 1);
             bookloaningManager.addBookloaning(bookloaning);
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -53,21 +76,16 @@ public class BookloaningManagerImplTest {
     @Transactional
     @Rollback(true)
     public void updateBookloaning() {
-        Date date = new Date();
-        List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
-        if (bookloanings != null || bookloanings.size() < 3) {
-            Bookloaning bookloaning = new Bookloaning();
-            bookloaning.setExtended(true);
-            bookloaning.setBeginDate(date);
-            bookloaning.setEndDate(date);
-            bookloaning.setGetBookId(1);
-            bookloaning.setUserIdUser(2);
-            bookloaning.setCopyIdCopy(15);
-            bookloaningManager.updateBookloaning(bookloaning, bookloanings.get(0));
-        } else {
-            logger.error("No Bookloaning or update Bookloaning out of range....");
-        }
 
+        try {
+            Bookloaning bookloaning = InitializeBookLoaningObject(true, new Date(),
+                    new Date(), 1, 1, 1);
+            List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
+
+            bookloaningManager.updateBookloaning(bookloaning, bookloanings.get(0));
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
     /* Delete Bookloaning */
@@ -76,11 +94,12 @@ public class BookloaningManagerImplTest {
     @Transactional
     @Rollback(true)
     public void deleteBookloaning() {
-        List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
-        if (bookloanings != null || bookloanings.size() < 3) {
-            bookloaningManager.deleteBookloaning(bookloanings.get(1));
-        } else {
-            logger.error("No Bookloaning or update Bookloaning out of range....");
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
+            bookloaningManager.deleteBookloaning(bookloanings.get(0));
+        } catch (Exception e) {
+            logger.error(e);
         }
 
     }
@@ -91,32 +110,141 @@ public class BookloaningManagerImplTest {
     @Transactional
     @Rollback(true)
     public void bookloanings() {
-        List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
-        if (bookloanings != null)
-            logger.info(bookloanings.toString());
-        else
-            logger.error("No Bookloaning available !");
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Show Bookloaning List By User */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningsByUser() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByUser(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show Bookloaning By Copy */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningsByCopy() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByCopy(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+
+    /* Show Bookloaning List  By User AND By Book*/
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningsByUserAndBook() {
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookAndByUser(2, 1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Bookloaning By Identification Number */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getBookloaning() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.Bookloanings();
+            if (bookloanings != null) {
+                logger.info(bookloanings.toString());
+            } else {
+                logger.error("No Bookloanings available !");
+            }
+            Bookloaning bookloaning = bookloaningManager.getBookloaning(1);
+            Assert.assertEquals(bookloaning.getBookLoaningId(), bookloanings.get(0).getBookLoaningId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show BookloaningLate List */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void bookloaningsLate() {
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.getBookloaningLate();
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show Bookloaning List By Book*/
 
     @Test
     @Transactional
     @Rollback(true)
     public void bookloaningListByBook() {
-        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBook(3);
-        // System.out.println(bookloanings.toString());
-
-   /*     for (int i = 0; i < bookloanings.size(); i++)
-            System.out.println(bookloanings.get(i));*/
-
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBook(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Show Bookloaning List By Book Ordered By Asc */
 
     @Test
     @Transactional
     @Rollback(true)
     public void bookloaningListByBookOrderByDate() {
-        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookOrderByDateAsc(3);
 
-/*        for (int i = 0; i < bookloanings.size(); i++)
-            System.out.println(bookloanings.get(i));*/
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookOrderByDateAsc(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

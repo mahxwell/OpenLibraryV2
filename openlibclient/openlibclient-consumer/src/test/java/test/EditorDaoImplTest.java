@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.consumer.contract.dao.EditorDao;
@@ -20,17 +21,52 @@ public class EditorDaoImplTest {
     private static final Logger logger = Logger.getLogger(EditorDaoImplTest.class);
 
 
+    /**
+     * Test
+     * Initialize Editor Object for Unit Tests
+     *
+     * @param editorName Set Editor Name
+     * @param editorNationality Set Editor Nationality
+     * @return An Editor Object
+     */
+    private Editor InitializeEditorObject(final String editorName, final String editorNationality) {
+        Editor editor = new Editor();
+
+        try {
+            editor.setEditorName(editorName);
+            editor.setEditorNationality(editorNationality);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return editor;
+    }
+
+    /**
+     * Test
+     * Get Last Editor Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Editor getLastEditor() {
+        try {
+            List<Editor> editors = editorDao.editors();
+            return editors.get(editors.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
     /* Add New Editor In DataBase */
 
     @Test
     public void addEditor() {
 
-        /* Add 20 new editor */
-        for (int i = 0; i < 20; i++) {
-            Editor editor = new Editor();
-            editor.setEditorName("editorName" + i);
-            editor.setEditorNationality("editorNationality" + i);
+        try {
+            Editor editor = InitializeEditorObject("Flam", "Allemand");
             editorDao.addEditor(editor);
+            editorDao.deleteEditor(getLastEditor());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -38,14 +74,13 @@ public class EditorDaoImplTest {
 
     @Test
     public void updateEditor() {
-        List<Editor> editors = editorDao.editors();
-        if (editors != null || editors.size() < 3) {
-            Editor editor = new Editor();
-            editor.setEditorName("updateEditor");
-            editor.setEditorNationality("updatedNationality");
-            editorDao.updateEditor(editor, editors.get(1));
-        } else {
-            logger.error("No Editor or update Editor out of range....");
+        try {
+            Editor editor = InitializeEditorObject("Flam", "Allemand");
+            editorDao.addEditor(editor);
+            editorDao.updateEditor(editor, getLastEditor());
+            editorDao.deleteEditor(getLastEditor());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -53,11 +88,12 @@ public class EditorDaoImplTest {
 
     @Test
     public void deleteEditor() {
-        List<Editor> editors = editorDao.editors();
-        if (editors != null || editors.size() < 3) {
-            editorDao.deleteEditor(editors.get(1));
-        } else {
-            logger.error("No Editor or update Editor out of range....");
+        try {
+            Editor editor = InitializeEditorObject("Flam", "Allemand");
+            editorDao.addEditor(editor);
+            editorDao.deleteEditor(getLastEditor());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -65,11 +101,32 @@ public class EditorDaoImplTest {
 
     @Test
     public void editors() {
+        try {
+            List<Editor> editors = editorDao.editors();
+            if (editors != null)
+                logger.info(editors.toString());
+            else
+                logger.error("No editors available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
-        List<Editor> editors = editorDao.editors();
-        if (editors != null)
-            logger.info(editors.toString());
-        else
-            logger.error("No editors available !");
+    /* Find One Editor By Identification Number */
+
+    @Test
+    public void getEditor() {
+        try {
+            List<Editor> editors = editorDao.editors();
+            if (editors != null) {
+                logger.info(editors.toString());
+            } else {
+                logger.error("No Editors available !");
+            }
+            Editor editor = editorDao.getEditor(1);
+            Assert.assertEquals(editor.getEditorId(), editors.get(0).getEditorId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

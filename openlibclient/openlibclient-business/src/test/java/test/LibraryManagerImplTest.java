@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.LibraryManager;
@@ -15,67 +16,113 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LibraryManagerImplTest {
 
-    private static final Logger logger = Logger.getLogger(LibraryManagerImplTest.class);
-
     @Autowired
     LibraryManager libraryManager;
+    private static final Logger logger = Logger.getLogger(LibraryManagerImplTest.class);
 
+    /**
+     * Test
+     * Initialize Library Object for Unit Tests
+     *
+     * @param libraryName Set Library Name
+     * @param postCode Set Library Post Code
+     * @return A Library Object
+     */
+    private Library InitializeLibraryObject(final String libraryName, final String postCode) {
+        Library library = new Library();
+        try {
+            library.setLibraryName(libraryName);
+            library.setLibraryPostCode(postCode);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return library;
+    }
+
+    /**
+     * Test
+     * Get Last Author Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Library getLastLibrary() {
+        try {
+            List<Library> libraries = libraryManager.libraries();
+            return libraries.get(libraries.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+    /* Add New Library In DataBase */
 
     @Test
     public void addLibrary() {
-
-        Library library = new Library();
-
-        library.setLibraryName("LibraryNameClient");
-        library.setLibraryPostCode("PCCLient");
-        if (library != null)
+        try {
+            Library library = InitializeLibraryObject("OpenLibCentrale", "75001");
             libraryManager.addLibrary(library);
-        else
-            logger.error("Library is null");
+            libraryManager.deleteLibrary(getLastLibrary());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /*  Update Library */
 
     @Test
     public void updateLibrary() {
-        List<Library> libraries = libraryManager.libraries();
-
-        if (libraries.size() > 0) {
-
-            Library library = libraries.get(0);
-
-            Library updateLibrary = new Library();
-
-            updateLibrary.setLibraryName("LibraryNameClientUpdated");
-            updateLibrary.setLibraryPostCode("LibraryCPClientUpdated");
-            if (library != null && updateLibrary != null) {
-                libraryManager.updateLibrary(updateLibrary, library);
-            } else
-                logger.error("Could not update library");
-        } else
-            logger.error("No Library available");
-
+        try {
+            Library library = InitializeLibraryObject("OpenLibCentraleUpdated", "75001");
+            libraryManager.addLibrary(library);
+            libraryManager.updateLibrary(library, getLastLibrary());
+            libraryManager.deleteLibrary(getLastLibrary());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Delete Library */
 
     @Test
     public void deleteLibrary() {
-        List<Library> libraries = libraryManager.libraries();
-
-        if (libraries.size() > 0)
-            libraryManager.deleteLibrary(libraries.get(0));
-        else
-            logger.error("Could not find Library List");
+        try {
+            Library library = InitializeLibraryObject("OpenLibCentrale", "75001");
+            libraryManager.addLibrary(library);
+            libraryManager.deleteLibrary(getLastLibrary());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
-    @Test
-    public void libraries() {
-        List<Library> libraries = libraryManager.libraries();
+    /* Show Library List */
 
-        if (libraries == null)
-            logger.error("Library list is null");
-        else {
-            for (int i = 0; i < libraries.size(); i++) {
-                logger.info(libraries.get(i).getLibraryName());
+    @Test
+    public void listLibrary() {
+        try {
+            List<Library> libraries = libraryManager.libraries();
+            if (libraries != null)
+                logger.info(libraries.toString());
+            else
+                logger.error("No library available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Library By Identification Number */
+
+    @Test
+    public void getLibrary() {
+        try {
+            List<Library> libraries = libraryManager.libraries();
+            if (libraries != null) {
+                logger.info(libraries.toString());
+            } else {
+                logger.error("No Libraries available !");
             }
-            logger.info("FINISHED");
+            Library library = libraryManager.getLibrary(1);
+            Assert.assertEquals(library.getLibraryId(), libraries.get(0).getLibraryId());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 }

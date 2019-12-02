@@ -1,6 +1,5 @@
 package test;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.consumer.contract.dao.ReservationDao;
@@ -30,17 +29,26 @@ public class ReservationDaoImplTest {
     private ReservationDao reservationDao;
     private static final Logger logger = Logger.getLogger(ReservationDaoImplTest.class);
 
-    private String formater = "yyyy-MM-dd'T'HH:mm:ss";
-
-    private DateFormat format = new SimpleDateFormat(formater);
-
-    private Date date = new Date();
-
+    /**
+     * Test
+     * Initialize Reservation Object for Unit Tests
+     *
+     * @param book_id Set Book Identification Number
+     * @param user_id Set User Identification Number
+     * @param copy_id Set Copy Identification Number
+     * @return A Reservation Object
+     */
     private Reservation InitializeReservationObject(final Integer book_id, final Integer user_id, final Integer copy_id) {
         Reservation reservation = new Reservation();
         try {
+
+            String formater = "yyyy-MM-dd'T'HH:mm:ss";
+
+            DateFormat format = new SimpleDateFormat(formater);
+
             XMLGregorianCalendar gDateFormatted =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(new Date()));
+
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             reservation.setReservationDate(timestamp.toString());
             reservation.setReservationMail(gDateFormatted);
@@ -53,134 +61,153 @@ public class ReservationDaoImplTest {
         return reservation;
     }
 
-    private void cleanAllReservation() {
-        List<Reservation> reservations = reservationDao.Reservations();
-        if (reservations != null) {
-            for (int i = 0; i < reservations.size(); i++) {
-                reservationDao.deleteReservation(reservations.get(i));
-            }
-        } else {
-            logger.error("reservation list is null, unable to clean empty list");
+    /**
+     * Test
+     * Get Last Reservation Object in Data Base
+     *
+     * @return Last Object -> For Delete
+     */
+    private Reservation getLastReservation() {
+        try {
+            List<Reservation> reservations = reservationDao.Reservations();
+            return reservations.get(reservations.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
         }
     }
 
+    /* Add New Reservation In DataBase */
 
     @Test
     public void addReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(1, 1, 1);
+            reservationDao.addReservation(reservation);
+            reservationDao.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /*  Update Reservation */
 
     @Test
     public void updateReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
-
-        Reservation reservationUpdate = InitializeReservationObject(2, 2, 2);
-        List<Reservation> reservations = reservationDao.Reservations();
-        reservationDao.updateReservation(reservationUpdate, reservations.get(0));
-
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(2, 2, 4);
+            reservationDao.addReservation(reservation);
+            reservationDao.updateReservation(reservation, getLastReservation());
+            reservationDao.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Delete Reservation */
+
 
     @Test
     public void deleteReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
-        cleanAllReservation();
+        try {
+            Reservation reservation = InitializeReservationObject(1, 1, 1);
+            reservationDao.addReservation(reservation);
+            reservationDao.deleteReservation(getLastReservation());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Show Reservation List */
 
     @Test
     public void reservations() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
 
-        List<Reservation> reservations = reservationDao.Reservations();
-
-        Assert.assertNotNull(reservations);
-        cleanAllReservation();
+        try {
+            reservationDao.Reservations();
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Find One Reservation By Identification Number */
 
     @Test
     public void getReservation() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
-
-        List<Reservation> reservations = reservationDao.Reservations();
-
-        Integer reservation_id = reservations.get(0).getReservationId();
-
-        Reservation reservationGetting = reservationDao.getReservation(reservation_id);
-
-        Assert.assertNotNull(reservationGetting);
-        cleanAllReservation();
+        try {
+            reservationDao.getReservation(getLastReservation().getReservationId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Find One Reservation By UserId AND CopyId */
 
     @Test
     public void getReservationByUserIdAndCopyId() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
+        try {
+            reservationDao.getReservationByUserIdAndCopyId(1, 1);
 
-        Reservation reservation1 = reservationDao.getReservationByUserIdAndCopyId(1, 1);
-
-        Assert.assertNotNull(reservation1);
-        cleanAllReservation();
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+
+    /* Find Reservations By Books */
 
     @Test
     public void reservationsByBooks() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
-
-        Reservation reservation1 = InitializeReservationObject(1, 2, 2);
-        reservationDao.addReservation(reservation1);
-
-        Integer book_id1 = reservation.getGetBookId();
-        Integer book_id2 = reservation1.getGetBookId();
-
-        Assert.assertEquals(book_id1, book_id2);
-
-        reservationDao.reservationsByBooks(book_id1);
-        cleanAllReservation();
+        try {
+            reservationDao.reservationsByBooks(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
+
+    /* Find Reservations By Users */
 
     @Test
     public void reservationsByUser() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
+        try {
+            reservationDao.reservationsByUser(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
 
-        Reservation reservation1 = InitializeReservationObject(2, 1, 2);
-        reservationDao.addReservation(reservation1);
-
-        Integer user_id1 = reservation.getUserIdUser();
-        Integer user_id2 = reservation1.getUserIdUser();
-
-        Assert.assertEquals(user_id1, user_id2);
-
-        reservationDao.reservationsByUser(user_id1);
-
-        cleanAllReservation();
     }
+
+    /* Find Reservations By Books AND Users */
 
     @Test
     public void reservationsByUserAndByBooks() {
 
-        Reservation reservation = InitializeReservationObject(1, 1, 1);
-        reservationDao.addReservation(reservation);
+        try {
+            reservationDao.reservationsByUserAndByBooks(1, 1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
-        Reservation reservation1 = InitializeReservationObject(2, 1, 2);
-        reservationDao.addReservation(reservation1);
+    /* Find Reservations By Copies */
 
-        reservationDao.reservationsByUserAndByBooks(reservation.getUserIdUser(), reservation1.getGetBookId());
-        cleanAllReservation();
+    @Test
+    public void reservationsByCopyId() {
+
+        try {
+            List<Reservation> reservationList = reservationDao.reservationsByCopyId(1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }
