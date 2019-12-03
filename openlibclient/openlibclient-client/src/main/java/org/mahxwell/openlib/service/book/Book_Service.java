@@ -30,7 +30,7 @@ public class Book_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/Openlibrary-Webservice/book?wsdl");
+            url = new URL("http://library_web_service:8080/Openlibrary-Webservice/book?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

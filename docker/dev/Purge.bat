@@ -1,2 +1,4 @@
-docker container stop librarydb
+docker container stop library_db
+docker container stop library_web_service
+docker container stop library_web_application
 docker container prune
