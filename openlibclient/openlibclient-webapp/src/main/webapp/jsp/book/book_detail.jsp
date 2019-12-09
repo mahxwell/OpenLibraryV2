@@ -30,11 +30,33 @@
             <s:set var="copyAvailable" value="copyNbr"/>
             <s:set var="AlreadyLoaned" value="alreadyLoaned"/>
             <s:set var="Extended" value="bookloaningExtend"/>
+            <s:set var="limitPassed" value="cannotExtend"/>
+
+            <s:set var="alreadyReserved" value="alreadyReserved"/>
+            <s:set var="expectedReturnDate" value="expectedReturnDate"/>
+
+            <s:set var="reserveQueueLimit" value="reserveQueueLimit"/>
+
+            <s:set var="reservationPrioritybol" value="reservationPrioritybol"/>
+
             <div style="background-color: rgba(208, 207, 207, 1.00)"><h4>Option</h4></div>
 
             <s:if test="%{#userId!=null}">
-                <s:if test="%{#copyAvailable==0}">
-                    <p style="color: red">Plus d'exemplaires Disponibles</p>
+                <s:if test="%{#copyAvailable==0 && #AlreadyLoaned==false}">
+                    <s:if test="%{#alreadyReserved==false}">
+                        <s:if test="%{#reserveQueueLimit==false}">
+                            <p style="color: red">Plus d'exemplaires Disponibles, vous pouvez reserver cet ouvrage</p>
+                            <p style="color: red">Disponible à partir du : <s:property value="expectedReturnDate"/></p>
+                            <s:a action="reservation_create">Réserver le livre</s:a>
+                        </s:if>
+                        <s:elseif test="%{#reserveQueueLimit==true}">
+                            <p style="color: red">Trop d'exemplaires en attente de prêt...</p>
+                        </s:elseif>
+                    </s:if>
+                    <s:elseif test="%{#copyAvailable==0 && #alreadyReserved==true}">
+                        <p style="color: red">Annuler la réservation ?</p>
+                        <s:a action="reservation_delete">Annuler la réservation</s:a>
+                    </s:elseif>
                 </s:if>
                 <s:elseif test="%{#AlreadyLoaned==true}">
                     <p style="color: red">Ouvrage Emprunté jusqu'au <span style="color: blue;"><s:property
@@ -43,16 +65,28 @@
                     <s:a action="book_loaning_delete">Rendre Le Livre</s:a>
                     </br>
                     <p>Besoin de temps pour finir votre lecture ?</p>
-                    <s:if test="%{#Extended==false}">
+                    <s:if test="%{#Extended==false && #limitPassed==false}">
                         <s:a action="book_loaning_update">Prolonger Emprun</s:a>
                     </s:if>
+                    <s:elseif test="%{#limitPassed==true}">
+                        <p style="color: red">Attention : Vous ne pouvez prolonger un emprun en retard</p>
+                    </s:elseif>
                     <s:else>
                         <p style="color: red">Vous ne pouvez prolongez qu'une seule fois</p>
                     </s:else>
                     </br></br>
                 </s:elseif>
                 <s:else>
-                    <s:a action="book_loaning_create">Emprunter un exemplaire</s:a>
+                    <s:if test="%{#alreadyReserved==true}">
+                        <s:a action="book_loaning_create">Emprunter un exemplaire réservé</s:a>
+                    </s:if>
+
+                    <s:elseif test="%{#reservationPrioritybol==false }">
+                        <s:a action="book_loaning_create">Emprunter un exemplaire</s:a>
+                    </s:elseif>
+                    <s:else>
+                        <p style="color: red">Livre réservé</p>
+                    </s:else>
                 </s:else>
             </s:if>
             <s:elseif test="%{#userId==null}">

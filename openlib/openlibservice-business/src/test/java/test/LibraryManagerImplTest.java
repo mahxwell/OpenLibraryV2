@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.LibraryManager;
@@ -22,19 +23,36 @@ public class LibraryManagerImplTest {
     private static final Logger logger = Logger.getLogger(LibraryManagerImplTest.class);
 
 
+    /**
+     * Test
+     * Initialize Library Object for Unit Tests
+     *
+     * @param libraryName Set Library Name
+     * @param postCode Set Library Post Code
+     * @return A Library Object
+     */
+    private Library InitializeLibraryObject(final String libraryName, final String postCode) {
+        Library library = new Library();
+        try {
+            library.setLibraryName(libraryName);
+            library.setLibraryPostCode(postCode);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return library;
+    }
+
     /* Add New Library In DataBase */
 
     @Test
     @Transactional
     @Rollback(true)
     public void addLibrary() {
-
-        /* Add 20 new library */
-        for (int i = 0; i < 20; i++) {
-            Library library = new Library();
-            library.setLibraryName("LibraryName" + i);
-            library.setLibraryPostCode("54000");
+        try {
+            Library library = InitializeLibraryObject("OpenLibCentrale", "75001");
             libraryManager.addLibrary(library);
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -44,15 +62,12 @@ public class LibraryManagerImplTest {
     @Transactional
     @Rollback(true)
     public void updateLibrary() {
-
-        List<Library> libraries = libraryManager.Libraries();
-        if (libraries != null || libraries.size() < 3) {
-            Library library = new Library();
-            library.setLibraryName("updateLib");
-            library.setLibraryPostCode("update0000");
-            libraryManager.updateLibrary(library, libraries.get(1));
-        } else {
-            logger.error("No Library or update Library out of range....");
+        try {
+            List<Library> libraries = libraryManager.Libraries();
+            Library library = InitializeLibraryObject("OpenLibUpdated", "75001");
+            libraryManager.updateLibrary(library, libraries.get(0));
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -62,14 +77,16 @@ public class LibraryManagerImplTest {
     @Transactional
     @Rollback(true)
     public void deleteLibrary() {
-
-        List<Library> libraries = libraryManager.Libraries();
-        if (libraries != null || libraries.size() < 3) {
-            libraryManager.deleteLibrary(libraries.get(1));
-        } else {
-            logger.error("No Library or update Library out of range....");
+        try {
+            List<Library> libraries = libraryManager.Libraries();
+            if (libraries != null) {
+                libraryManager.deleteLibrary(libraries.get(1));
+            } else {
+                logger.error("No Library or update Library out of range....");
+            }
+        } catch (Exception e) {
+            logger.error(e);
         }
-
     }
 
     /* Show Library List */
@@ -78,12 +95,34 @@ public class LibraryManagerImplTest {
     @Transactional
     @Rollback(true)
     public void listLibrary() {
-
-        List<Library> libraries = libraryManager.Libraries();
-        if (libraries != null)
-            logger.info(libraries.toString());
-        else
-            logger.error("No library available !");
+        try {
+            List<Library> libraries = libraryManager.Libraries();
+            if (libraries != null)
+                logger.info(libraries.toString());
+            else
+                logger.error("No library available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
+    /* Find One Library By Identification Number */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getLibrary() {
+        try {
+            List<Library> libraries = libraryManager.Libraries();
+            if (libraries != null) {
+                logger.info(libraries.toString());
+            } else {
+                logger.error("No Libraries available !");
+            }
+            Library library = libraryManager.getLibrary(1);
+            Assert.assertEquals(library.getLibraryId(), libraries.get(0).getLibraryId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 }

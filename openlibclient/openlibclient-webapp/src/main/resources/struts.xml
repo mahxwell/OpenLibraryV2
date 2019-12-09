@@ -37,7 +37,7 @@
 
         <!-- Welcome Profile Page -->
 
-         <action name="welcome_profile" class="org.mahxwell.openlib.action.UserAction"
+        <action name="welcome_profile" class="org.mahxwell.openlib.action.UserAction"
                 method="doGetLoanByUser">
             <result name="success">jsp/user/welcome_user.jsp</result>
             <result name="error">jsp/user/welcome_user.jsp</result>
@@ -99,6 +99,15 @@
             <result name="error">/jsp/error.jsp</result>
         </action>
 
+        <!-- All Reserved Book List by User -->
+
+        <action name="reservedListBook"
+                class="org.mahxwell.openlib.action.BookAction"
+                method="doListReservedBook">
+            <result name="success">/jsp/book/book_reserved_list.jsp</result>
+            <result name="error">/jsp/error.jsp</result>
+        </action>
+
         <!-- Book List Details -->
 
         <action name="bookDetail"
@@ -147,6 +156,22 @@
             <result name="success">/jsp/search/quick_search.jsp</result>
             <result name="error">/jsp/search/quick_search.jsp</result>
         </action>
+
+        <!-- Reservation -->
+        <action name="reservation_create"
+                class="org.mahxwell.openlib.action.ReservationAction"
+                method="doCreateReservation">
+            <result name="success" type="redirectAction">welcome</result>
+            <result name="error">/jsp/error.jsp</result>
+        </action>
+
+        <action name="reservation_delete"
+                class="org.mahxwell.openlib.action.ReservationAction"
+                method="deDeleteReservation">
+            <result name="success" type="redirectAction">welcome</result>
+            <result name="error">/jsp/error.jsp</result>
+        </action>
+
     </package>
     <package name="public" extends="base">
 

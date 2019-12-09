@@ -5,7 +5,7 @@
     <parent>
         <artifactId>openlibclient</artifactId>
         <groupId>org.openlibclient</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>openlibclient-webapp</artifactId>
@@ -22,17 +22,17 @@
         <dependency>
             <groupId>org.openlibclient</groupId>
             <artifactId>openlibclient-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.openlibclient</groupId>
             <artifactId>openlibclient-consumer</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.openlibclient</groupId>
             <artifactId>openlibclient-business</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
         <!-- Junit -->
         <dependency>

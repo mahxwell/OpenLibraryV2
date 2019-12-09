@@ -92,4 +92,16 @@ public class UserDaoImpl implements UserDao {
     public List<User> usersToSendMail() {
         return userService.userstosendmail();
     }
+
+    /**
+     * DAO
+     * Get a User Object with Unique Identification Number
+     *
+     * @param user_id User Unique Identification Number
+     * @return A User Object
+     */
+    @Override
+    public User getUser(final Integer user_id) {
+        return userService.getUser(user_id);
+    }
 }

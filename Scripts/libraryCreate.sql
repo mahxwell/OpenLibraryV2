@@ -96,6 +96,18 @@ CREATE TABLE librarydb.bookloaning (
 
 ALTER TABLE librarydb.bookloaning OWNER TO postgres;
 
+CREATE TABLE librarydb.reservation (
+	reservation_id serial NOT NULL,
+	reservation_date varchar NOT NULL,
+	reservation_mail date,
+	get_book_id integer NOT NULL,
+	user_id_user integer,
+	copy_id_copy integer,
+	CONSTRAINT reservation_pk PRIMARY KEY (reservation_id)
+);
+
+ALTER TABLE librarydb.reservation OWNER TO postgres;
+
 ALTER TABLE librarydb.book ADD CONSTRAINT library_fk FOREIGN KEY (library_id_library)
 REFERENCES librarydb.library (library_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
@@ -125,5 +137,9 @@ REFERENCES librarydb.copy (copy_id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE librarydb.bookloaning ADD CONSTRAINT bookloaning_uq UNIQUE (copy_id_copy);
+
+ALTER TABLE librarydb.reservation ADD CONSTRAINT user_fk FOREIGN KEY (user_id_user)
+REFERENCES librarydb.user (user_id) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
 
 

@@ -13,6 +13,7 @@ import org.mahxwell.openlib.service.copy.Copy;
 import org.mahxwell.openlib.service.editor.Editor;
 import org.mahxwell.openlib.service.genre.Genre;
 import org.mahxwell.openlib.service.library.Library;
+import org.mahxwell.openlib.service.reservation.Reservation;
 import org.mahxwell.openlib.service.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,13 +34,14 @@ public class BookAction extends ActionSupport implements SessionAware {
     private Map<String, Object> session;
     private HttpServletRequest servletRequest;
 
-    BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
-    AuthorManager authorManager = ContextLoader.INSTANCE.getAuthorManager();
-    BookManager bookManager = ContextLoader.INSTANCE.getBookManager();
-    CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
-    EditorManager editorManager = ContextLoader.INSTANCE.getEditorManager();
-    GenreManager genreManager = ContextLoader.INSTANCE.getGenreManager();
-    LibraryManager libraryManager = ContextLoader.INSTANCE.getLibraryManager();
+    private BookloaningManager bookloaningManager = ContextLoader.INSTANCE.getBookloaningManager();
+    private AuthorManager authorManager = ContextLoader.INSTANCE.getAuthorManager();
+    private BookManager bookManager = ContextLoader.INSTANCE.getBookManager();
+    private CopyManager copyManager = ContextLoader.INSTANCE.getCopyManager();
+    private EditorManager editorManager = ContextLoader.INSTANCE.getEditorManager();
+    private GenreManager genreManager = ContextLoader.INSTANCE.getGenreManager();
+    private LibraryManager libraryManager = ContextLoader.INSTANCE.getLibraryManager();
+    private ReservationManager reservationManager = ContextLoader.INSTANCE.getReservationManager();
 
     private Book book;
     private Integer bookId;
@@ -56,6 +58,15 @@ public class BookAction extends ActionSupport implements SessionAware {
     private Boolean alreadyLoaned;
     private Date date;
     private boolean bookloaningExtend;
+    private boolean cannotExtend;
+
+    private boolean alreadyReserved;
+    private Date expectedReturnDate;
+    private List<Reservation> reservationListByUser;
+
+    private boolean reserveQueueLimit;
+
+    private boolean reservationPrioritybol;
 
     /**
      * doListBook
@@ -71,6 +82,44 @@ public class BookAction extends ActionSupport implements SessionAware {
             logger.error("Error in doListBook Method");
             return ActionSupport.ERROR;
         }
+    }
+
+    /**
+     * List of Reserved Book by User
+     *
+     * @return
+     */
+    public String doListReservedBook() {
+
+        user = (User) this.session.get("user");
+
+        if (user != null) {
+            try {
+                reservationListByUser = reservationManager.reservationsByUser(user.getUserId());
+                logger.info("RESERVATION BY USER =" + reservationListByUser.get(0).getGetBookId());
+                if (reservationListByUser != null) {
+                    List<Book> allBooks = bookManager.books();
+                    List<Book> booksByUser = new ArrayList<>();
+                    int i = 0;
+                    int j;
+                    while (i < allBooks.size()) {
+                        j = 0;
+                        while (j < reservationListByUser.size()) {
+                            if (allBooks.get(i).getBookId() == reservationListByUser.get(j).getGetBookId()
+                                    && !booksByUser.contains(allBooks.get(i)))
+                                booksByUser.add(allBooks.get(i));
+                            j++;
+                        }
+                        i++;
+                    }
+                    books = new ArrayList<>(booksByUser);
+                }
+            } catch (Exception e) {
+                books = new ArrayList<>();
+                logger.error("Error in doListReservedBook Method");
+            }
+        }
+        return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
     /**
@@ -126,6 +175,9 @@ public class BookAction extends ActionSupport implements SessionAware {
             logger.error("bookId is null");
         } else {
             try {
+                /**
+                 * Get All Book Informations for JSP
+                 */
                 book = bookManager.getBook(bookId);
                 editor = editorManager.getEditor(book.getEditorIdEditor());
                 author = authorManager.getAuthor(book.getAuthorIdAuthor());
@@ -134,6 +186,48 @@ public class BookAction extends ActionSupport implements SessionAware {
                 copyListByBooks = copyManager.copiesByBook(bookId);
                 bookloanings = bookloaningManager.bookloaningsByBook(bookId);
                 copyNbr = copyListByBooks.size() - bookloanings.size();
+
+                /**
+                 * Add for V2 -> Expected return date for JSP
+                 */
+                this.expectedReturnDate = expectedReturnDateForReservation(book.getBookId());
+
+                /**
+                 * Add for V2 -> Check if reservation list for a book is not too long
+                 */
+                this.checkMaxQueueReservation(book.getBookId());
+
+
+                /**
+                 * Add for V2 -> Check if a book is already reserved for JSP
+                 */
+                try {
+                    Reservation reservationKeep = reservationManager.reservationsByUserAndByBooks(user.getUserId(), bookId);
+                    if (reservationKeep == null) {
+                        alreadyReserved = false;
+                    } else {
+                        alreadyReserved = true;
+                    }
+                } catch (Exception e) {
+                    logger.info("reservationKeep is null");
+                }
+                /**
+                 * Add V2 -> Check If a user has reserved a book or not
+                 * to allow priority to users who have reserved to loan
+                 */
+                // CHECK IF LOANING BUG OCCUR AGAIN
+                List<Reservation>  reservationPriority = reservationManager.reservationsByBooks(bookId);
+
+                if (reservationPriority.size() <= 0) {
+                    reservationPrioritybol = false;
+                } else {
+                    reservationPrioritybol = true;
+                }
+
+
+                /**
+                 * Bookloaning Operation
+                 */
                 List<Bookloaning> bookloaningsByBookAndUser =
                         bookloaningManager.bookloaningsByBookAndByUser(bookId, user.getUserId());
                 if (bookloaningsByBookAndUser.size() > 0) {
@@ -141,6 +235,17 @@ public class BookAction extends ActionSupport implements SessionAware {
                     XMLGregorianCalendar datexml = bookloaningsByBookAndUser.get(0).getEndDate();
                     date = datexml.toGregorianCalendar().getTime();
                     bookloaningExtend = bookloaningsByBookAndUser.get(0).isExtended();
+
+                    /**
+                     * Add For V2 -> Fix add 1.0.1
+                     * User cannot extend a loan when return date is passed
+                     */
+                    Date dateNow = new Date();
+                    if (dateNow.compareTo(date) > 0) {
+                        cannotExtend = true;
+                    } else {
+                        cannotExtend = false;
+                    }
                 } else {
                     alreadyLoaned = false;
                 }
@@ -152,7 +257,88 @@ public class BookAction extends ActionSupport implements SessionAware {
         return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
     }
 
+    /**
+     * Add For V2 -> Get a expected return Date for reservation
+     *
+     * @param bookId
+     * @return
+     */
+    private Date expectedReturnDateForReservation(final Integer bookId) {
+
+        try {
+            List<Bookloaning> bookloanedDate = bookloaningManager.bookloaningsByBookOrderByDateAsc(bookId);
+            XMLGregorianCalendar expectedReturnDate = bookloanedDate.get(0).getEndDate();
+            Date returnDate = expectedReturnDate.toGregorianCalendar().getTime();
+            return returnDate;
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
+    }
+
+    /**
+     * Add for V2 -> Check if reservation list for a book is not too long
+     *
+     * @param bookId
+     */
+    private void checkMaxQueueReservation(final Integer bookId) {
+        try {
+            List<Reservation> reservations = reservationManager.reservationsByBooks(bookId);
+            List<Copy> copiesByBooks = copyManager.copiesByBook(bookId);
+
+            if (reservations.size() > 0 && copiesByBooks.size() > 0) {
+                Integer actualReservation = reservations.size();
+                Integer maxReservationByBook = copiesByBooks.size() + copiesByBooks.size();
+
+                if (actualReservation < maxReservationByBook) {
+                    reserveQueueLimit = false;
+                } else {
+                    reserveQueueLimit = true;
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+
     /* GETTERS AND SETTERS */
+
+    public boolean isReserveQueueLimit() {
+        return reserveQueueLimit;
+    }
+
+    public void setReserveQueueLimit(boolean reserveQueueLimit) {
+        this.reserveQueueLimit = reserveQueueLimit;
+    }
+
+    public List<Reservation> getReservationListByUser() {
+        return reservationListByUser;
+    }
+
+    public void setReservationListByUser(List<Reservation> reservationListByUser) {
+        this.reservationListByUser = reservationListByUser;
+    }
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public boolean isAlreadyReserved() {
+        return alreadyReserved;
+    }
+
+    public void setAlreadyReserved(boolean alreadyReserved) {
+        this.alreadyReserved = alreadyReserved;
+    }
+
+    public Date getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setExpectedReturnDate(Date expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
+    }
 
     @Override
     public void setSession(Map<String, Object> session) {
@@ -277,5 +463,21 @@ public class BookAction extends ActionSupport implements SessionAware {
 
     public void setBookloaningExtend(boolean bookloaningExtend) {
         this.bookloaningExtend = bookloaningExtend;
+    }
+
+    public boolean isCannotExtend() {
+        return cannotExtend;
+    }
+
+    public void setCannotExtend(boolean cannotExtend) {
+        this.cannotExtend = cannotExtend;
+    }
+
+    public boolean isReservationPrioritybol() {
+        return reservationPrioritybol;
+    }
+
+    public void setReservationPrioritybol(boolean reservationPrioritybol) {
+        this.reservationPrioritybol = reservationPrioritybol;
     }
 }

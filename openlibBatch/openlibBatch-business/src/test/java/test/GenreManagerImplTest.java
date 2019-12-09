@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.GenreManager;
@@ -19,15 +20,48 @@ public class GenreManagerImplTest {
     private GenreManager genreManager;
     private static final Logger logger = Logger.getLogger(GenreManagerImplTest.class);
 
+    /**
+     * Test
+     * Initialize Genre Object for Unit Tests
+     *
+     * @param genreName Set Genre Name
+     * @return A Genre Object
+     */
+    private Genre InitializeGenreObject(final String genreName) {
+        Genre genre = new Genre();
+        try {
+            genre.setGenreName(genreName);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return genre;
+    }
+
+    /**
+     * Test
+     * Get Last Author Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Genre getLastGenre() {
+        try {
+            List<Genre> genres = genreManager.genres();
+            return genres.get(genres.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
     /* Add New Genre In DataBase */
 
     @Test
     public void addGenre() {
-        /* Add 20 new genre */
-        for (int i = 0; i < 20; i++) {
-            Genre genre = new Genre();
-            genre.setGenreName("genreName" + i);
+        try {
+            Genre genre = InitializeGenreObject("Action");
             genreManager.addGenre(genre);
+            genreManager.deleteGenre(getLastGenre());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -35,13 +69,13 @@ public class GenreManagerImplTest {
 
     @Test
     public void updateGenre() {
-        List<Genre> genres = genreManager.genres();
-        if (genres != null || genres.size() < 3) {
-            Genre genre = new Genre();
-            genre.setGenreName("updatedName");
-            genreManager.updateGenre(genre, genres.get(1));
-        } else {
-            logger.error("No Genre or update Genre out of range....");
+        try {
+            Genre genre = InitializeGenreObject("Action");
+            genreManager.addGenre(genre);
+            genreManager.updateGenre(genre, getLastGenre());
+            genreManager.deleteGenre(getLastGenre());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -49,11 +83,12 @@ public class GenreManagerImplTest {
 
     @Test
     public void deleteGenre() {
-        List<Genre> genres = genreManager.genres();
-        if (genres != null || genres.size() < 3) {
-            genreManager.deleteGenre(genres.get(1));
-        } else {
-            logger.error("Delete failed");
+        try {
+            Genre genre = InitializeGenreObject("Action");
+            genreManager.addGenre(genre);
+            genreManager.deleteGenre(getLastGenre());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -61,10 +96,32 @@ public class GenreManagerImplTest {
 
     @Test
     public void genres() {
-        List<Genre> genres = genreManager.genres();
-        if (genres != null)
-            logger.info(genres.toString());
-        else
-            logger.error("No Genre available !");
+        try {
+            List<Genre> genres = genreManager.genres();
+            if (genres != null)
+                logger.info(genres.toString());
+            else
+                logger.error("No Genre available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Genre By Identification Number */
+
+    @Test
+    public void getBookloaning() {
+        try {
+            List<Genre> genres = genreManager.genres();
+            if (genres != null) {
+                logger.info(genres.toString());
+            } else {
+                logger.error("No Genres available !");
+            }
+            Genre genre = genreManager.getGenre(1);
+            Assert.assertEquals(genre.getGenreId(), genres.get(0).getGenreId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

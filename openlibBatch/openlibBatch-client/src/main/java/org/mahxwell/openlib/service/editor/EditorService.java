@@ -27,33 +27,6 @@ public interface EditorService {
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns org.mahxwell.openlib.service.editor.Editor
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.GetEditor")
-    @ResponseWrapper(localName = "getEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.GetEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/getEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/getEditorResponse")
-    public Editor getEditor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditor")
-    @ResponseWrapper(localName = "addEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorResponse")
-    public void addEditor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Editor arg0);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<org.mahxwell.openlib.service.editor.Editor>
      */
@@ -69,10 +42,10 @@ public interface EditorService {
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
-    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
-    public void deleteEditor(
+    @RequestWrapper(localName = "addEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditor")
+    @ResponseWrapper(localName = "addEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorResponse")
+    public void addEditor(
         @WebParam(name = "arg0", targetNamespace = "")
         Editor arg0);
 
@@ -90,5 +63,32 @@ public interface EditorService {
         Editor arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Editor arg1);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
+    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
+    public void deleteEditor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Editor arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns org.mahxwell.openlib.service.editor.Editor
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.GetEditor")
+    @ResponseWrapper(localName = "getEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.GetEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/getEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/getEditorResponse")
+    public Editor getEditor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
 
 }

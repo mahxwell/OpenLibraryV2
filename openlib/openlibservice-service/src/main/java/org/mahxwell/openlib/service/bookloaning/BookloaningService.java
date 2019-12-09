@@ -226,4 +226,27 @@ public class BookloaningService extends AbstractManagerService {
         }
         return null;
     }
+
+    /**
+     * WebService
+     * Get a Bookloaning List by Book Object Order By Date
+     *
+     * @param book_id Book Unique Identification Number
+     * @return Bookloanings -> List of Bookloaning Object
+     */
+    @WebMethod(operationName = "listbookloaningByBookOrderByDateAsc")
+    public List<Bookloaning> getBookloaningListByBookOrderByDateAscService(final Integer book_id) {
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookOrderByDateAsc(book_id);
+            if (bookloanings != null) {
+                return bookloanings;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error listbookloaning method = " + e);
+        }
+        return null;
+    }
 }

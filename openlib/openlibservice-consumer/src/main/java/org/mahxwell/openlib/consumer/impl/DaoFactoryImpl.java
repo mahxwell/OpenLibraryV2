@@ -2,6 +2,7 @@ package org.mahxwell.openlib.consumer.impl;
 
 import org.mahxwell.openlib.consumer.contract.DaoFactory;
 import org.mahxwell.openlib.consumer.contract.dao.*;
+import org.mahxwell.openlib.model.bean.openlib.Reservation;
 
 /**
  * @author Mahxwell
@@ -19,6 +20,7 @@ public class DaoFactoryImpl implements DaoFactory {
     private EditorDao editorDao;
     private GenreDao genreDao;
     private LibraryDao libraryDao;
+    private ReservationDao reservationDao;
 
     @Override
     public UserDao getUserDao() {
@@ -98,5 +100,15 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public void setLibraryDao(LibraryDao libraryDao) {
         this.libraryDao = libraryDao;
+    }
+
+    @Override
+    public ReservationDao getReservationDao() {
+        return reservationDao;
+    }
+
+    @Override
+    public void setReservationDao(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
     }
 }

@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.BookManager;
@@ -23,23 +24,47 @@ public class BookManagerImplTest {
     private static final Logger logger = Logger.getLogger(BookManagerImplTest.class);
 
 
+
+    /**
+     * Test
+     * Initialize Book Object for Unit Tests
+     *
+     * @param bookTitle Set BookTitle
+     * @param bookYear  Set BookYear
+     * @param authorId  Set Author Identification Number
+     * @param editorId  Set Editor Identification Number
+     * @param genreId   Set Genre Identification Number
+     * @param libraryId Set Library Identification Number
+     * @return A Book Object
+     */
+    private Book InitializeBookObject(final String bookTitle, final Integer bookYear,
+                                      final Integer authorId, final Integer editorId,
+                                      final Integer genreId, final Integer libraryId) {
+        Book book = new Book();
+        try {
+            book.setBookTitle(bookTitle);
+            book.setBookYear(bookYear);
+            book.setAuthorIdAuthor(authorId);
+            book.setEditorIdEditor(editorId);
+            book.setGenreIdGenre(genreId);
+            book.setLibraryIdLibrary(libraryId);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return book;
+    }
+
     /* Add New Book In DataBase */
 
     @Test
     @Transactional
     @Rollback(true)
     public void addBook() {
-        /* Add 20 new Book */
-
-        for (int i = 0; i < 20; i++) {
-            Book book = new Book();
-            book.setBookTitle("BookTitle" + i);
-            book.setBookYear(1000 + i);
-            book.setEditorIdEditor(4);
-            book.setAuthorIdAuthor(4);
-            book.setGenreIdGenre(4);
-            book.setLibraryIdLibrary(4);
+        try {
+            Book book = InitializeBookObject("TheBestBook", 2010, 1, 1, 1, 1);
             bookManager.addBook(book);
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -49,18 +74,14 @@ public class BookManagerImplTest {
     @Transactional
     @Rollback(true)
     public void updateBook() {
-        List<Book> books = bookManager.Books();
-        if (books != null || books.size() < 3) {
-            Book book = new Book();
-            book.setBookTitle("updatedTitle");
-            book.setBookYear(3000);
-            book.setEditorIdEditor(4);
-            book.setAuthorIdAuthor(4);
-            book.setGenreIdGenre(4);
-            book.setLibraryIdLibrary(4);
-            bookManager.updateBook(book, books.get(1));
-        } else {
-            logger.error("No Book or update Book out of range....");
+        try {
+
+            Book bookToUpdate = InitializeBookObject("TheBestBookUpdated", 2010, 1, 1, 1, 1);
+            List<Book> books = bookManager.Books();
+            bookManager.updateBook(bookToUpdate, books.get(0));
+
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -70,11 +91,15 @@ public class BookManagerImplTest {
     @Transactional
     @Rollback(true)
     public void deleteBook() {
-        List<Book> books = bookManager.Books();
-        if (books != null || books.size() < 3) {
-            bookManager.deleteBook(books.get(1));
-        } else {
-            logger.error("No Book or update Book out of range....");
+        try {
+            List<Book> books = bookManager.Books();
+            if (books != null) {
+                bookManager.deleteBook(books.get(0));
+            } else {
+                logger.error("No Book or update Book out of range....");
+            }
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -84,11 +109,93 @@ public class BookManagerImplTest {
     @Transactional
     @Rollback(true)
     public void books() {
+        try {
+            List<Book> books = bookManager.Books();
+            System.out.println(books.toString());
+            if (books != null)
+                logger.info(books.toString());
+            else
+                logger.error("No book available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 
-        List<Book> books = bookManager.Books();
-        if (books != null)
-            logger.info(books.toString());
-        else
-            logger.error("No book available !");
+    /* Search Test */
+
+
+    /* Search By Title */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void SearchByTitletest() {
+
+        try {
+            List<Book> books = bookManager.SearchBookByTitle("BookTitle1");
+            if (books != null)
+                logger.info(books.toString());
+            else
+                logger.error("No book available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Advanced Search */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void AdvancedSearch() {
+        try {
+
+            List<Book> books = bookManager.AdvancedSearchBook("BookTitle0",
+                    "LibraryName0", "editorName0", "genreName0", "AuthorName0");
+            if (books != null)
+                logger.info(books.toString());
+            else
+                logger.error("No book available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show Book Mail List */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void booksMail() {
+        try {
+            List<Book> books = bookManager.booksToSendMail();
+            if (books != null)
+                logger.info(books.toString());
+            else
+                logger.error("No book available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+
+    /* Find One Book By Identification Number */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getBook() {
+        try {
+            List<Book> books = bookManager.Books();
+            if (books != null) {
+                logger.info(books.toString());
+            } else {
+                logger.error("No Books available !");
+            }
+            Book book = bookManager.getBook(1);
+            Assert.assertEquals(book.getBookId(), books.get(0).getBookId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

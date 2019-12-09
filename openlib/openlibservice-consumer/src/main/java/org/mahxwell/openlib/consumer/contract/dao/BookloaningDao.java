@@ -31,4 +31,6 @@ public interface BookloaningDao {
     List<Bookloaning> bookloaningsByBookAndByUser(final Integer book_id, final Integer user_id);
 
     List<Bookloaning> getBookloaningLate();
+
+    List<Bookloaning> bookloaningsByBookOrderByDateAsc(final Integer book_id);
 }

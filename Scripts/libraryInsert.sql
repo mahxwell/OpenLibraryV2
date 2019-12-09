@@ -64,41 +64,10 @@ INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, a
 INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle2', 2002, 3, 3, 3, 3);
 INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle3', 2003, 4, 4, 4, 4);
 INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle4', 2004, 1, 1, 5, 1);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle5', 2005, 2, 2, 6, 2);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle6', 2006, 3, 3, 7, 3);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle7', 2007, 4, 4, 8, 4);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle8', 2008, 1, 1, 1, 1);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle9', 2009, 2, 2, 9, 2);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle10', 2010, 3, 3, 4, 3);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle11', 2011, 4, 4, 3, 4);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle12', 2012, 1, 1, 2, 1);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle13', 2013, 2, 2, 7, 2);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle14', 2014, 3, 3, 5, 3);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle15', 2015, 4, 4, 4, 4);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle16', 2016, 1, 1, 8, 1);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle17', 2017, 2, 2, 5, 2);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle18', 2018, 3, 3, 1, 3);
-INSERT INTO librarydb.book (title, year, library_id_library, editor_id_editor, author_id_author, genre_id_genre) VALUES ('BookTitle19', 2019, 4, 4, 2, 4);
 
 INSERT INTO librarydb.copy (book_id_book) VALUES (1);
 INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
-INSERT INTO librarydb.copy (book_id_book) VALUES (1);
 
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
 INSERT INTO librarydb.copy (book_id_book) VALUES (2);
 INSERT INTO librarydb.copy (book_id_book) VALUES (2);
 
@@ -135,6 +104,21 @@ INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-08-18', '2019-08-15', 1, 3, 1);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-08-18', '2019-09-17', 4, 2, 31);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-08-18', '2019-08-15', 2, 3, 11);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 1, 1, 1);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 2, 1, 3);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 1, 2, 2);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 2, 2, 4);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-05-15', 3, 3, 5);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-06-12', 4, 3, 15);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 4, 4, 16);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 5, 5, 25);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 4, 7, 17);
+
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:50.696', 1, 3, 1);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:56.151', 2, 3, 3);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:30.648', 1, 4, 2);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:36.161', 2, 4, 4);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:08.116', 1, 5, 1);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:12.031', 2, 5, 3);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:54.061', 1, 6, 2);
+INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:58.761', 2, 6, 4);

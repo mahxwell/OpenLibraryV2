@@ -136,4 +136,19 @@ public class UserService extends AbstractManagerService {
         }
         return null;
     }
+
+    @WebMethod(operationName = "getUser")
+    public User getUserService(final Integer user_id) {
+        try {
+            User user = userManager.getUser(user_id);
+            if (user != null) {
+                return user;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("Error getUser method = " + e);
+        }
+        return null;
+    }
 }

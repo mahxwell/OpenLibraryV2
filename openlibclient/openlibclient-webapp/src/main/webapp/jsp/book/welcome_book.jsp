@@ -22,6 +22,9 @@
                 <p style="color:rgba(146, 146, 146, 1.00);font-family:  montserrat, sans-serif;
     font-style: normal">Consulter Vos empruns</p>
                 <s:a action="loanedListBook">Livres Empruntés</s:a>
+                <p style="color:rgba(146, 146, 146, 1.00);font-family:  montserrat, sans-serif;
+    font-style: normal">Consulter Vos Réservations</p>
+                <s:a action="reservedListBook">Livres Réservés</s:a>
             </s:if>
             <s:else>
             </s:else>

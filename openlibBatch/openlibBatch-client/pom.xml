@@ -5,13 +5,13 @@
     <parent>
         <artifactId>openlibBatch</artifactId>
         <groupId>org.openlibBatch</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>openlibBatch-client</artifactId>
     <groupId>org.openlibBatch</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- =============================================================== -->
@@ -24,50 +24,55 @@
     <properties>
         <service.wsdl.url.user>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/user?wsdl
+            http://localhost:8080/Openlibrary-Webservice/user?wsdl
         </service.wsdl.url.user>
 
         <service.wsdl.url.library>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/library?wsdl
+            http://localhost:8080/Openlibrary-Webservice/library?wsdl
         </service.wsdl.url.library>
 
         <service.wsdl.url.author>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/author?wsdl
+            http://localhost:8080/Openlibrary-Webservice/author?wsdl
         </service.wsdl.url.author>
 
         <service.wsdl.url.editor>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/editor?wsdl
+            http://localhost:8080/Openlibrary-Webservice/editor?wsdl
         </service.wsdl.url.editor>
 
         <service.wsdl.url.copy>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/copy?wsdl
+            http://localhost:8080/Openlibrary-Webservice/copy?wsdl
         </service.wsdl.url.copy>
 
         <service.wsdl.url.genre>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/genre?wsdl
+            http://localhost:8080/Openlibrary-Webservice/genre?wsdl
         </service.wsdl.url.genre>
 
         <service.wsdl.url.book>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/book?wsdl
+            http://localhost:8080/Openlibrary-Webservice/book?wsdl
         </service.wsdl.url.book>
 
         <service.wsdl.url.bookloaning>
             <!-- change Url-->
-            http://DESKTOP-SLCNU9U:8080/Openlibrary-Webservice8721089228461807260/bookloaning?wsdl
+            http://localhost:8080/Openlibrary-Webservice/bookloaning?wsdl
         </service.wsdl.url.bookloaning>
+
+        <service.wsdl.url.reservation>
+            <!-- change Url-->
+            http://localhost:8080/Openlibrary-Webservice/reservation?wsdl
+        </service.wsdl.url.reservation>
     </properties>
 
 
     <!-- =============================================================== -->
     <!-- Build -->
     <!-- =============================================================== -->
-    <build>
+ <!--   <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -91,10 +96,11 @@
                         <wsdlUrl>${service.wsdl.url.genre}</wsdlUrl>
                         <wsdlUrl>${service.wsdl.url.book}</wsdlUrl>
                         <wsdlUrl>${service.wsdl.url.bookloaning}</wsdlUrl>
+                        <wsdlUrl>${service.wsdl.url.reservation}</wsdlUrl>
                     </wsdlUrls>
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>

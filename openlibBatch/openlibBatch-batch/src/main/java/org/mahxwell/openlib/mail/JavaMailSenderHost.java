@@ -37,7 +37,7 @@ public class JavaMailSenderHost {
         Properties properties = new Properties();
         InputStream input = null;
         try {
-            input = JavaMailSenderHost.class.getClassLoader().getResourceAsStream("maiL-configuration.properties");
+            input = JavaMailSenderHost.class.getClassLoader().getResourceAsStream("mail-configuration.properties");
             properties.load(input);
             HOST = properties.getProperty("host");
             PORT = properties.getProperty("port");

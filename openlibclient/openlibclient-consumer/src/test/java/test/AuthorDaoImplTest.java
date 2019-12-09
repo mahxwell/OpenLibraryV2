@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.consumer.contract.dao.AuthorDao;
@@ -24,33 +25,60 @@ public class AuthorDaoImplTest {
     private AuthorDao authorDao;
     private static final Logger logger = Logger.getLogger(AuthorDaoImplTest.class);
 
+    /**
+     * Test
+     * Initialize Author Object For Unit Tests
+     *
+     * @param name        Set Author Name
+     * @param surname     Set Author Surname
+     * @param nationality Set Author BirthDate
+     * @return A Author Object
+     */
+    private Author InitializeAuthorObject(final String name, final String surname, final String nationality) {
+        Author author = new Author();
+        try {
+            String formater = "yyyy-MM-dd'T'HH:mm:ss";
+
+            DateFormat format = new SimpleDateFormat(formater);
+
+            XMLGregorianCalendar gDateFormatted1 =
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(new Date()));
+            author.setAuthorName(name);
+            author.setAuthorSurname(surname);
+            author.setAuthorNationality(nationality);
+            author.setAuthorBirthdate(gDateFormatted1);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return author;
+    }
+
+    /**
+     * Test
+     * Get Last Author Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Author getLastAuthor() {
+        try {
+            List<Author> authors = authorDao.authors();
+            return authors.get(authors.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
     /* Add New Author In DataBase */
 
     @Test
     public void addAuthor() {
 
         try {
-
-            String formater = "yyyy-MM-dd'T'HH:mm:ss";
-
-            DateFormat format = new SimpleDateFormat(formater);
-
-            Date date = new Date();
-            XMLGregorianCalendar gDateFormatted1 =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-
-            //  Date date = new Date();
-            /* Add 20 new author */
-            for (int i = 0; i < 20; i++) {
-                Author author = new Author();
-                author.setAuthorName("AuthorName" + i);
-                author.setAuthorSurname("AuthorSurName" + i);
-                author.setAuthorNationality("AuthorNationality" + i);
-                author.setAuthorBirthdate(gDateFormatted1);
-                authorDao.addAuthor(author);
-            }
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
+            authorDao.addAuthor(author);
+            authorDao.deleteAuthor(getLastAuthor());
         } catch (Exception e) {
-            logger.error("Error addAuthor Test = " + e);
+            logger.error(e);
         }
     }
 
@@ -58,29 +86,16 @@ public class AuthorDaoImplTest {
 
     @Test
     public void updateAuthor() {
+
         try {
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
+            authorDao.addAuthor(author);
+            Author authorUpdate = InitializeAuthorObject("Tata", "Papa", "UK");
+            authorDao.updateAuthor(authorUpdate, getLastAuthor());
+            authorDao.deleteAuthor(getLastAuthor());
 
-            String formater = "yyyy-MM-dd'T'HH:mm:ss";
-
-            DateFormat format = new SimpleDateFormat(formater);
-
-            Date date = new Date();
-            XMLGregorianCalendar gDateFormatted1 =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-
-            List<Author> authors = authorDao.authors();
-            if (authors != null || authors.size() < 3) {
-                Author author = new Author();
-                author.setAuthorName("updatedName");
-                author.setAuthorSurname("updatedSurname");
-                author.setAuthorNationality("updatedNationality");
-                author.setAuthorBirthdate(gDateFormatted1);
-                authorDao.updateAuthor(author, authors.get(1));
-            } else {
-                logger.error("No Author or update Author out of range....");
-            }
         } catch (Exception e) {
-            logger.error("Error updateAuthor Test = " + e);
+            logger.error(e);
         }
     }
     /* Delete Author */
@@ -88,22 +103,46 @@ public class AuthorDaoImplTest {
     @Test
     public void deleteAuthor() {
 
-        List<Author> authors = authorDao.authors();
-        if (authors != null || authors.size() < 3) {
-            authorDao.deleteAuthor(authors.get(1));
-        } else {
-            logger.error("Delete failed");
+        try {
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
+            authorDao.addAuthor(author);
+            authorDao.deleteAuthor(getLastAuthor());
+        } catch (Exception e) {
+            logger.error(e);
         }
-
     }
     /* Show Author List */
 
     @Test
     public void authors() {
-        List<Author> authors = authorDao.authors();
-        if (authors != null)
-            logger.info(authors.toString());
-        else
-            logger.error("No Authors available !");
+
+        try {
+            List<Author> authors = authorDao.authors();
+            if (authors != null) {
+                logger.info(authors.toString());
+            } else {
+                logger.error("No Authors available !");
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Author By Identification Number */
+
+    @Test
+    public void getAuthor() {
+        try {
+            List<Author> authors = authorDao.authors();
+            if (authors != null) {
+                logger.info(authors.toString());
+            } else {
+                logger.error("No Authors available !");
+            }
+            Author author = authorDao.getAuthor(1);
+            Assert.assertEquals(author.getAuthorId(), authors.get(0).getAuthorId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.business.contract.manager.BookloaningManager;
@@ -25,36 +26,70 @@ public class BookloaningManagerImplTest {
     private static final Logger logger = Logger.getLogger(BookloaningManagerImplTest.class);
 
 
-    /* Add New Bookloaning In DataBase */
-
-    @Test
-    public void addBookloaning() {
-
+    /**
+     * Test
+     * Initialize BookLoaning Object For Unit Tests
+     *
+     * @param extended Set Extended Status
+     * @param beginDate Set Loan Begin Date
+     * @param endDate Set Loan Ending Date
+     * @param getBookId Set Book Identification Number
+     * @param copyId Set Copy Identification Number
+     * @param userId Set User Identification Number
+     * @return A Bookloaning Object
+     */
+    private Bookloaning InitializeBookLoaningObject(final Boolean extended, final Date beginDate, final Date endDate,
+                                                    final Integer getBookId, final Integer copyId, final Integer userId) {
+        Bookloaning bookloaning = new Bookloaning();
         try {
 
             String formater = "yyyy-MM-dd'T'HH:mm:ss";
 
             DateFormat format = new SimpleDateFormat(formater);
 
-            Date date = new Date();
-            XMLGregorianCalendar gDateFormatted1 =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-            int n = 1;
-            /* Add 20 new Bookloaning */
-            for (int i = 0; i < 10; i++) {
-                Bookloaning bookloaning = new Bookloaning();
-                bookloaning.setExtended(true);
-                bookloaning.setBeginDate(gDateFormatted1);
-                bookloaning.setEndDate(gDateFormatted1);
-                bookloaning.setGetBookId(4);
-                bookloaning.setUserIdUser(1);
-                bookloaning.setCopyIdCopy(n = n + 1);
-                logger.info(bookloaning.getBeginDate() + " test " + bookloaning.getEndDate());
-                bookloaningManager.addBookloaning(bookloaning);
+            XMLGregorianCalendar gDateFormatted =
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(new Date()));
 
-            }
+            bookloaning.setExtended(extended);
+            bookloaning.setBeginDate(gDateFormatted);
+            bookloaning.setEndDate(gDateFormatted);
+            bookloaning.setGetBookId(getBookId);
+            bookloaning.setCopyIdCopy(copyId);
+            bookloaning.setUserIdUser(userId);
         } catch (Exception e) {
-            logger.error("Error addBookloaningManager Test = " + e);
+            logger.error(e);
+        }
+        return bookloaning;
+    }
+
+    /**
+     * Test
+     * Get Last Bookloaning Object in Data Base
+     * @return Last Object -> For Delete
+     */
+    private Bookloaning getLastBookloaning() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
+            return bookloanings.get(bookloanings.size() - 1);
+        } catch (Exception e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+
+    /* Add New Bookloaning In DataBase */
+
+    @Test
+    public void addBookloaning() {
+
+        try {
+            Bookloaning bookloaning = InitializeBookLoaningObject(false,
+                    new Date(), new Date(), 1, 1, 1);
+            bookloaningManager.addBookloaning(bookloaning);
+            bookloaningManager.deleteBookloaning(getLastBookloaning());
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -64,42 +99,28 @@ public class BookloaningManagerImplTest {
     public void updateBookloaning() {
 
         try {
-
-            String formater = "yyyy-MM-dd'T'HH:mm:ss";
-
-            DateFormat format = new SimpleDateFormat(formater);
-
-            Date date = new Date();
-            XMLGregorianCalendar gDateFormatted1 =
-                    DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(date));
-            List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
-            if (bookloanings != null || bookloanings.size() < 3) {
-                Bookloaning bookloaning = new Bookloaning();
-                bookloaning.setExtended(true);
-                bookloaning.setBeginDate(gDateFormatted1);
-                bookloaning.setEndDate(gDateFormatted1);
-                bookloaning.setUserIdUser(2);
-                bookloaning.setCopyIdCopy(15);
-                bookloaningManager.updateBookloaning(bookloaning, bookloanings.get(0));
-            } else {
-                logger.error("No Bookloaning or update Bookloaning out of range....");
-            }
+            Bookloaning bookloaning = InitializeBookLoaningObject(true,
+                    new Date(), new Date(), 1, 1, 1);
+            bookloaningManager.addBookloaning(bookloaning);
+            bookloaningManager.updateBookloaning(bookloaning, getLastBookloaning());
+            bookloaningManager.deleteBookloaning(getLastBookloaning());
         } catch (Exception e) {
-            logger.error("Error updateBookloaningManager Test = " + e);
-
+            logger.error(e);
         }
-
     }
 
     /* Delete Bookloaning */
 
     @Test
     public void deleteBookloaning() {
-        List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
-        if (bookloanings != null || bookloanings.size() < 3) {
-            bookloaningManager.deleteBookloaning(bookloanings.get(1));
-        } else {
-            logger.error("No Bookloaning or update Bookloaning out of range....");
+
+        try {
+            Bookloaning bookloaning = InitializeBookLoaningObject(false,
+                    new Date(), new Date(), 1, 1, 1);
+            bookloaningManager.addBookloaning(bookloaning);
+            bookloaningManager.deleteBookloaning(getLastBookloaning());
+        } catch (Exception e) {
+            logger.error(e);
         }
 
     }
@@ -108,19 +129,95 @@ public class BookloaningManagerImplTest {
 
     @Test
     public void bookloanings() {
-        List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
-        if (bookloanings != null)
-            logger.info(bookloanings.toString());
-        else
-            logger.error("No Bookloaning available !");
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 
+    /* Show Bookloaning List By User */
+
     @Test
-    public void bookloaningsByBookAndUser() {
-        List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookAndByUser(2, 2);
-        if (bookloanings != null)
-            logger.info(bookloanings.toString());
-        else
-            logger.error("No Bookloaning available !");
+    public void bookloaningsByUser() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByUser(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show Bookloaning By Copy */
+
+    @Test
+    public void bookloaningsByCopy() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByCopy(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+
+    /* Show Bookloaning List  By User AND By Book*/
+
+    @Test
+    public void bookloaningsByUserAndBook() {
+
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBookAndByUser(2, 1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Bookloaning By Identification Number */
+
+    @Test
+    public void getBookloaning() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloanings();
+            if (bookloanings != null) {
+                logger.info(bookloanings.toString());
+            } else {
+                logger.error("No Bookloanings available !");
+            }
+            Bookloaning bookloaning = bookloaningManager.getBookloaning(1);
+            Assert.assertEquals(bookloaning.getBookLoaningId(), bookloanings.get(0).getBookLoaningId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Show Bookloaning List By Book*/
+
+    @Test
+    public void bookloaningListByBook() {
+        try {
+            List<Bookloaning> bookloanings = bookloaningManager.bookloaningsByBook(1);
+            if (bookloanings != null)
+                logger.info(bookloanings.toString());
+            else
+                logger.error("No Bookloaning available !");
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

@@ -30,4 +30,6 @@ public interface BookloaningDao {
     List<Bookloaning> bookloaningsByBook(final Integer book_id);
 
     List<Bookloaning> bookloaningsByBookAndByUser(final Integer book_id, final Integer user_id);
+
+    List<Bookloaning> bookloaningsByBookOrderByDateAsc(final Integer book_id);
 }

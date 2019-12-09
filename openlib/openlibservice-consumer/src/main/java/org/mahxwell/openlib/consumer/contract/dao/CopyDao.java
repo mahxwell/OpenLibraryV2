@@ -23,4 +23,5 @@ public interface CopyDao {
     Copy getCopy(final Integer copy_id);
 
     List<Copy> CopiesByBook(final Integer book_id);
+
 }

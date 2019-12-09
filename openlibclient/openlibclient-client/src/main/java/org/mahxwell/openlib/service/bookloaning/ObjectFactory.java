@@ -30,10 +30,12 @@ public class ObjectFactory {
     private final static QName _ListbookloaningByUserResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaningByUserResponse");
     private final static QName _ListbookloaningResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaningResponse");
     private final static QName _AddBookloaningResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "addBookloaningResponse");
+    private final static QName _ListbookloaningByBookOrderByDateAscResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaningByBookOrderByDateAscResponse");
     private final static QName _UpdateBookloaning_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "updateBookloaning");
     private final static QName _DeleteBookloaningResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "deleteBookloaningResponse");
     private final static QName _ListbookloaningByBookAndUser_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaningByBookAndUser");
     private final static QName _Listbookloaning_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaning");
+    private final static QName _ListbookloaningByBookOrderByDateAsc_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "listbookloaningByBookOrderByDateAsc");
     private final static QName _UpdateBookloaningResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "updateBookloaningResponse");
     private final static QName _GetBookloaning_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "getBookloaning");
     private final static QName _BookloaningslateResponse_QNAME = new QName("http://bookloaning.service.openlib.mahxwell.org/", "bookloaningslateResponse");
@@ -133,6 +135,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ListbookloaningByBookOrderByDateAsc }
+     * 
+     */
+    public ListbookloaningByBookOrderByDateAsc createListbookloaningByBookOrderByDateAsc() {
+        return new ListbookloaningByBookOrderByDateAsc();
+    }
+
+    /**
      * Create an instance of {@link UpdateBookloaningResponse }
      * 
      */
@@ -162,6 +172,14 @@ public class ObjectFactory {
      */
     public AddBookloaningResponse createAddBookloaningResponse() {
         return new AddBookloaningResponse();
+    }
+
+    /**
+     * Create an instance of {@link ListbookloaningByBookOrderByDateAscResponse }
+     * 
+     */
+    public ListbookloaningByBookOrderByDateAscResponse createListbookloaningByBookOrderByDateAscResponse() {
+        return new ListbookloaningByBookOrderByDateAscResponse();
     }
 
     /**
@@ -275,6 +293,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListbookloaningByBookOrderByDateAscResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://bookloaning.service.openlib.mahxwell.org/", name = "listbookloaningByBookOrderByDateAscResponse")
+    public JAXBElement<ListbookloaningByBookOrderByDateAscResponse> createListbookloaningByBookOrderByDateAscResponse(ListbookloaningByBookOrderByDateAscResponse value) {
+        return new JAXBElement<ListbookloaningByBookOrderByDateAscResponse>(_ListbookloaningByBookOrderByDateAscResponse_QNAME, ListbookloaningByBookOrderByDateAscResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UpdateBookloaning }{@code >}}
      * 
      */
@@ -308,6 +335,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://bookloaning.service.openlib.mahxwell.org/", name = "listbookloaning")
     public JAXBElement<Listbookloaning> createListbookloaning(Listbookloaning value) {
         return new JAXBElement<Listbookloaning>(_Listbookloaning_QNAME, Listbookloaning.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListbookloaningByBookOrderByDateAsc }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://bookloaning.service.openlib.mahxwell.org/", name = "listbookloaningByBookOrderByDateAsc")
+    public JAXBElement<ListbookloaningByBookOrderByDateAsc> createListbookloaningByBookOrderByDateAsc(ListbookloaningByBookOrderByDateAsc value) {
+        return new JAXBElement<ListbookloaningByBookOrderByDateAsc>(_ListbookloaningByBookOrderByDateAsc_QNAME, ListbookloaningByBookOrderByDateAsc.class, null, value);
     }
 
     /**

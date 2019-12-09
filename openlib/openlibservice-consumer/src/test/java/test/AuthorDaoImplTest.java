@@ -1,6 +1,7 @@
 package test;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahxwell.openlib.consumer.contract.dao.AuthorDao;
@@ -24,21 +25,39 @@ public class AuthorDaoImplTest {
     private AuthorDao authorDao;
     private static final Logger logger = Logger.getLogger(AuthorDaoImplTest.class);
 
+    /**
+     * Test
+     * Initialize Author Object For Unit Tests
+     *
+     * @param name Set Author Name
+     * @param surname Set Author Surname
+     * @param nationality Set Author BirthDate
+     * @return A Author Object
+     */
+    private Author InitializeAuthorObject(final String name, final String surname, final String nationality) {
+        Author author = new Author();
+        try {
+            author.setAuthorName(name);
+            author.setAuthorSurname(surname);
+            author.setAuthorNationality(nationality);
+            author.setAuthorBirthdate(new Date());
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return author;
+    }
     /* Add New Author In DataBase */
 
     @Test
     @Transactional
     @Rollback(true)
     public void addAuthor() {
-        Date date = new Date();
-        /* Add 20 new author */
-        for (int i = 0; i < 20; i++) {
-            Author author = new Author();
-            author.setAuthorName("AuthorName" + i);
-            author.setAuthorSurname("AuthorSurName" + i);
-            author.setAuthorNationality("AuthorNationality" + i);
-            author.setAuthorBirthdate(date);
+
+        try {
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
             authorDao.addAuthor(author);
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -48,17 +67,16 @@ public class AuthorDaoImplTest {
     @Transactional
     @Rollback(true)
     public void updateAuthor() {
-        List<Author> authors = authorDao.Authors();
-        Date date = new Date();
-        if (authors != null || authors.size() < 3) {
-            Author author = new Author();
-            author.setAuthorName("updatedName");
-            author.setAuthorSurname("updatedSurname");
-            author.setAuthorNationality("updatedNationality");
-            author.setAuthorBirthdate(date);
-            authorDao.updateAuthor(author, authors.get(1));
-        } else {
-            logger.error("No Author or update Author out of range....");
+
+        try {
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
+            authorDao.addAuthor(author);
+
+            Author authorUpdate = InitializeAuthorObject("Tata", "Papa", "UK");
+            List<Author> authors = authorDao.Authors();
+            authorDao.updateAuthor(authorUpdate, authors.get(0));
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
     /* Delete Author */
@@ -68,13 +86,14 @@ public class AuthorDaoImplTest {
     @Rollback(true)
     public void deleteAuthor() {
 
-        List<Author> authors = authorDao.Authors();
-        if (authors != null || authors.size() < 3) {
-            authorDao.deleteAuthor(authors.get(1));
-        } else {
-            logger.error("Delete failed");
+        try {
+            Author author = InitializeAuthorObject("Titi", "Toto", "France");
+            authorDao.addAuthor(author);
+            List<Author> authors = authorDao.Authors();
+            authorDao.deleteAuthor(authors.get(0));
+        } catch (Exception e) {
+            logger.error(e);
         }
-
     }
     /* Show Author List */
 
@@ -82,10 +101,36 @@ public class AuthorDaoImplTest {
     @Transactional
     @Rollback(true)
     public void authors() {
-        List<Author> authors = authorDao.Authors();
-        if (authors != null)
-            logger.info(authors.toString());
-        else
-            logger.error("No Authors available !");
+
+        try {
+            List<Author> authors = authorDao.Authors();
+            if (authors != null) {
+                logger.info(authors.toString());
+            } else {
+                logger.error("No Authors available !");
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    /* Find One Author By Identification Number */
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getAuthor() {
+        try {
+            List<Author> authors = authorDao.Authors();
+            if (authors != null) {
+                logger.info(authors.toString());
+            } else {
+                logger.error("No Authors available !");
+            }
+            Author author = authorDao.getAuthor(1);
+            Assert.assertEquals(author.getAuthorId(), authors.get(0).getAuthorId());
+        } catch (Exception e) {
+            logger.error(e);
+        }
     }
 }

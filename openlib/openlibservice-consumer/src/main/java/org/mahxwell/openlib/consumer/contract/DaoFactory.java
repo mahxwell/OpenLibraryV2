@@ -50,4 +50,9 @@ public interface DaoFactory {
 
     void setLibraryDao(LibraryDao libraryDao);
 
+    //Reservation
+    ReservationDao getReservationDao();
+
+    void setReservationDao(ReservationDao reservationDao);
+
 }

@@ -60,7 +60,7 @@ public class AuthorService extends AbstractManagerService {
         try {
             authorManager.addAuthor(newAuthor);
         } catch (Exception e) {
-            logger.error("Error addLibraries method = " + e);
+            logger.error("Error addAuthor method = " + e);
         }
         return;
     }

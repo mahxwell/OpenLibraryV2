@@ -12,10 +12,11 @@
     <bean id="dataSourceOpenLib"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/openlib"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <property name="url" value="jdbc:postgresql://library_db:5432/librarydb"/>
+        <property name="username" value="openlib"/>
+        <property name="password" value="openlibco"/>
     </bean>
+
 
     <!-- ===== DAO ===== -->
 
@@ -30,6 +31,7 @@
     <bean id="copyDao" class="org.mahxwell.openlib.consumer.impl.dao.CopyDaoImpl" parent="abstractDaoImpl"/>
     <bean id="genreDao" class="org.mahxwell.openlib.consumer.impl.dao.GenreDaoImpl" parent="abstractDaoImpl"/>
     <bean id="bookloaningDao" class="org.mahxwell.openlib.consumer.impl.dao.BookloaningDaoImpl" parent="abstractDaoImpl"/>
+    <bean id="reservationDao" class="org.mahxwell.openlib.consumer.impl.dao.ReservationDaoImpl" parent="abstractDaoImpl"/>
 
 
 
@@ -43,7 +45,7 @@
         <property name="copyDao" ref="copyDao"/>
         <property name="genreDao" ref="genreDao"/>
         <property name="bookloaningDao" ref="bookloaningDao"/>
-
+        <property name="reservationDao" ref="reservationDao"/>
     </bean>
 
 </beans>
