@@ -1,3 +1,7 @@
+# Travis CI BUILD
+
+https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master
+
 # OPENLIBRARY
 
 ## Library Website Openclassroom's project
