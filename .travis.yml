@@ -17,7 +17,7 @@ script:
 - docker-compose -p librarydb up -d web-application
 - cd ../../openlib
 - mvn test
-- cd ../../openlibclient
+- cd ../openlibclient
 - mvn test
 - cd ../docker/dev
 - docker container stop library_db
