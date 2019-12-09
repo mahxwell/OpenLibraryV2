@@ -41,7 +41,7 @@ public class TaskLateMailSender {
 
             }
         } catch (RuntimeException e) {
-            logger.error(e);
+           System.out.println(e);
         } catch (Exception e) {
             logger.error(e);
         }

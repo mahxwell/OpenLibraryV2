@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class JavaMailSenderUser extends JavaMailSenderHost {
+public  class JavaMailSenderUser extends JavaMailSenderHost {
 
     public static final Logger logger = LogManager.getLogger(JavaMailSenderUser.class);
 
@@ -53,7 +53,7 @@ public class JavaMailSenderUser extends JavaMailSenderHost {
         Properties properties = new Properties();
         InputStream input = null;
         try {
-            input = JavaMailSenderUser.class.getClassLoader().getResourceAsStream("maiL-configuration.properties");
+            input = JavaMailSenderUser.class.getClassLoader().getResourceAsStream("mail-configuration.properties");
             properties.load(input);
             SUJET = properties.getProperty("sujet");
             MESSAGE = properties.getProperty("message");

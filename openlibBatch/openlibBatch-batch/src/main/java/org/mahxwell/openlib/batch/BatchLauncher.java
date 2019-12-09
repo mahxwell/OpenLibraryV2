@@ -1,9 +1,5 @@
 package org.mahxwell.openlib.batch;
 
-
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import java.util.concurrent.*;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -14,8 +10,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * Create several threads to send different informations to OpenLibrary users
  */
 public class BatchLauncher {
-
-    private static final Logger logger = LogManager.getLogger(BatchLauncher.class);
 
     /**
      * Launch This Method with your IDE to begin threads

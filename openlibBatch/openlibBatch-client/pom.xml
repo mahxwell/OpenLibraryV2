@@ -24,47 +24,47 @@
     <properties>
         <service.wsdl.url.user>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/user?wsdl
+            http://localhost:8080/Openlibrary-Webservice/user?wsdl
         </service.wsdl.url.user>
 
         <service.wsdl.url.library>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/library?wsdl
+            http://localhost:8080/Openlibrary-Webservice/library?wsdl
         </service.wsdl.url.library>
 
         <service.wsdl.url.author>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/author?wsdl
+            http://localhost:8080/Openlibrary-Webservice/author?wsdl
         </service.wsdl.url.author>
 
         <service.wsdl.url.editor>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/editor?wsdl
+            http://localhost:8080/Openlibrary-Webservice/editor?wsdl
         </service.wsdl.url.editor>
 
         <service.wsdl.url.copy>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/copy?wsdl
+            http://localhost:8080/Openlibrary-Webservice/copy?wsdl
         </service.wsdl.url.copy>
 
         <service.wsdl.url.genre>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/genre?wsdl
+            http://localhost:8080/Openlibrary-Webservice/genre?wsdl
         </service.wsdl.url.genre>
 
         <service.wsdl.url.book>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/book?wsdl
+            http://localhost:8080/Openlibrary-Webservice/book?wsdl
         </service.wsdl.url.book>
 
         <service.wsdl.url.bookloaning>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/bookloaning?wsdl
+            http://localhost:8080/Openlibrary-Webservice/bookloaning?wsdl
         </service.wsdl.url.bookloaning>
 
         <service.wsdl.url.reservation>
             <!-- change Url-->
-            http://DESKTOP-JQMEVRQ:8080/Openlibrary-Webservice/reservation?wsdl
+            http://localhost:8080/Openlibrary-Webservice/reservation?wsdl
         </service.wsdl.url.reservation>
     </properties>
 
@@ -72,7 +72,7 @@
     <!-- =============================================================== -->
     <!-- Build -->
     <!-- =============================================================== -->
-    <build>
+ <!--   <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -101,6 +101,6 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>

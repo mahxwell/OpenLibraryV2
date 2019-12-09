@@ -42,10 +42,10 @@ public interface EditorService {
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
-    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
-    public void deleteEditor(
+    @RequestWrapper(localName = "addEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditor")
+    @ResponseWrapper(localName = "addEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorResponse")
+    public void addEditor(
         @WebParam(name = "arg0", targetNamespace = "")
         Editor arg0);
 
@@ -67,6 +67,18 @@ public interface EditorService {
     /**
      * 
      * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditor")
+    @ResponseWrapper(localName = "deleteEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.DeleteEditorResponse")
+    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/deleteEditorResponse")
+    public void deleteEditor(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Editor arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns org.mahxwell.openlib.service.editor.Editor
      */
@@ -78,17 +90,5 @@ public interface EditorService {
     public Editor getEditor(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addEditor", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditor")
-    @ResponseWrapper(localName = "addEditorResponse", targetNamespace = "http://editor.service.openlib.mahxwell.org/", className = "org.mahxwell.openlib.service.editor.AddEditorResponse")
-    @Action(input = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorRequest", output = "http://editor.service.openlib.mahxwell.org/EditorService/addEditorResponse")
-    public void addEditor(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Editor arg0);
 
 }

@@ -35,3 +35,8 @@ services:
       - 4949:4848
       - 80:8080
       - 8282:8181
+  batch:
+    image: mahxwell/library_batch
+    container_name: library_batch
+    volumes:
+      - ./batchapp/logs:/logs
