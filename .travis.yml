@@ -1,0 +1,31 @@
+language: java
+
+jdk:
+- openjdk8
+
+sudo: required
+
+services:
+- docker
+
+before_install:
+- cd docker/dev
+- docker-compose -p librarydb up -d database
+- docker-compose -p librarydb up -d web-service
+- docker-compose -p librarydb up -d web-application
+
+
+script:
+- cd ../../openlib
+- mvn test
+- cd ../../openlibclient
+- mvn test
+- cd ../docker/dev
+- docker container stop library_db
+- docker container stop library_web_service
+- docker container stop library_web_application
+- docker container prune
+
+
+notifications:
+email: false
