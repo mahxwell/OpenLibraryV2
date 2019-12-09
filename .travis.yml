@@ -18,6 +18,8 @@ script:
 - mvn test
 - cd ../openlibclient
 - mvn test
+- cd ../openlibBatch
+- mvn test
 - cd ../docker/dev
 - docker container stop library_db
 - docker container stop library_web_service
