@@ -1,3 +1,5 @@
+cd ..\dev
+
 docker-compose -p librarydb up -d database
 
 docker-compose -p librarydb up -d web-service
