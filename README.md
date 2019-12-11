@@ -1,7 +1,3 @@
-## BUILD
-
-[![Build Status](https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master)](https://travis-ci.org/mahxwell/OpenLibraryV2)
-
 # OPENLIBRARY
 
 ## Library Website Openclassroom's project
@@ -57,6 +53,7 @@ Features Version 2 :
 * Unit Test for three applications available As Integration Test
 
 `- JUnit 4 For Unit Testing.`
+
 `- Travis CI For Integration Testing.`
 
 * Bug Fix
@@ -83,7 +80,7 @@ Please follow CAREFULLY and step by step the application deployment below
 
 ### Windows 10 INSTALLATION
 
-Different docker command are regrouped as `.bat`file for Windows in this folder :`"OpenLibraryV2\docker\Windows\"`
+Different docker command are regrouped as `.bat` file for Windows in this folder :`"OpenLibraryV2\docker\Windows\"`
 Please double click on files to launch them.
 
 1. Deploy Applications : `Compose.bat`
@@ -115,3 +112,12 @@ Please wait 1 or 2 minutes to let applications deploying correctly in docker con
 Then you can test Openlibrary Client Application with this link : http://localhost:80/Openlibrary-Client/
 
 Enjoy It !
+
+### Testing AND Build
+
+Please click on this link to check Travis CI Logs : [![Build Status](https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master)](https://travis-ci.org/mahxwell/OpenLibraryV2)
+This Application contains Unit tests
+
+### Package it on your Computer
+
+To package it on your computer by compiling source code please follow Readme.MD from Openlibrary Version 1 at this link : https://github.com/mahxwell/OpenLibrary/
