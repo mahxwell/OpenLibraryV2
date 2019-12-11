@@ -113,10 +113,11 @@ Then you can test Openlibrary Client Application with this link : http://localho
 
 Enjoy It !
 
-### Testing AND Build
+### Testing And Build
 
-Please click on this link to check Travis CI Logs : [![Build Status](https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master)](https://travis-ci.org/mahxwell/OpenLibraryV2)
-This Application contains Unit tests
+Please click on this link to check Travis CI Logs :  [![Build Status](https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master)](https://travis-ci.org/mahxwell/OpenLibraryV2)
+
+This Application contains almost 170 Unit tests made with JUnit 4.
 
 ### Package it on your Computer
 
