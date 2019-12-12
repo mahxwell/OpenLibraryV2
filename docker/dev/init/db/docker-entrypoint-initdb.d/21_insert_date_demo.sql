@@ -2,8 +2,8 @@
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName0', 'UserSurname0', 'UserPseudo0', 'UserName0@test', 'titi', 'OOO');
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName1', 'UserSurname1', 'UserPseudo1', 'UserName1@test', 'titi', 'OOO');
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName2', 'UserSurname2', 'UserPseudo2', 'openlibuser@gmail.com', 'titi', 'OOO');
-INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName3', 'UserSurname3', 'UserPseudo3', 'openlibuser@gmail.com', 'titi', 'OOO');
-INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName4', 'UserSurname4', 'UserPseudo4', 'openlibuser@gmail.com', 'titi', 'OOO');
+INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName3', 'UserSurname3', 'UserPseudo3', 'openlibuser2@gmail.com', 'titi', 'OOO');
+INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName4', 'UserSurname4', 'UserPseudo4', 'UserName4@test', 'titi', 'OOO');
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName5', 'UserSurname5', 'UserPseudo5', 'openlibuser@gmail.com', 'titi', 'OOO');
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName6', 'UserSurname6', 'UserPseudo6', 'UserName6@test', 'titi', 'OOO');
 INSERT INTO librarydb."user" (name, surname, pseudo, mail, password, phone) VALUES ('UserName7', 'UserSurname7', 'UserPseudo7', 'UserName7@test', 'titi', 'OOO');
@@ -69,7 +69,6 @@ INSERT INTO librarydb.copy (book_id_book) VALUES (1);
 INSERT INTO librarydb.copy (book_id_book) VALUES (1);
 
 INSERT INTO librarydb.copy (book_id_book) VALUES (2);
-INSERT INTO librarydb.copy (book_id_book) VALUES (2);
 
 INSERT INTO librarydb.copy (book_id_book) VALUES (3);
 INSERT INTO librarydb.copy (book_id_book) VALUES (3);
@@ -104,19 +103,12 @@ INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 INSERT INTO librarydb.copy (book_id_book) VALUES (5);
 
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 2, 1, 3);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 1, 2, 2);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-05-15', 3, 3, 5);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-06-12', 4, 3, 15);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 4, 4, 16);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 5, 5, 25);
-INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-11-20', '2019-12-20', 4, 7, 17);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-12-12', '2020-01-11', 1, 1, 1);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-12-12', '2020-01-11', 2, 1, 3);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-12-12', '2020-01-11', 1, 2, 2);
+INSERT INTO librarydb.bookloaning (is_extended, begin_date, endind_date, get_book_id, user_id_user, copy_id_copy) VALUES (false, '2019-12-12', '2019-01-11', 5, 11, 24);
 
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:50.696', 1, 3, 1);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:01:56.151', 2, 3, 3);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:30.648', 1, 4, 2);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:03:36.161', 2, 4, 4);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:08.116', 1, 5, 1);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:12.031', 2, 5, 3);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:54.061', 1, 6, 2);
-INSERT INTO librarydb.reservation (reservation_date, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-11-20 23:04:58.761', 2, 6, 4);
+INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-12-12 13:48:25.564', null, 1, 3, 1);
+INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-12-12 13:49:06.2', null, 2, 4, 3);
+INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-12-12 13:49:48.94', null, 1, 5, 2);
+INSERT INTO librarydb.reservation (reservation_date, reservation_mail, get_book_id, user_id_user, copy_id_copy) VALUES ('2019-12-12 14:33:31.192', null, 1, 6, 1);
