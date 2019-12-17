@@ -20,7 +20,7 @@ Server :
 
 `- Glassfish 5.0`
 
-Docker was also used for Applications version 2 deploiment.
+Docker was also used for Applications version 2 deployment.
 
 For more informations, please follow "Get started" point bellow
 
@@ -71,29 +71,41 @@ you MUST own a docker account to get necessary images to create Openlibrary appl
 The Projet is divided in 3 parts :
 
 The WebService is contained in “openlib” folder
+
 The Web Application is contained in “openlibclient” folder
+
 The Java Batch is contained in “openlibBatch” folder
 
 This Projet uses a SOAP “Bottom-Up” implementation where .wsdl file are automatically generated.
 
 Please follow CAREFULLY and step by step the application deployment below
 
-### Windows 10 INSTALLATION
+### Windows DEPLOYMENT
 
-Different docker command are regrouped as `.bat` file for Windows in this folder :`"OpenLibraryV2\docker\Windows\"`
+Different docker commands are regrouped as `.bat` files for Windows in this folder :`"OpenLibraryV2\docker\Windows"`
 Please double click on files to launch them.
 
-1. Deploy Applications : `Compose.bat`
+(You MUST deploy all applications in this specific order to make it work CORRECTLY)
 
-2. Launch Batch Application : `LaunchBatch.bat`
+1. Deploy Data Base :  `\1.databaseGestion\ComposeDB.bat`
 
-3. Stop Batch Application : `stopBatch.bat`
+2. Deploy Web-Service : `\2.webServiceGestion\ComposeWebService.bat`
+   
+3. Deploy Web-Application : `\3.webApplicationGestion\ComposeWebApplication.bat`
+   
+4. Deploy AND Launch Batch Application : `\4.batchGestion\LaunchBatch.bat`
+   
+   Stop Batch : `\4.batchGestion\stopBatch.bat`
 
-4. Stop AND Delete all Containers : `Purge.bat`
+Other Actions :
 
-### MacOSX INSTALLATION
+Stop AND Delete all applications Containers : `\Purge.bat`
 
-Different docker command are regrouped as `.sh` script files for MacOSX in this folder `"OpenLibraryV2/docker/MacOS/"`
+Stop AND Delete all applications Containers AND All applications Images : `\PurgeAll.bat`
+
+### MacOSX DEPLOYMENT
+
+Different docker commands are regrouped as `.sh` script files for MacOSX in this folder `"OpenLibraryV2/docker/MacOS/"`
 Run these files in your Terminal Application
 
 1. Deploy Applications : `bash Compose.sh`
@@ -109,7 +121,7 @@ Run these files in your Terminal Application
 
 Please wait 1 or 2 minutes to let applications deploying correctly in docker containers.
 
-Then you can test Openlibrary Client Application with this link : http://localhost:80/Openlibrary-Client/
+Then test Openlibrary Client Application with this link : http://localhost:80/Openlibrary-Client/
 
 Enjoy It !
 
@@ -118,6 +130,8 @@ Enjoy It !
 Please click on this link to check Travis CI Logs :  [![Build Status](https://travis-ci.org/mahxwell/OpenLibraryV2.svg?branch=master)](https://travis-ci.org/mahxwell/OpenLibraryV2)
 
 This Project contains almost 170 Unit tests made with JUnit 4.
+
+Travis CI shows how applications communicate thanks to .wsdl files.
 
 ### Package it on your Computer
 
