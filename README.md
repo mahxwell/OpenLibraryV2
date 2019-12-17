@@ -70,11 +70,11 @@ you MUST own a docker account to get necessary images to create Openlibrary appl
 
 The Projet is divided in 3 parts :
 
-The WebService is contained in “openlib” folder
+- The WebService is contained in “openlib” folder
 
-The Web Application is contained in “openlibclient” folder
+- The Web Application is contained in “openlibclient” folder
 
-The Java Batch is contained in “openlibBatch” folder
+- The Java Batch is contained in “openlibBatch” folder
 
 This Projet uses a SOAP “Bottom-Up” implementation where .wsdl file are automatically generated.
 
@@ -95,7 +95,7 @@ Please double click on files to launch them.
    
 4. Deploy AND Launch Batch Application : `\4.batchGestion\LaunchBatch.bat`
    
-   Stop Batch : `\4.batchGestion\stopBatch.bat`
+    Stop Batch : `\4.batchGestion\stopBatch.bat`
 
 Other Actions :
 
